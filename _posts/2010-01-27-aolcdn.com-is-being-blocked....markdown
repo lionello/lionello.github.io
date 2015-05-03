@@ -6,8 +6,8 @@ permalink: /archives/99-aolcdn.com-is-being-blocked....html
 s9y_link: http://www.lunesu.com/index.php?/archives/99-aolcdn.com-is-being-blocked....html
 date: 2010-01-27 12:53:08.000000000 +08:00
 ---
-...and it fucks up most of the sites I visit daily.<br />
-<br />
-Apparently AOL offers the open-source <a href="http://dev.aol.com/dojo" title="Dojo framework">Dojo </a>framework on its Content Delivery Network and many sites make use of it.<br />
-<br />
+...and it fucks up most of the sites I visit daily.
+
+Apparently AOL offers the open-source <a href="http://dev.aol.com/dojo" title="Dojo framework">Dojo </a>framework on its Content Delivery Network and many sites make use of it.
+
 Come on, AOL, change your IP or something (it's not the DNS, since I'm already using Google's.)

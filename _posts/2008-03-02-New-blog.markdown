@@ -7,8 +7,8 @@ permalink: /archives/1-New-blog.html
 s9y_link: http://www.lunesu.com/index.php?/archives/1-New-blog.html
 date: 2008-03-02 23:54:00.000000000 +08:00
 ---
-Hi All,<br />
-<br />
-And welcome to my new blog. For those of you who haven't heard yet: Ine and I have just moved to Beijing, China! Here are <a href="http://picasaweb.google.com/ivanzeeland/BeijingFebruari2008?authkey=mCLHpRdlaIU">some photos</a>, for now.<br />
-<br />
+Hi All,
+
+And welcome to my new blog. For those of you who haven't heard yet: Ine and I have just moved to Beijing, China! Here are <a href="http://picasaweb.google.com/ivanzeeland/BeijingFebruari2008?authkey=mCLHpRdlaIU">some photos</a>, for now.
+
 <img src="http://lh6.google.com/ivanzeeland/R8rFh38U13I/AAAAAAAAABk/COTUgDOrPPw/drumtoren2.jpg?imgmax=576" alt="Drum tower" />

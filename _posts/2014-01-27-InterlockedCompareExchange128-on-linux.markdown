@@ -6,7 +6,7 @@ permalink: /archives/138-InterlockedCompareExchange128-on-linux.html
 s9y_link: http://www.lunesu.com/index.php?/archives/138-InterlockedCompareExchange128-on-linux.html
 date: 2014-01-27 10:26:31.000000000 +08:00
 ---
-The GCC that comes with my Fedora installation doesn't appear to have a <strong>__sync_val_compare_and_swap</strong> that works with <strong>__uint128_t</strong>, so here it is:<br />
+The GCC that comes with my Fedora installation doesn't appear to have a <strong>__sync_val_compare_and_swap</strong> that works with <strong>__uint128_t</strong>, so here it is:
 {% highlight c %}
 #undef NDEBUG
 #include &lt;assert.h>

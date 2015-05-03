@@ -6,9 +6,9 @@ permalink: /archives/97-Writing-portable-code-is-pretty-hard....html
 s9y_link: http://www.lunesu.com/index.php?/archives/97-Writing-portable-code-is-pretty-hard....html
 date: 2010-01-11 11:26:16.000000000 +08:00
 ---
-I've decided to make a small Wake-On-Lan program that I can register as a scheduled task in order to wake up my NAS. This task must be executed <em>every minute</em> or else the NAS will shutdown again, so to minimize system resources I decided to write this thingy in plain old C, without using any functions that would use the CRT. <br />
-<br />
-As if that wasn't bad enough, I tried to make it portable: buildable using different compilers on different platforms. Here's the result:<br />
+I've decided to make a small Wake-On-Lan program that I can register as a scheduled task in order to wake up my NAS. This task must be executed <em>every minute</em> or else the NAS will shutdown again, so to minimize system resources I decided to write this thingy in plain old C, without using any functions that would use the CRT.
+
+As if that wasn't bad enough, I tried to make it portable: buildable using different compilers on different platforms. Here's the result:
 {% highlight c %}
 // Portable Wake-On-Lan by Lionello Lunesu, placed in the public domain
 #ifdef _WIN32
@@ -127,8 +127,7 @@ int main(int argc, char* argv[])
 	return i;
 }
 {% endhighlight %}
-<br />
-<br />
-I've build this using GCC on Ubuntu and MSVC and DMC on Windows. Actually, on Windows this application still needs the CRT, since that WinMain isn't exactly the entry-point called by the OS. The OS calls an entry point without any arguments and then the CRT will extract the HINSTANCE and command line etc using the Windows API. So to get the above code free of all CRT use I'll have to use GetCommandLineA and skip the first argument, taking double-quotes into account. Easy to do, for sure, but I'm lazy and the program does not load the MSVCRT DLL which is what I basically wanted.<br />
-<br />
+
+I've build this using GCC on Ubuntu and MSVC and DMC on Windows. Actually, on Windows this application still needs the CRT, since that WinMain isn't exactly the entry-point called by the OS. The OS calls an entry point without any arguments and then the CRT will extract the HINSTANCE and command line etc using the Windows API. So to get the above code free of all CRT use I'll have to use GetCommandLineA and skip the first argument, taking double-quotes into account. Easy to do, for sure, but I'm lazy and the program does not load the MSVCRT DLL which is what I basically wanted.
+
 <strong>UPDATE:</strong> I have since then added a native Windows service wrapper tol my WakeOnLan program. Let me tell you: parsing command line parameters without CRT is not funny! My WOL service's private working set is now around 132KB. Not sure what else I can do to minimize that. (IIRC, there are some EXE headers that can be tuned, like stack size and such. Haven't tried that yet.)

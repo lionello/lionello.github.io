@@ -7,13 +7,16 @@ permalink: /archives/133-Show-current-GIT-branch-in-TCC.html
 s9y_link: http://www.lunesu.com/index.php?/archives/133-Show-current-GIT-branch-in-TCC.html
 date: 2013-05-03 15:02:39.000000000 +08:00
 ---
-I'm getting more and more familiar with the GIT workflow, which goes kinda like this:<blockquote>git checkout -b topicbranchX<br />
-git add somefile<br />
-git commit -m"commit message"<br />
-git pull<br />
-git rebase master<br />
-git push</blockquote><br />
-Unfortunately this means that you'll end up with a bunch of branches (which you can delete once they get pulled into origin/master) but I keep forgetting what branch I currently have checked out. I've seen bash prompts that show the current branch and I decided to do something similar for <a href="http://jpsoft.com" title="JP Software">TCC/LE</a>.<br />
+I'm getting more and more familiar with the GIT workflow, which goes kinda like this:
+{% highlight sh %}
+git checkout -b topicbranchX
+git add somefile
+git commit -m"commit message"
+git pull
+git rebase master
+git push
+{% endhighlight %}
+Unfortunately this means that you'll end up with a bunch of branches (which you can delete once they get pulled into origin/master) but I keep forgetting what branch I currently have checked out. I've seen bash prompts that show the current branch and I decided to do something similar for <a href="http://jpsoft.com" title="JP Software">TCC/LE</a>.
 {% highlight c %}
 /*
 @cl "/Tp%~f0" /nologo /GS- /link /SUBSYSTEM:console /nodefaultlib /entry:_main kernel32.lib
@@ -46,8 +49,9 @@ int __stdcall _main() {
   return 0;
 }
 {% endhighlight %}
-<br />
-What's fun about this file is that you can save it as "gb.cmd". When you then enter "gb" on the command line, it will actually invoke the C compiler (remember to run vcvars32) to generate the gb.exe. Next time, the exe will be invoked instead.<br />
-<br />
-This is the final prompt:<br />
-<blockquote>prompt %%@exec[@gb.exe]$e[1m$P$e[0m$_$+$g</blockquote>
+What's fun about this file is that you can save it as "gb.cmd". When you then enter "gb" on the command line, it will actually invoke the C compiler (remember to run vcvars32) to generate the gb.exe. Next time, the exe will be invoked instead.
+
+This is the final prompt:
+{% highlight sh %}
+prompt %%@exec[@gb.exe]$e[1m$P$e[0m$_$+$g
+{% endhighlight %}

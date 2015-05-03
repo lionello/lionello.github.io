@@ -6,40 +6,44 @@ permalink: /archives/109-Android-2.1,-here-we-go.html
 s9y_link: http://www.lunesu.com/index.php?/archives/109-Android-2.1,-here-we-go.html
 date: 2010-04-21 16:54:15.000000000 +08:00
 ---
-I've had it. I've been waiting since November last year for an official firmware update from HTC for my HTC Hero. Since then the update has been postponed numerous times and all the while I see these reports from people using leaked Android 2.1 ROMs. Now, it appears the official update will come in May, but I'm done waiting!<br />
-<br />
-As we speak I'm installing <a href="http://www.villainrom.co.uk/viewtopic.php?f=23&t=94" title="VillainROM 5.22">Villainrom 5.22</a>, which appears to be the <a href="http://android.modaco.com/content/htc-hero-hero-modaco-com/306106/poll-only-best-2-1-rom/" title="Android 2.1 ROM Poll">most popular 2.1 ROM</a> out there. Unfortunately it's not that straightforward to update your ROM and the necessary information is scattered among several forums and posts. Below is a list of the steps that I did to get 2.1 on my HTC Hero. Basically there are two kinds of updates: flash images and update packages. Flash images have the extension <em>.img</em> and are flashed using the command <em>flash_image</em> from the android shell. To install an update package you put the package as <em>update.zip</em> on the sdcard and reboot the phone into recovery mode. From there you can install the update package.<br />
-<br />
-<strong>Flash a new Radio ROM</strong><br />
-I've read somewhere on the <a href="http://forum.xda-developers.com/forumdisplay.php?f=508" title="XDA HTC Hero forum">XDA Hero forum</a> (sorry, can't remember the post) that the newer ROMs need a newer Radio ROM as well, so I've decided to flash a new radio ROM first. I suggest you make a backup first (step 2+3) and flash the Radio ROM afterwards.<br />
-<br />
-I've downloaded version <a href="http://forum.xda-developers.com/showpost.php?p=4594434" title="HTC Hero Radios">63.18.55.06JU_6.35.09.26</a> and put it on my sdcard as <em>update.zip</em> using the USB cable and enabling USB mass storage. I've shutdown my phone and then, while keeping the <em>home </em>key pressed, turned it on again. My phone booted into the recovery mode, displaying a menu from where I selected <strong>flash sdcard:update.zip</strong>.<br />
-<br />
-<strong>Flash a new Recovery boot loader</strong><br />
-The first step went well but I really should have created a backup <em>before</em> flashing the new radio. Better late than never, I suppose. I booted into the recovery mode again and selected <em>backup</em> but I instead of a backup I got an error message: <em>error running rom backup. backup not performed.</em> First thought: update the recovery image.<br />
-<br />
-I've downloaded <a href="http://rapidshare.com/files/360227978/recovery-RA-hero-v1.6.2.img" title="HTC Hero recovery image 1.6.2">recovery-RA-hero-v1.6.2.img</a> and followed the steps in <a href="http://forum.xda-developers.com/showthread.php?t=561124" title="[Recovery ROM] [07-Mar-2010] RA-hero-v1.6.2 ">this post</a>, using adb (android debug bridge):<br />
-<blockquote>adb shell reboot bootloader<br />
-fastboot boot recovery-RA-hero-v1.6.2.img<br />
-adb shell mount /sdcard<br />
-adb push recovery-RA-hero-v1.6.2.img /sdcard/recovery-RA-hero-v1.6.2.img<br />
-adb shell flash_image recovery /sdcard/recovery-RA-hero-v1.6.2.img<br />
-adb shell reboot</blockquote><br />
-<br />
-<strong>Make a Nandroid backup</strong><br />
-Reboot into the (new) recovery mode and selected <em>nand backup</em>. There was also a <em>nand + ext</em> and <em>BART backup </em>options, but I don't quite know what each does, so I ignored them <img src="http://www.lunesu.com/templates/default/img/emoticons/smile.png" alt=":-)" style="display: inline; vertical-align: bottom;" class="emoticon" /> After backup move all the contents of the sdcard to your PC. (The sdcard will be wiped in the next step.) Note that the nandroid backup does not backup the contents of your sdcard. <br />
-<br />
-<strong>Wipe all data</strong><br />
-From Android version 1.5 to 2.1 is a big step so I followed XDA poster's advice and wiped all the data from my phone before flashing the new firmware. Boot into recovery (if not already done) and select each of the following options from the recovery menu:<br />
-<blockquote>Wipe Data/Factory Reset<br />
-Wipe Dalvik cache<br />
-Wipe SD</blockquote><br />
-<br />
-<strong>Flash the new ROM</strong><br />
-I opted to go for the VillainROM 5.2 (aka 5.22) You can get it <a href="http://www.villainrom.co.uk/viewtopic.php?f=23&t=94" title="VillainROM 5.2">here</a>. The trick is the same: download the file and put it on the sdcard as <em>update.zip</em>. Then, boot into recovery mode and flash the zip from the sdcard. Reboot. Rinse. Repeat.<br />
-<br />
-This should have done the trick. Note that the first time the phone boots it might take a while for all the components to initialize, so go easy on your phone. <br />
-<br />
-Another great guide is found <a href="http://forum.xda-developers.com/showthread.php?t=645253" title="newbie guide">here</a>.<br />
-<br />
+I've had it. I've been waiting since November last year for an official firmware update from HTC for my HTC Hero. Since then the update has been postponed numerous times and all the while I see these reports from people using leaked Android 2.1 ROMs. Now, it appears the official update will come in May, but I'm done waiting!
+
+As we speak I'm installing <a href="http://www.villainrom.co.uk/viewtopic.php?f=23&t=94" title="VillainROM 5.22">Villainrom 5.22</a>, which appears to be the <a href="http://android.modaco.com/content/htc-hero-hero-modaco-com/306106/poll-only-best-2-1-rom/" title="Android 2.1 ROM Poll">most popular 2.1 ROM</a> out there. Unfortunately it's not that straightforward to update your ROM and the necessary information is scattered among several forums and posts. Below is a list of the steps that I did to get 2.1 on my HTC Hero. Basically there are two kinds of updates: flash images and update packages. Flash images have the extension <em>.img</em> and are flashed using the command <em>flash_image</em> from the android shell. To install an update package you put the package as <em>update.zip</em> on the sdcard and reboot the phone into recovery mode. From there you can install the update package.
+
+<strong>Flash a new Radio ROM</strong>
+I've read somewhere on the <a href="http://forum.xda-developers.com/forumdisplay.php?f=508" title="XDA HTC Hero forum">XDA Hero forum</a> (sorry, can't remember the post) that the newer ROMs need a newer Radio ROM as well, so I've decided to flash a new radio ROM first. I suggest you make a backup first (step 2+3) and flash the Radio ROM afterwards.
+
+I've downloaded version <a href="http://forum.xda-developers.com/showpost.php?p=4594434" title="HTC Hero Radios">63.18.55.06JU_6.35.09.26</a> and put it on my sdcard as <em>update.zip</em> using the USB cable and enabling USB mass storage. I've shutdown my phone and then, while keeping the <em>home </em>key pressed, turned it on again. My phone booted into the recovery mode, displaying a menu from where I selected <strong>flash sdcard:update.zip</strong>.
+
+<strong>Flash a new Recovery boot loader</strong>
+The first step went well but I really should have created a backup <em>before</em> flashing the new radio. Better late than never, I suppose. I booted into the recovery mode again and selected <em>backup</em> but I instead of a backup I got an error message: <em>error running rom backup. backup not performed.</em> First thought: update the recovery image.
+
+I've downloaded <a href="http://rapidshare.com/files/360227978/recovery-RA-hero-v1.6.2.img" title="HTC Hero recovery image 1.6.2">recovery-RA-hero-v1.6.2.img</a> and followed the steps in <a href="http://forum.xda-developers.com/showthread.php?t=561124" title="[Recovery ROM] [07-Mar-2010] RA-hero-v1.6.2 ">this post</a>, using adb (android debug bridge):
+{% highlight sh %}
+adb shell reboot bootloader
+fastboot boot recovery-RA-hero-v1.6.2.img
+adb shell mount /sdcard
+adb push recovery-RA-hero-v1.6.2.img /sdcard/recovery-RA-hero-v1.6.2.img
+adb shell flash_image recovery /sdcard/recovery-RA-hero-v1.6.2.img
+adb shell reboot
+{% endhighlight %}
+
+<strong>Make a Nandroid backup</strong>
+Reboot into the (new) recovery mode and selected <em>nand backup</em>. There was also a <em>nand + ext</em> and <em>BART backup </em>options, but I don't quite know what each does, so I ignored them <img src="http://www.lunesu.com/templates/default/img/emoticons/smile.png" alt=":-)" style="display: inline; vertical-align: bottom;" class="emoticon" /> After backup move all the contents of the sdcard to your PC. (The sdcard will be wiped in the next step.) Note that the nandroid backup does not backup the contents of your sdcard.
+
+<strong>Wipe all data</strong>
+From Android version 1.5 to 2.1 is a big step so I followed XDA poster's advice and wiped all the data from my phone before flashing the new firmware. Boot into recovery (if not already done) and select each of the following options from the recovery menu:
+{% highlight sh %}
+Wipe Data/Factory Reset
+Wipe Dalvik cache
+Wipe SD
+{% endhighlight %}
+
+<strong>Flash the new ROM</strong>
+I opted to go for the VillainROM 5.2 (aka 5.22) You can get it <a href="http://www.villainrom.co.uk/viewtopic.php?f=23&t=94" title="VillainROM 5.2">here</a>. The trick is the same: download the file and put it on the sdcard as <em>update.zip</em>. Then, boot into recovery mode and flash the zip from the sdcard. Reboot. Rinse. Repeat.
+
+This should have done the trick. Note that the first time the phone boots it might take a while for all the components to initialize, so go easy on your phone.
+
+Another great guide is found <a href="http://forum.xda-developers.com/showthread.php?t=645253" title="newbie guide">here</a>.
+
 And I've just got word that the official 2.1 has been postponed <em>yet again </em>until June. Now I'm really glad I've decided to go for the leaked 2.1.
