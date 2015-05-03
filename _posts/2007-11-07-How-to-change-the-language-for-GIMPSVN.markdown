@@ -9,6 +9,4 @@ date: 2007-11-07 22:01:00.000000000 +08:00
 ---
 The language for the GIMP and the SubVersion command line tools can be changed to another language by setting the LANG-environmentvariable to "en".<br />
 <br />
-```
-LANG=en
-```
+<blockquote>LANG=en</blockquote>

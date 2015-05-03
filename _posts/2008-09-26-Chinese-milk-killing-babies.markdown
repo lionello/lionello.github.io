@@ -19,9 +19,7 @@ From Xinhua today:<br />
 <br />
 [...]<br />
 <br />
-China's top quality control official, Li Changjiang, resigned on Monday over the tainted milk scandal, becoming one of the highest-ranking officials punished after the acclaimed Olympics. "
-```
-<br />
+China's top quality control official, Li Changjiang, resigned on Monday over the tainted milk scandal, becoming one of the highest-ranking officials punished after the acclaimed Olympics. "</blockquote><br />
 It's absolutely unbelievable that babies die in this country because of the fuzzy food regulations and lack of proper checks. That said, at least responsible authority figures are held accountable and do step down, which is not a common thing at all in several other countries I won't specify here. Pity though they only take up responsibility once their lust for power leads to accidents so severe that people will have to find out about them.<br />
 <br />
 BTW, <a href="http://www.danwei.org/milk/yanhong_on_breastfeeding_in_ch.php">Why don't Chinese women breastfeed</a>.

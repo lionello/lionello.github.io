@@ -13,18 +13,17 @@ In the slides I explain how I've made a projection for COM into D, which allows 
 <br />
 <strong>UPDATE:</strong> Add your comments below or on <a href="http://www.reddit.com/r/programming/comments/ow7qc/modern_com_programming_in_d/" title="Reddit">Reddit</a>.<br />
 <br />
-{% highlight c %}
-import std.stdio, comxml;
+<pre name="code" class="c">import std.stdio, comxml;
 
 void main()
 {
-    // Create a new empty document
+    // Create a new empty document 
     auto doc = XmlDocument();
 
     // Load an XML document from an inline string
     doc.LoadXml("<root>世界你好<a>hello</a><a>world</a></root>");
 
-    // Get the first node's value
+    // Get the first node's value 
     auto text = doc.DocumentElement.FirstChild;
     // Write the node's value to the console
     writeln(text.NodeValue);
@@ -36,8 +35,8 @@ void main()
     foreach (node; nodes.First)
         writeln(node.NodeValue);
 
-    // Access the child nodes by index
+    // Access the child nodes by index 
     for (uint t = 0; t < nodes.length; ++t)
         writeln(nodes[t].NodeValue);
 }
-{% endhighlight %}
+</pre>

@@ -6,7 +6,4 @@ permalink: /archives/123-Facebooc.html
 s9y_link: http://www.lunesu.com/index.php?/archives/123-Facebooc.html
 date: 2011-02-19 21:28:09.000000000 +08:00
 ---
-Nice IP address they got, by the way:
-```
-TCP    [2002:74e2:70fd:e472::3]:3405  [2620:0:1cfe:face:b00c::3]:443  ESTABLISHED
-```
+Nice IP address they got, by the way:<blockquote>TCP    [2002:74e2:70fd:e472::3]:3405  [2620:0:1cfe:face:b00c::3]:443  ESTABLISHED</blockquote>

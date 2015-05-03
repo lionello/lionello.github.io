@@ -14,45 +14,19 @@ After the initial setup I was shown the main menu. Because I was using mysqueeze
 <br />
 But still no access to my own music collection. Second surprise: the Squeezebox does not understand UPnP or DLNA. I thought that was a major bummer. It would have allowed me to simply hook it up to my <a href="http://www.buffalotech.com/products/network-storage/home-and-small-office/linkstation-live-ls-chl/" title="Buffalo LinkStation Live">Buffalo LinkStation Live</a>'s Twinkymedia Server. It seemed I had to install a Squeezebox Server.<br />
 <br />
-Squeezebox Server was installable on my Linkstation using:
-```
-ipkg install squeezecenter
-```
-That went well (albeit it was a somewhat older version), but it was immediately apparent that the 64Mb RAM of the Linkstation were not enough for the hefty perl + mysql Squeezecenter. The NAS was constantly swapping and became unresponsive.<br />
+Squeezebox Server was installable on my Linkstation using: <blockquote>ipkg install squeezecenter</blockquote>That went well (albeit it was a somewhat older version), but it was immediately apparent that the 64Mb RAM of the Linkstation were not enough for the hefty perl + mysql Squeezecenter. The NAS was constantly swapping and became unresponsive.<br />
 <br />
 What I basically wanted was simple: when I still had my original Xbox with <a href="http://xbmc.org/" title="XBox Media Center">XBMC</a>, I had made a startup script that immediately started Party Mode as soon as the XBox was turned on. Filling the room with music was a simple act of pressing a button. Most of the time I didn't care about which CD was playing. (Without Party Mode I would spend minutes figuring out what music I felt like listening and usually ending up with one of my favorites, never choosing 90% of the music I actually had.)<br />
 <br />
-I had heard about <a href="http://www.icecast.org/" title="Icecast.org">Icecast</a> before. It's a music (media, to be more exact) streamer, similar to shoutcast. It was easily installed on my NAS using
-```
-ipkg install icecast
-```
-. Icecast itself is just the streaming server, it doesn't actually read music itself, but needs a Icecast Source to provide it with the bits. That job is done by <a href="http://www.icecast.org/ices.php" title="Icecast Source">Ices</a>, also installable using
-```
-ipkg install Ices0
-```
-(Apparently nobody has built Ices2 for the ARM yet?) The input for Ices is a text file with the playlist. Because Ices0 (as opposed to Ices2) only understand MP3, I had to make a playlist with only my MP3s, skipping Flac and Ogg:
-```
-find /mnt/disk1/share/music -name \*.mp3 &gt; playlist.txt
-```
+I had heard about <a href="http://www.icecast.org/" title="Icecast.org">Icecast</a> before. It's a music (media, to be more exact) streamer, similar to shoutcast. It was easily installed on my NAS using <blockquote>ipkg install icecast</blockquote>. Icecast itself is just the streaming server, it doesn't actually read music itself, but needs a Icecast Source to provide it with the bits. That job is done by <a href="http://www.icecast.org/ices.php" title="Icecast Source">Ices</a>, also installable using<blockquote>ipkg install Ices0</blockquote>(Apparently nobody has built Ices2 for the ARM yet?) The input for Ices is a text file with the playlist. Because Ices0 (as opposed to Ices2) only understand MP3, I had to make a playlist with only my MP3s, skipping Flac and Ogg:<blockquote>find /mnt/disk1/share/music -name \*.mp3 &gt; playlist.txt</blockquote><br />
+Icecast and Ices could now be started with:<blockquote>/opt/bin/icecast -c /opt/etc/icecast.xml -b<br />
+/opt/bin/ices -c /opt/etc/ices.conf.dist -B</blockquote>I could now connect to my own radio station from Winamp! I then proceeded to add the URL to my Favorites on mysqueezebox.com but it wouldn't work. The Squeezebox cannot play streams on the LAN because the server (and in this case, mysqueezebox.com) must be able to access the stream, for some metadata I presume. The solution was easy: open a random port on the router and forward the traffic to the Icecast server: success!<br />
 <br />
-Icecast and Ices could now be started with:
-```
-/opt/bin/icecast -c /opt/etc/icecast.xml -b<br />
-/opt/bin/ices -c /opt/etc/ices.conf.dist -B
-```
-I could now connect to my own radio station from Winamp! I then proceeded to add the URL to my Favorites on mysqueezebox.com but it wouldn't work. The Squeezebox cannot play streams on the LAN because the server (and in this case, mysqueezebox.com) must be able to access the stream, for some metadata I presume. The solution was easy: open a random port on the router and forward the traffic to the Icecast server: success!<br />
-<br />
-One caveat though: the LinkStation would be constantly streaming music, even when nobody was listening, causing non-stop churning of the harddisk. I wanted to started Ices when the first listener connected and to stop it once the last listener went away. That could be done by adding an authentication section to icecast.xml:
-{% highlight xml %}
-&lt;authentication type="url"&gt;
+One caveat though: the LinkStation would be constantly streaming music, even when nobody was listening, causing non-stop churning of the harddisk. I wanted to started Ices when the first listener connected and to stop it once the last listener went away. That could be done by adding an authentication section to icecast.xml:<pre name="code" class="xml">&lt;authentication type="url"&gt;
   &lt;option name="listener_add" value="http://localhost:8081/icecast.php"/&gt;
   &lt;option name="listener_remove" value="http://localhost:8081/icecast.php"/&gt;
   &lt;option name="auth_header" value="icecast-auth-user: 1"/&gt;
-&lt;/authentication&gt;
-{% endhighlight %}
-With these settings, the Icecast server would contact the mentioned URLs when a listener (dis)connected. In the PHP file I could then start/stop the Ices server:
-{% highlight php %}
-&lt;?
+&lt;/authentication&gt;</pre>With these settings, the Icecast server would contact the mentioned URLs when a listener (dis)connected. In the PHP file I could then start/stop the Ices server:<pre name="code" class="php">&lt;?
 $action = $_POST['action'];
 $mount = $_POST['mount'];
 
@@ -68,10 +42,10 @@ function store($c)
     $count = 0;
   $count = intval($count) + intval($c);
   fputs($file, $count."\n");
-  fclose($file);
+  fclose($file); 
   return $count;
 }
-
+  
 function start_ices()
 {
   $array = array();
@@ -94,5 +68,4 @@ if ($action == "listener_remove" &&amp; $mount == "strm" &&amp; store(-1) == 0)
   stop_ices();
 
 ?&gt;Success.
-{% endhighlight %}
-I can't believe how hard it is to create a global setting in PHP. I needed an atomic increment/decrement for the user count. The store($) function basically serves as a global InterlockedAdd, loading a integer from a tempfile, adding a value to it, writing the result back to the file and returning it to the caller.  Please let me know if there's a easier way to accomplice that.
+</pre>I can't believe how hard it is to create a global setting in PHP. I needed an atomic increment/decrement for the user count. The store($) function basically serves as a global InterlockedAdd, loading a integer from a tempfile, adding a value to it, writing the result back to the file and returning it to the caller.  Please let me know if there's a easier way to accomplice that.

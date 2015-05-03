@@ -15,9 +15,6 @@ So, for all those Ansible lovers, here's a single page file with all of Ansible'
 <a href="http://lunesu.com/ansible.yml" title="Ansible">http://lunesu.com/ansible.yml</a><br />
 <br />
 This file was created as such (with a little post-processing*):<br />
-```
-$ ansible-doc -l | cut -d ' ' -f 1 | xargs -n1 ansible-doc -s &gt;&gt;ansible.yml
-```
-<br />
+<blockquote>$ ansible-doc -l | cut -d ' ' -f 1 | xargs -n1 ansible-doc -s &gt;&gt;ansible.yml</blockquote><br />
 <br />
 * :%s/^\([^'#]\+\)'\([^#]*\)/\1`\2/g

@@ -17,15 +17,12 @@ In Apache, we need a separate irtual host to handle the HTTPS request on port 44
 Now we create a new virtual host for HTTPS. Go to the "Create virtual host" tab. Change the port to "443" and check the radio button to the left of it. I chose the copy all directives from the existing virtual host, so if you want to do the same, select the existing host in "Copy directives from" drop down box. Save and apply changes. The new virtual host should appear in the server list. Select the new host and go to its "SSL Options" page. Check "Enable SSL" and select the certificate and the private key to use for SSL. I've chosen the same certificate and private key as the one used by Webmin. If you've combined the certificate and private key into a single file (by simple concatenation) you only need to set one option. Otherwise, set both options. Apply changes.<br />
 <br />
 As far as Webmin's concerned, we're done. But unfortunately it still didn't work for me. The following errors appeared in /var/log/apache2/error.log:<br />
-```[error] VirtualHost *:80 -- mixing * ports and non-* ports with a NameVirtualHost address is not supported, proceeding with undefined results<br />
-[error] VirtualHost *:443 -- mixing * ports and non-* ports with a NameVirtualHost address is not supported, proceeding with undefined results
-```
-<br />
+<blockquote>[error] VirtualHost *:80 -- mixing * ports and non-* ports with a NameVirtualHost address is not supported, proceeding with undefined results<br />
+[error] VirtualHost *:443 -- mixing * ports and non-* ports with a NameVirtualHost address is not supported, proceeding with undefined results</blockquote><br />
 <br />
 Apparently the error is caused by the NameVirtualHost directive being out of sync with the VirtualHost directive in apache's configuration files. I fixed this error by editing etc/apache2/sites-available/default and commenting out the "NameVirtualHost *" line (add a # before it):<br />
-```sudo vi etc/apache2/sites-available/default<br />
+<blockquote>sudo vi etc/apache2/sites-available/default<br />
 sudo etc/init.d/apache2 restart<br />
-```
-<br />
+</blockquote><br />
 <br />
 After restarting Apache the error.log no longer showed the aforementioned error messages and HTTP and HTTPS were both working.

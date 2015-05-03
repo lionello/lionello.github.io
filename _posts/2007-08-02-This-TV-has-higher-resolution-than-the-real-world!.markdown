@@ -18,9 +18,6 @@ What would be the ideal distance at which to put this TV?<br />
 <br />
 Now using some <a href="http://en.wikipedia.org/wiki/Trigonometry#Overview" title="Trigonometry">trigonometry</a>, Tan(angle) = opposite/adjacent. opposite is our pixel, 0,5mm; adjacent is the distance between us and the TV, which is what we want to know.<br />
 <br />
-```
-Distance to TV = pixel size / Tan(pixel angle) = 0,5mm / Tan(0,013) = ~2203mm.
-```
-<br />
+<blockquote>Distance to TV = pixel size / Tan(pixel angle) = 0,5mm / Tan(0,013) = ~2203mm.</blockquote><br />
 <br />
 Conclusion: do <em>not </em>put your HDTV at a distance of more than 2,2m!

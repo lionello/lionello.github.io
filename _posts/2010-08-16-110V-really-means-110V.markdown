@@ -13,15 +13,11 @@ Of course, I did not just plug it in and watch explode. I first opened up the po
 <br />
 I already had a plan B from the moment I bought the Xbox: the power supply output 12V and 5V, much like a regular PC power supply. So I bought a (mini) ATX power supply and went online to see if I could find the pinout. <a href="http://www.google.com.hk/images?q=atx%20psu%20pinout&hl=en&um=1&ie=UTF-8&source=og&sa=N&tab=wi&biw=1746&bih=822" title="atx psu pinout">Plenty</a>. When I  plugged in the ATX power source, I measured the voltage on a few pins, but got nothing. Then I remembered the fact that an ATX power supply does not really turn on until the PC tells it to. This is done by shorting pin 14 of the ATX plug (green wire) to ground (black, any will do.) Once I did that, I got all the power I needed.<br />
 <br />
-The pinout on the Xbox side was harder to come by. I had found a few for the old Xbox 360, but none for the new slim model. Fortunately there were some hints on the PSU's board:
-```
-Yellow 12V<br />
+The pinout on the Xbox side was harder to come by. I had found a few for the old Xbox 360, but none for the new slim model. Fortunately there were some hints on the PSU's board:<blockquote>Yellow 12V<br />
 Black GND<br />
 Red 5VSB<br />
 Blue PS_ON<br />
-Gray RSENSE
-```
-<br />
+Gray RSENSE</blockquote><br />
 I thought I'd check what I could get away with: I connected the yellow wire from the Xbox to the yellow wire of the PSU. Same for the red wires, and black wires, matching the colors. Then, I turned on the power supply by connecting the green wire on pin 14 to a black wire. I pressed the button on the Xbox: success!<br />
 <a class="serendipity_image_link"  href='http://www.lunesu.com/uploads/P1030006.JPG'><!-- s9ymdb:83 --><img class="serendipity_image_center" width="83" height="110"  src="http://www.lunesu.com/uploads/P1030006.serendipityThumb.JPG"  alt="" /></a><br />
 Having the power supply turned on all the time was not something I liked though. So the next step was to get the power supply to turn on together with the Xbox. By measuring the voltage I saw the blue PS_ON wire being pulled up (~3.3V) when the Xbox wants to turn on. In order to do this, the Xbox needs some power though. This is done by the red "5VSB" wire. The "SB" stands for Stand By. This means that the red wire from the Xbox must not be attached to the red ATX wires, but to the purple wire on pin 9.<br />
@@ -32,18 +28,14 @@ The datasheet for the EL817 can be found <a href="http://www.sztuofeng.com/pdf/%
 <br />
 So, pin 1 of the optocoupler (the pin near the dot) will be pulled high, to ~3.3V. We want to give the LED inside about ~1.2V, that leaves 2.1V for a resistor. At about 20mA this means we need a V/I=R 2.1/0.02= ~100 Ohm resistor. 100 Ohm = 10*10, 10 times 10 to the power 1: we need a resistor with Brown, Black, Brown rings. Luckily I found one <img src="http://www.lunesu.com/templates/default/img/emoticons/smile.png" alt=":-)" style="display: inline; vertical-align: bottom;" class="emoticon" /><br />
 <br />
-I had everything I needed:
-```
-Yellow (Xbox) - Yellow (ATX)<br />
+I had everything I needed:<blockquote>Yellow (Xbox) - Yellow (ATX)<br />
 Red (Xbox) - Purple (ATX)<br />
 Blue (Xbox) - Resistor - Optocoupler pin 1<br />
 Black (Xbox) - Black (ATX)<br />
 Optocoupler pin 2 - Black (ATX)<br />
 Optocoupler pin 3 - Black (ATX)<br />
 Optocoupler pin 4 - Green (ATX)<br />
-Gray (Xbox) - unused
-```
-<br />
+Gray (Xbox) - unused</blockquote><br />
 I had no idea what the gray RSENSE wire was for, so I just ignored it and it worked fine! Once I got everything figured out, I opened up the ATX PSU and removed all the wires I didn't use. Important: there was a brown wire that got connected to a orange (3.3V) wire IN the ATX power connector. So after cutting of the connector I had to connect the brown wire to 3.3V somewhere inside the PSU.<br />
 <a class="serendipity_image_link"  href='http://www.lunesu.com/uploads/P1030007.JPG'><!-- s9ymdb:82 --><img class="serendipity_image_center" width="110" height="83"  src="http://www.lunesu.com/uploads/P1030007.serendipityThumb.JPG"  alt="" /></a><br />
 And all it cost me was an ATX power supply and 1 blister. Not bad <img src="http://www.lunesu.com/templates/default/img/emoticons/smile.png" alt=":-)" style="display: inline; vertical-align: bottom;" class="emoticon" /><br />

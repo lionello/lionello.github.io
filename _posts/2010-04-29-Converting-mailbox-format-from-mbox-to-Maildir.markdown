@@ -17,13 +17,9 @@ The steps:<br />
 <br />
 <li/>You should also stop postifx to prevent mail being delivered to the wrong mailbox during conversion: <em>sudo /etc/init.d/postfix stop</em><br />
 <br />
-<li/>The easiest way to convert the mailbox format is to let dovecot do it for us. Make the following changes to <em>/etc/dovecot/dovecot.conf</em>:
-```
-mail_location = maildir:~/Maildir<br />
+<li/>The easiest way to convert the mailbox format is to let dovecot do it for us. Make the following changes to <em>/etc/dovecot/dovecot.conf</em>: <blockquote>mail_location = maildir:~/Maildir<br />
 mail_plugins = convert<br />
-convert_mail = mbox:~/mail:INBOX=/var/mail/%u
-```
-(Search for the settings and change them.)<br />
+convert_mail = mbox:~/mail:INBOX=/var/mail/%u</blockquote>(Search for the settings and change them.)<br />
 <br />
 <li/>Apply the changes by restarting dovecot: <em>sudo /etc/init.d/dovecot restart</em><br />
 <br />

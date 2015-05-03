@@ -8,22 +8,14 @@ date: 2014-07-03 13:40:20.000000000 +08:00
 ---
 GIT over SSH will create files with user:group from the user that's doing the push. This will prevent other users from changing files, in particular updating refs/heads/.<br />
 <br />
-To share a GIT repo over SSH among several users, create the repo with --shared=group and put all users in the same <em>primary </em>group:
-```
-sudo addgroup git<br />
+To share a GIT repo over SSH among several users, create the repo with --shared=group and put all users in the same <em>primary </em>group:<blockquote>sudo addgroup git<br />
 sudo adduser user1 git<br />
 sudo adduser user2 git<br />
-git init --bare --shared=group
-```
+git init --bare --shared=group</blockquote><br />
 <br />
-<br />
-To fix sharing for an already existent setup, fixup the primary groups and file ownership:
-```
-sudo cat /etc/group<br />
+To fix sharing for an already existent setup, fixup the primary groups and file ownership:<blockquote>sudo cat /etc/group<br />
 sudo usermod -g 1006 -G 1007 user1<br />
 sudo usermod -g 1006 -G 1008 user2<br />
 sudo chown -R root:git /var/repo.git<br />
-sudo git config core.sharedRepository group
-```
-<br />
+sudo git config core.sharedRepository group</blockquote><br />
 where 1006 is the ID of the 'git' group and 1007 and 1008 refer to the user's respective groups.
