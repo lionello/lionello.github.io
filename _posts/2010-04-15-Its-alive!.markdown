@@ -1,0 +1,13 @@
+---
+layout: post
+title: It's alive!
+categories: []
+permalink: /archives/107-Its-alive!.html
+s9y_link: http://www.lunesu.com/index.php?/archives/107-Its-alive!.html
+date: 2010-04-15 16:08:08.000000000 +08:00
+---
+(Continued from below.)<br />
+<br />
+It works! I've attached the O-scope to an IR sensor (TSOP31238, 38Khz) which also demodulates the signal, and the demodulated signal is correct! This proves that using the 2 LED trick works fine, and it further proves that a 38Khz sensor will also demodulate a 36KHz signal!<br />
+<br />
+<!-- s9ymdb:76 --><img class="serendipity_image_center" width="524" height="188"  src="http://www.lunesu.com/uploads/oscope2.png"  alt="" />

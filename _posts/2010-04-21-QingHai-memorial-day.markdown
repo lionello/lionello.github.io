@@ -1,0 +1,9 @@
+---
+layout: post
+title: QingHai memorial day
+categories: []
+permalink: /archives/110-QingHai-memorial-day.html
+s9y_link: http://www.lunesu.com/index.php?/archives/110-QingHai-memorial-day.html
+date: 2010-04-21 22:17:54.000000000 +08:00
+---
+<div class="serendipity_imageComment_left" style="width: 110px"><div class="serendipity_imageComment_img"><a class="serendipity_image_link"  href='http://www.lunesu.com/uploads/elong-bw.png'><!-- s9ymdb:81 --><img class="serendipity_image_left" width="110" height="67"  src="http://www.lunesu.com/uploads/elong-bw.serendipityThumb.png"  alt="" /></a></div><div class="serendipity_imageComment_txt">elong.com</div></div><div class="serendipity_imageComment_left" style="width: 110px"><div class="serendipity_imageComment_img"><a class="serendipity_image_link"  href='http://www.lunesu.com/uploads/xinhua-bw.png'><!-- s9ymdb:78 --><img class="serendipity_image_left" width="110" height="67"  src="http://www.lunesu.com/uploads/xinhua-bw.serendipityThumb.png"  alt="" /></a></div><div class="serendipity_imageComment_txt">xinhuanet.com</div></div><div class="serendipity_imageComment_left" style="width: 110px"><div class="serendipity_imageComment_img"><a class="serendipity_image_link"  href='http://www.lunesu.com/uploads/airchina-bw.png'><!-- s9ymdb:79 --><img class="serendipity_image_left" width="110" height="67"  src="http://www.lunesu.com/uploads/airchina-bw.serendipityThumb.png"  alt="" /></a></div><div class="serendipity_imageComment_txt">airchina.com.cn</div></div><div class="serendipity_imageComment_left" style="width: 110px"><div class="serendipity_imageComment_img"><a class="serendipity_image_link"  href='http://www.lunesu.com/uploads/csair-bw.png'><!-- s9ymdb:80 --><img class="serendipity_image_left" width="110" height="67"  src="http://www.lunesu.com/uploads/csair-bw.serendipityThumb.png"  alt="" /></a></div><div class="serendipity_imageComment_txt">csair.com</div></div>

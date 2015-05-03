@@ -1,0 +1,12 @@
+---
+layout: post
+title: '"Do no evil"'
+categories: []
+permalink: /archives/130-Do-no-evil.html
+s9y_link: http://www.lunesu.com/index.php?/archives/130-Do-no-evil.html
+date: 2012-08-11 17:05:00.000000000 +08:00
+---
+(Cross-posted from my Facebook profile)<br />
+<br />
+Smart, but disingenuous, ad served by Google. Mentions other browsers but links to the Chrome homepage. The site this ad got served on worked just fine in IE. Dirty trick.<br />
+<!-- s9ymdb:148 --><img class="serendipity_image_center" width="300" height="250"  src="http://www.lunesu.com/uploads/scroogled.png" title="scroogled.png" alt="" />

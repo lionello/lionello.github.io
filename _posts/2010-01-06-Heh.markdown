@@ -1,0 +1,9 @@
+---
+layout: post
+title: Heh
+categories: []
+permalink: /archives/96-Heh.html
+s9y_link: http://www.lunesu.com/index.php?/archives/96-Heh.html
+date: 2010-01-06 11:44:27.000000000 +08:00
+---
+<!-- s9ymdb:68 --><img class="serendipity_image_center" width="392" height="198" style="border: 0px; padding-left: 5px; padding-right: 5px;" src="http://www.lunesu.com/uploads/rootls.PNG" alt="" />
