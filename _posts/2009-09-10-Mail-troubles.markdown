@@ -16,7 +16,10 @@ Since <a href="http://www.postfix.org/" title="The Postfix mail server">postfix 
 Next step: fix the certificate warning I get when trying to send mail through my own server. The fix: in Webmin's Postfix page, select <em>SMTP Authentication And Encryption</em>. Change the paths of the certificate and private key files to the <a href="http://lunesu.com/index.php?/archives/80-Creating-my-own-keys.html" title="Creating my own keys">ones created before</a>. Save.<br />
 <br />
 I also use a lot of aliases. Basically, I create a new mail alias each time a vague site wants my email address. Since I have about 25 aliases, I use Webmin's <em>Edit Map Manually</em> option in its <em>Mail Aliases</em> page. This works fine, but it won't be applied automatically after save! I had to run the following command as root for the aliases to start working:<br />
-<blockquote>newaliases</blockquote><br />
+```
+newaliases
+```
+<br />
 Another thing I noticed is that Postifx apparently always recognizes addresses of the form <em>account+suffix@domain</em> and delivers them to <em>account</em>, without the suffix. This how I made most of my aliases in the first place, so all of those with a plus sign could be removed from the aliases map. (Of course, the part before the plus sign must still be an existing account name or alias.)<br />
 <br />
 So, most of it seems to be working at the moment, but no anti-spam yet, which is really the next thing I need to figure out before I get drowned in spam messages.

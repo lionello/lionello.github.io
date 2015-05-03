@@ -19,21 +19,27 @@ I've downloaded version <a href="http://forum.xda-developers.com/showpost.php?p=
 The first step went well but I really should have created a backup <em>before</em> flashing the new radio. Better late than never, I suppose. I booted into the recovery mode again and selected <em>backup</em> but I instead of a backup I got an error message: <em>error running rom backup. backup not performed.</em> First thought: update the recovery image.<br />
 <br />
 I've downloaded <a href="http://rapidshare.com/files/360227978/recovery-RA-hero-v1.6.2.img" title="HTC Hero recovery image 1.6.2">recovery-RA-hero-v1.6.2.img</a> and followed the steps in <a href="http://forum.xda-developers.com/showthread.php?t=561124" title="[Recovery ROM] [07-Mar-2010] RA-hero-v1.6.2 ">this post</a>, using adb (android debug bridge):<br />
-<blockquote>adb shell reboot bootloader<br />
+```
+adb shell reboot bootloader<br />
 fastboot boot recovery-RA-hero-v1.6.2.img<br />
 adb shell mount /sdcard<br />
 adb push recovery-RA-hero-v1.6.2.img /sdcard/recovery-RA-hero-v1.6.2.img<br />
 adb shell flash_image recovery /sdcard/recovery-RA-hero-v1.6.2.img<br />
-adb shell reboot</blockquote><br />
+adb shell reboot
+```
+<br />
 <br />
 <strong>Make a Nandroid backup</strong><br />
 Reboot into the (new) recovery mode and selected <em>nand backup</em>. There was also a <em>nand + ext</em> and <em>BART backup </em>options, but I don't quite know what each does, so I ignored them <img src="http://www.lunesu.com/templates/default/img/emoticons/smile.png" alt=":-)" style="display: inline; vertical-align: bottom;" class="emoticon" /> After backup move all the contents of the sdcard to your PC. (The sdcard will be wiped in the next step.) Note that the nandroid backup does not backup the contents of your sdcard. <br />
 <br />
 <strong>Wipe all data</strong><br />
 From Android version 1.5 to 2.1 is a big step so I followed XDA poster's advice and wiped all the data from my phone before flashing the new firmware. Boot into recovery (if not already done) and select each of the following options from the recovery menu:<br />
-<blockquote>Wipe Data/Factory Reset<br />
+```
+Wipe Data/Factory Reset<br />
 Wipe Dalvik cache<br />
-Wipe SD</blockquote><br />
+Wipe SD
+```
+<br />
 <br />
 <strong>Flash the new ROM</strong><br />
 I opted to go for the VillainROM 5.2 (aka 5.22) You can get it <a href="http://www.villainrom.co.uk/viewtopic.php?f=23&t=94" title="VillainROM 5.2">here</a>. The trick is the same: download the file and put it on the sdcard as <em>update.zip</em>. Then, boot into recovery mode and flash the zip from the sdcard. Reboot. Rinse. Repeat.<br />

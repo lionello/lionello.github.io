@@ -21,31 +21,60 @@ My first thought was that the IE browser on WP7.5 "Mango" was simply not support
 That's suspicious, I thought, since the browser is exactly the same, whether I use mobile mode or desktop mode. I figure I'd manually try the different <a href="http://en.wikipedia.org/wiki/User_agent" title="User Agent on Wikipedia">User-Agents</a> to see what would happen:<br />
 <ul><li>WP7 - Mobile Version<br />
 Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Nokia 800)<br />
-<blockquote>HTTP/1.1 302 Found<br />
-Location: http://maps.google.com/m/local</blockquote><br />
+```
+HTTP/1.1 302 Found<br />
+Location: http://maps.google.com/m/local
+```
+<br />
 </li><li>WP7 - Desktop Version<br />
 Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)<br />
-<blockquote>HTTP/1.1 302 Found<br />
-Location: http://maps.google.com/m/local</blockquote><br />
+```
+HTTP/1.1 302 Found<br />
+Location: http://maps.google.com/m/local
+```
+<br />
 </li><li>WP8 - Mobile Version<br />
 Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; Microsoft; Virtual)<br />
-<blockquote>HTTP/1.1 302 Found<br />
-Location: http://maps.google.com/m/local</blockquote><br />
+```
+HTTP/1.1 302 Found<br />
+Location: http://maps.google.com/m/local
+```
+<br />
 </li><li>WP8 - Desktop Version<br />
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; ARM; Touch; WPDesktop)<br />
-<blockquote>HTTP/1.1 200 OK</blockquote><br />
+```
+HTTP/1.1 200 OK
+```
+<br />
 </li><li>Win8 - Desktop Browser<br />
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)<br />
-<blockquote>HTTP/1.1 200 OK</blockquote><br />
+```
+HTTP/1.1 200 OK
+```
+<br />
 </li><li>Win8 - "Metro" Modern Browser<br />
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)<br />
-<blockquote>HTTP/1.1 200 OK</blockquote><br />
+```
+HTTP/1.1 200 OK
+```
+<br />
 </li></ul><br />
 Interestingly, as soon as a device identifies itself as a Windows Phone (or WP7) it gets redirected. In other cases it gets the actual Google Maps page. As a test I wanted to replace the User-Agent from my WP7 device with the one from an Android device. Here's how:<br />
-<blockquote>sudo apt-get privoxy<br />
-sudo vi /etc/privoxy/default.actions</blockquote>Add this to the end:<blockquote>{+hide-user-agent{Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus One Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1)}}<br />
-.google.</blockquote>Change <strong>listen-address </strong>to listen on a public IP:<blockquote>sudo vi /etc/privoxy/config<br />
-sudo /etc/init.d/privoxy restart</blockquote>On the WP device, change the proxy for your current WLAN profile to point to your instance of <a href="http://www.privoxy.org/" title="Privoxy HTTP proxy">Privoxy</a>.<br />
+```
+sudo apt-get privoxy<br />
+sudo vi /etc/privoxy/default.actions
+```
+Add this to the end:
+```
+{+hide-user-agent{Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus One Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1)}}<br />
+.google.
+```
+Change <strong>listen-address </strong>to listen on a public IP:
+```
+sudo vi /etc/privoxy/config<br />
+sudo /etc/init.d/privoxy restart
+```
+On the WP device, change the proxy for your current WLAN profile to point to your instance of <a href="http://www.privoxy.org/" title="Privoxy HTTP proxy">Privoxy</a>.<br />
 <br />
 Et voilà, you got Google Maps on WP7, albeit a little flaky. It might be that Google preferred WP user to have no experience to them having a flaky one, but that still doesn't explain why it's redirecting WP8 IE when in Mobile mode.<br />
 <br />

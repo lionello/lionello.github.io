@@ -27,13 +27,16 @@ When make is done we need to 'install' the modules, but not in our host/build sy
 <br />
 When done, copy all the files from /tmp/MyModules/lib/modules/2.6.22.7ownkernel/kernel/sound (recursive) to your NAS. Now comes another the tricky part: loading the needed modules. The module you <strong>need</strong> is <em>snd-usb-audio</em> and <em>snd-pcm-oss</em>, but before this one will need you'll have to load a couple of others. The normal way this is done is to move the modules into the NAS's kernel folder and issue a <em>depmod -a</em> to update the module dependecies and a <em>modprobe snd-usb-audio</em> to load the module with its dependencies. I did it the wrong way: using <em>insmod</em> to load each module by hand, and trying to figure out the order in which to load them by trial-and-error. Eventually, <em>insmod snd-usb-audio.ko</em> loaded without complaints.<br />
 <br />
-Last step: create the device nodes. As per the NAS-Central page:<blockquote>cd /dev<br />
+Last step: create the device nodes. As per the NAS-Central page:
+```
+cd /dev<br />
 addgroup audio<br />
 mknod -m 660 mixer c 14 0 ; chgrp audio mixer<br />
 mknod -m 660 mixer1 c 14 16 ; chgrp audio mixer1<br />
 mknod -m 660 dsp c 14 3 ; chgrp audio dsp<br />
 mknod -m 660 dsp1 c 14 19 ; chgrp audio dsp1<br />
-</blockquote><br />
+```
+<br />
 I am now able to stream music using mpg123, madplay, mpd (all installable using ipkg.)<br />
 <br />
 The sound quality of that 15 RMB sound card sucks though <img src="http://www.lunesu.com/templates/default/img/emoticons/sad.png" alt=":-(" style="display: inline; vertical-align: bottom;" class="emoticon" /><br />

@@ -13,6 +13,8 @@ Of course, it only seems logical that you'd want to add all remote folders to th
 There's a hack though. On NTFS you can make <em>softlinks </em>that point to files and folders, either local or remote. After creating a softlink to the remote folder (or share), the softlink can be added to the library.<br />
 <br />
 Example:<br />
-<blockquote>C:\>mklink /d Remote \\Remote\share<br />
-</blockquote><br />
+```
+C:\>mklink /d Remote \\Remote\share<br />
+```
+<br />
 This will create a softlink in the C: root, pointing to the share "share" on the PC called "Remote". The /D creates a symbolic link to a folder. After creation, you can add the folder, or any subfolder, to the libraries.

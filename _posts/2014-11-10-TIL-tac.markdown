@@ -6,7 +6,13 @@ permalink: /archives/145-TIL-tac.html
 s9y_link: http://www.lunesu.com/index.php?/archives/145-TIL-tac.html
 date: 2014-11-10 17:27:44.000000000 +08:00
 ---
-<blockquote>tac<br />
+```
+tac<br />
 <br />
-Concatenate and write files in reverse, copies each FILE ( - means standard input), or standard input if none are given, to standard output, reversing the records (lines by default) in each file separately.</blockquote><br />
-OSX doesn't have <strong>tac</strong> out of the box, but add the following line to your <strong>.bash_profile</strong> and you're good to go:<blockquote>alias tac='tail -r'</blockquote>
+Concatenate and write files in reverse, copies each FILE ( - means standard input), or standard input if none are given, to standard output, reversing the records (lines by default) in each file separately.
+```
+<br />
+OSX doesn't have <strong>tac</strong> out of the box, but add the following line to your <strong>.bash_profile</strong> and you're good to go:
+```
+alias tac='tail -r'
+```

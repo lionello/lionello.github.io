@@ -12,9 +12,13 @@ Here's how to get Fedora to boot to XBMC without login.<br />
 <br />
 First, configure your desktop manager to auto-login. In my case that is LXDM and it's configured by editing <strong>/etc/lxdm/lxdm.conf</strong> and adding/changing the line containing <strong>autologin=USER</strong> with <em>USER </em>being the username of the local user you want to run XBMC as. <br />
 <br />
-Next, change the desktop manager for your user to XBMC. If you install XBMC using the Yum package you should have gotten <strong>/usr/share/xsessions/XBMC.desktop</strong> so it's enough to create a file called .dmrc in the user's home folder.<blockquote>cat >~/.dmrc<br />
+Next, change the desktop manager for your user to XBMC. If you install XBMC using the Yum package you should have gotten <strong>/usr/share/xsessions/XBMC.desktop</strong> so it's enough to create a file called .dmrc in the user's home folder.
+```
+cat >~/.dmrc<br />
 [Desktop]<br />
-Session=XBMC</blockquote>(End by pressing CTRL-D)<br />
+Session=XBMC
+```
+(End by pressing CTRL-D)<br />
 <br />
 Finally, to prevent XBMC from using CPU when on the home screen, disable the RSS feed by editing the settings for the default skin. Edit <strong>~/.xbmc/userdata/guisettings.xml</strong> and change <strong>enablerssfeeds </strong>to <strong>false</strong>.<br />
 <br />

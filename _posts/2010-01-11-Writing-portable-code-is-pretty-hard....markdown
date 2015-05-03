@@ -8,8 +8,10 @@ date: 2010-01-11 11:26:16.000000000 +08:00
 ---
 I've decided to make a small Wake-On-Lan program that I can register as a scheduled task in order to wake up my NAS. This task must be executed <em>every minute</em> or else the NAS will shutdown again, so to minimize system resources I decided to write this thingy in plain old C, without using any functions that would use the CRT. <br />
 <br />
-As if that wasn't bad enough, I tried to make it portable: buildable using different compilers on different platforms. Here's the result:<br />
-<pre name="code" class="c">// Portable Wake-On-Lan by Lionello Lunesu, placed in the public domain
+As if that wasn't bad enough, I tried to make it portable: buildable using different compilers on different platforms. Here's the result:
+
+{% highlight c %}
+// Portable Wake-On-Lan by Lionello Lunesu, placed in the public domain
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include &lt;windows.h&gt;
@@ -39,7 +41,7 @@ BOOL ValidHex(TCHAR t) {
 }
 
 #ifdef _WIN32
-int WINAPI WinMain(      
+int WINAPI WinMain(
     HINSTANCE hInstance,
     HINSTANCE hPrevInstance,
     LPSTR lpCmdLine,
@@ -125,7 +127,8 @@ int main(int argc, char* argv[])
 #endif
 	return i;
 }
-</pre><br />
+{% endhighlight %}
+
 <br />
 I've build this using GCC on Ubuntu and MSVC and DMC on Windows. Actually, on Windows this application still needs the CRT, since that WinMain isn't exactly the entry-point called by the OS. The OS calls an entry point without any arguments and then the CRT will extract the HINSTANCE and command line etc using the Windows API. So to get the above code free of all CRT use I'll have to use GetCommandLineA and skip the first argument, taking double-quotes into account. Easy to do, for sure, but I'm lazy and the program does not load the MSVCRT DLL which is what I basically wanted.<br />
 <br />

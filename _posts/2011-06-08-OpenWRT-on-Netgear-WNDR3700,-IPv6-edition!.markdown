@@ -22,9 +22,13 @@ Here's how I went about it:<br />
 <li>sysupgrade http://downloads.openwrt.org/snapshots/trunk/ar71xx/openwrt-ar71xx-generic-wndr3700-squashfs-sysupgrade.bin</li><br />
 <li>opkg install kmod-ipv6 radvd ip kmod-ip6tables ip6tables 6to4 kmod-sit</li><br />
 <li>vim /etc/config/network</li><br />
-<li>Add to end:<blockquote>config interface 6rd<br />
+<li>Add to end:
+```
+config interface 6rd<br />
 &#160;&#160;&#160;&#160;option proto 6to4<br />
-&#160;&#160;&#160;&#160;option adv_subnet 1</blockquote></li><br />
+&#160;&#160;&#160;&#160;option adv_subnet 1
+```
+</li><br />
 <li>vim /etc/config/radvd</li><br />
 <li>Change interface option 'ignore' to 0</li><br />
 <li>/etc/init.d/network restart</li><br />
