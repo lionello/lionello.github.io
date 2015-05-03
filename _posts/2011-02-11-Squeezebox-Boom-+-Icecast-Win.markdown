@@ -22,11 +22,17 @@ I had heard about <a href="http://www.icecast.org/" title="Icecast.org">Icecast<
 Icecast and Ices could now be started with:<blockquote>/opt/bin/icecast -c /opt/etc/icecast.xml -b<br />
 /opt/bin/ices -c /opt/etc/ices.conf.dist -B</blockquote>I could now connect to my own radio station from Winamp! I then proceeded to add the URL to my Favorites on mysqueezebox.com but it wouldn't work. The Squeezebox cannot play streams on the LAN because the server (and in this case, mysqueezebox.com) must be able to access the stream, for some metadata I presume. The solution was easy: open a random port on the router and forward the traffic to the Icecast server: success!<br />
 <br />
-One caveat though: the LinkStation would be constantly streaming music, even when nobody was listening, causing non-stop churning of the harddisk. I wanted to started Ices when the first listener connected and to stop it once the last listener went away. That could be done by adding an authentication section to icecast.xml:<pre name="code" class="xml">&lt;authentication type="url"&gt;
+One caveat though: the LinkStation would be constantly streaming music, even when nobody was listening, causing non-stop churning of the harddisk. I wanted to started Ices when the first listener connected and to stop it once the last listener went away. That could be done by adding an authentication section to icecast.xml:
+{% highlight xml %}
+&lt;authentication type="url"&gt;
   &lt;option name="listener_add" value="http://localhost:8081/icecast.php"/&gt;
   &lt;option name="listener_remove" value="http://localhost:8081/icecast.php"/&gt;
   &lt;option name="auth_header" value="icecast-auth-user: 1"/&gt;
-&lt;/authentication&gt;</pre>With these settings, the Icecast server would contact the mentioned URLs when a listener (dis)connected. In the PHP file I could then start/stop the Ices server:<pre name="code" class="php">&lt;?
+&lt;/authentication&gt;
+{% endhighlight %}
+With these settings, the Icecast server would contact the mentioned URLs when a listener (dis)connected. In the PHP file I could then start/stop the Ices server:
+{% highlight php %}
+&lt;?
 $action = $_POST['action'];
 $mount = $_POST['mount'];
 
@@ -42,10 +48,10 @@ function store($c)
     $count = 0;
   $count = intval($count) + intval($c);
   fputs($file, $count."\n");
-  fclose($file); 
+  fclose($file);
   return $count;
 }
-  
+
 function start_ices()
 {
   $array = array();
@@ -68,4 +74,5 @@ if ($action == "listener_remove" &&amp; $mount == "strm" &&amp; store(-1) == 0)
   stop_ices();
 
 ?&gt;Success.
-</pre>I can't believe how hard it is to create a global setting in PHP. I needed an atomic increment/decrement for the user count. The store($) function basically serves as a global InterlockedAdd, loading a integer from a tempfile, adding a value to it, writing the result back to the file and returning it to the caller.  Please let me know if there's a easier way to accomplice that.
+{% endhighlight %}
+I can't believe how hard it is to create a global setting in PHP. I needed an atomic increment/decrement for the user count. The store($) function basically serves as a global InterlockedAdd, loading a integer from a tempfile, adding a value to it, writing the result back to the file and returning it to the caller.  Please let me know if there's a easier way to accomplice that.

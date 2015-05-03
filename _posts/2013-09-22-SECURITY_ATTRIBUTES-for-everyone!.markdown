@@ -8,7 +8,8 @@ date: 2013-09-22 11:42:43.000000000 +08:00
 ---
 I keep having to Google this, so I thought it'd just put it up here. This piece of code creates a <em>SECURITY_ATTRIBUTES</em> (and <em>SECURITY_DESCRIPTOR</em>) for the <strong>Everyone</strong> group. Handy for some quick-n-dirty hacking, but probably A Bad Idea for anything else.<br />
 <br />
-<pre name="code" class="c">SECURITY_DESCRIPTOR SD;
+{% highlight c %}
+SECURITY_DESCRIPTOR SD;
 InitializeSecurityDescriptor(&SD, SECURITY_DESCRIPTOR_REVISION);
 SetSecurityDescriptorDacl(&SD, TRUE,(PACL)NULL, FALSE);
 
@@ -16,4 +17,5 @@ SECURITY_ATTRIBUTES sa = {0};
 sa.nLength = sizeof(sa);
 sa.bInheritHandle = FALSE;
 sa.lpSecurityDescriptor = &SD;
-</pre><br />
+{% endhighlight %}
+<br />

@@ -7,7 +7,8 @@ s9y_link: http://www.lunesu.com/index.php?/archives/138-InterlockedCompareExchan
 date: 2014-01-27 10:26:31.000000000 +08:00
 ---
 The GCC that comes with my Fedora installation doesn't appear to have a <strong>__sync_val_compare_and_swap</strong> that works with <strong>__uint128_t</strong>, so here it is:<br />
-<pre name="code" class="c">#undef NDEBUG
+{% highlight c %}
+#undef NDEBUG
 #include &lt;assert.h>
 
 inline __uint128_t InterlockedCompareExchange128( volatile __uint128_t * src, __uint128_t cmp, __uint128_t with )
@@ -39,4 +40,4 @@ int main(int argc, char* argv[])
   assert(a == b);
   return 0;
 }
-</pre>
+{% endhighlight %}
