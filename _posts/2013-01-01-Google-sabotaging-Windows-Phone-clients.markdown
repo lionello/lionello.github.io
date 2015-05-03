@@ -19,40 +19,46 @@ Lately (as of a few months ago) opening maps.google.com on my WinPhone simply re
 My first thought was that the IE browser on WP7.5 "Mango" was simply not supported by Google. So I fired up the WP8 emulator to check whether Google Maps would open on the mobile version of IE10. Sure enough, it didn't. However, this time switching IE to Desktop mode did solve the problem and I got the regular desktop experience, albeit on a small screen.
 
 That's suspicious, I thought, since the browser is exactly the same, whether I use mobile mode or desktop mode. I figure I'd manually try the different <a href="http://en.wikipedia.org/wiki/User_agent" title="User Agent on Wikipedia">User-Agents</a> to see what would happen:
-<ul><li>WP7 - Mobile Version
+
+* WP7 - Mobile Version
 Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Nokia 800)
 {% highlight sh %}
 HTTP/1.1 302 Found
 Location: http://maps.google.com/m/local
 {% endhighlight %}
-</li><li>WP7 - Desktop Version
+
+* WP7 - Desktop Version
 Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)
 {% highlight sh %}
 HTTP/1.1 302 Found
 Location: http://maps.google.com/m/local
 {% endhighlight %}
-</li><li>WP8 - Mobile Version
+
+* WP8 - Mobile Version
 Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; Microsoft; Virtual)
 {% highlight sh %}
 HTTP/1.1 302 Found
 Location: http://maps.google.com/m/local
 {% endhighlight %}
-</li><li>WP8 - Desktop Version
+
+* WP8 - Desktop Version
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; ARM; Touch; WPDesktop)
 {% highlight sh %}
 HTTP/1.1 200 OK
 {% endhighlight %}
-</li><li>Win8 - Desktop Browser
+
+* Win8 - Desktop Browser
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)
 {% highlight sh %}
 HTTP/1.1 200 OK
 {% endhighlight %}
-</li><li>Win8 - "Metro" Modern Browser
+
+* Win8 - "Metro" Modern Browser
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)
 {% highlight sh %}
 HTTP/1.1 200 OK
 {% endhighlight %}
-</li></ul>
+
 Interestingly, as soon as a device identifies itself as a Windows Phone (or WP7) it gets redirected. In other cases it gets the actual Google Maps page. As a test I wanted to replace the User-Agent from my WP7 device with the one from an Android device. Here's how:
 {% highlight sh %}
 sudo apt-get privoxy

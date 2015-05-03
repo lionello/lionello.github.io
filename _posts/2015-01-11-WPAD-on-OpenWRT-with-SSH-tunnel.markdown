@@ -6,7 +6,8 @@ permalink: /archives/146-WPAD-on-OpenWRT-with-SSH-tunnel.html
 s9y_link: http://www.lunesu.com/index.php?/archives/146-WPAD-on-OpenWRT-with-SSH-tunnel.html
 date: 2015-01-11 23:20:43.000000000 +08:00
 ---
-<ol><li>Create your <a href="http://en.wikipedia.org/wiki/Proxy_auto-config" title="Proxy auto-config">PAC</a> file, for example
+
+1. Create your <a href="http://en.wikipedia.org/wiki/Proxy_auto-config" title="Proxy auto-config">PAC</a> file, for example
 {% highlight sh %}
 function FindProxyForURL(url, host) {
   if (shExpMatch(host, "*.google.com") || host == "google.com") {
@@ -17,11 +18,15 @@ function FindProxyForURL(url, host) {
   }
 }
 {% endhighlight %}
-</li>
-<li>SCP the PAC file to <strong>root@openwrt:/www/wpad.dat</strong></li>
-<li>Go to Luci -> Network -> Hostnames and add <strong>wpad</strong> as an alias for your OpenWRT router's IP</li>
-<li>Install the <strong>autossh</strong> software package through <strong>opkg</strong></li>
-<li>SSH to the router and edit <strong>/etc/config/autossh</strong>
+
+
+1. SCP the PAC file to <strong>root@openwrt:/www/wpad.dat</strong>
+
+1. Go to Luci -> Network -> Hostnames and add <strong>wpad</strong> as an alias for your OpenWRT router's IP
+
+1. Install the <strong>autossh</strong> software package through <strong>opkg</strong>
+
+1. SSH to the router and edit <strong>/etc/config/autossh</strong>
 {% highlight sh %}
 config autossh
   option ssh	'-2 -N -o ServerAliveInterval=60 -L 192.168.1.1:8888:127.0.0.1:8888 -i /root/.ssh/id_rsa user@example.com'
@@ -29,11 +34,14 @@ config autossh
   option monitorport	'0'
   option poll	'600'
 {% endhighlight %}
-</li>
-<li>Use <strong>dropbearkey</strong> to create an SSH keypair, save the private key in <strong>/root/.ssh/id_rsa</strong></li>
-<li>Append the newly created public key to your server's <strong>~/.ssh/authorized_keys</strong></li>
-<li><strong>Enable</strong> and <strong>start</strong> the autossh service through Luci</li>
-</ol>
+
+
+1. Use <strong>dropbearkey</strong> to create an SSH keypair, save the private key in <strong>/root/.ssh/id_rsa</strong>
+
+1. Append the newly created public key to your server's <strong>~/.ssh/authorized_keys</strong>
+
+1. <strong>Enable</strong> and <strong>start</strong> the autossh service through Luci
+
 You can test your setup with curl:
 {% highlight sh %}
 curl wpad/wpad.dat
