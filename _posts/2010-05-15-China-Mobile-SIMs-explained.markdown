@@ -6,7 +6,7 @@ permalink: /archives/115-China-Mobile-SIMs-explained.html
 s9y_link: http://www.lunesu.com/index.php?/archives/115-China-Mobile-SIMs-explained.html
 date: 2010-05-15 16:51:50.000000000 +08:00
 ---
-A <a href="http://lunesu.com/index.php?/archives/114-New-phone-number.html#c1835" title="Jose">reader</a> (!) complained about not being able to get GPRS to work with China Mobile. Although I'm in no way an expert on the subject, I think I know enough to make a useful remark, or two..
+A <a href="http://www.lunesu.com/archives/114-New-phone-number.html#c1835" title="Jose">reader</a> (!) complained about not being able to get GPRS to work with China Mobile. Although I'm in no way an expert on the subject, I think I know enough to make a useful remark, or two..
 
 The problem with China Mobile is that they have two kinds of SIM cards: 神州行 ShenZhouXing, also known as EasyOwn, versus 动感地带 DongGanDiDai also known as M-Zone.
 

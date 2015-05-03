@@ -19,4 +19,4 @@ For the moment, let's hope this is a temporary glitch in my ISP's DNS service.
 
 <strong>UPDATE2: </strong> I'm now using 8.8.8.8, <a href="http://code.google.com/speed/public-dns/" title="Google Public DNS">Google Public DNS</a>
 
-<strong>UPDATE3: </strong> <a href="http://lunesu.com/index.php?/archives/128-Finally-unbound-+-dnsmasq.html">No I'm not</a>
+<strong>UPDATE3: </strong> <a href="http://www.lunesu.com/archives/128-Finally-unbound-+-dnsmasq.html">No I'm not</a>

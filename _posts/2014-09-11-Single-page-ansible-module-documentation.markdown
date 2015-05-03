@@ -12,7 +12,7 @@ A friend introduced me to <a href="http://www.ansible.com/home" title="Ansible">
 Unfortunately I find the Ansible online docs lacking, especially given the amount of info available in `ansible-doc` command line tool.
 
 So, for all those Ansible lovers, here's a single page file with all of Ansible's modules and attributes:
-<a href="http://lunesu.com/ansible.yml" title="Ansible">http://lunesu.com/ansible.yml</a>
+<a href="http://www.lunesu.com/ansible.yml" title="Ansible">http://www.lunesu.com/ansible.yml</a>
 
 This file was created as such (with a little post-processing*):
 {% highlight sh %}

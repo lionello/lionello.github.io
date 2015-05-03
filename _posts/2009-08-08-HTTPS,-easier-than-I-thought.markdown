@@ -18,4 +18,4 @@ I pasted that certificate into <a href="https://www.cacert.org/account.php?id=10
 
 Lo and behold, after a restart of Webmin I no longer got the usual red HTTPS warning! I have no idea what I did, but it seems to have worked. Now to try something similar for dovecot to get IMAP over SSL.
 
-<strong>UPDATE:</strong> using a private key that you did not yourself create is not secure. Check <a href="http://lunesu.com/index.php?/archives/80-Creating-my-own-certificates.html" title="Creating server keys">this post</a> on how to create your own keys.
+<strong>UPDATE:</strong> using a private key that you did not yourself create is not secure. Check <a href="http://www.lunesu.com/archives/80-Creating-my-own-keys.html" title="Creating server keys">this post</a> on how to create your own keys.

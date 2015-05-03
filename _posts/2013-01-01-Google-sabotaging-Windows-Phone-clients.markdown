@@ -82,6 +82,6 @@ Now here's what's interesting. As soon as I add "Windows Phone" to the User-Agen
 
 As much as I agree with <a href="http://en.wikipedia.org/wiki/Hanlon%27s_razor" title="Hanlon's razor on Wikipedia">Hanlon's razor</a> "Never attribute to malice that which is adequately explained by stupidity," this does reek of Google being disingenuous and blocking the competition from their platform's killing app.
 
-<a href="http://lunesu.com/index.php?/archives/130-Do-no-evil.html" title=""Do no evil"">And it's not as-if they haven't done shit like this before.</a>
+<a href="http://www.lunesu.com/archives/130-Do-no-evil.html" title=""Do no evil"">And it's not as-if they haven't done shit like this before.</a>
 
 Oh, and Happy New Year!

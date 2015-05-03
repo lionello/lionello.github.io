@@ -13,7 +13,7 @@ The mail (like this site) was still hosted at directnic, so when their mail serv
 
 Since <a href="http://www.postfix.org/" title="The Postfix mail server">postfix </a>was up and running from the beginning, there was little left to do. I just had to instruct postfix to accept mail from all my domains, not just the main one from the hostname. This could be done from within webmin: <em>Server, Postfix Mail Server, General Options, What domains to receive mail for</em>. Select the last option. I just appended lunesu.com to the comma separated domain list. Click <em>Save and apply</em>.
 
-Next step: fix the certificate warning I get when trying to send mail through my own server. The fix: in Webmin's Postfix page, select <em>SMTP Authentication And Encryption</em>. Change the paths of the certificate and private key files to the <a href="http://lunesu.com/index.php?/archives/80-Creating-my-own-keys.html" title="Creating my own keys">ones created before</a>. Save.
+Next step: fix the certificate warning I get when trying to send mail through my own server. The fix: in Webmin's Postfix page, select <em>SMTP Authentication And Encryption</em>. Change the paths of the certificate and private key files to the <a href="http://www.lunesu.com/archives/80-Creating-my-own-keys.html" title="Creating my own keys">ones created before</a>. Save.
 
 I also use a lot of aliases. Basically, I create a new mail alias each time a vague site wants my email address. Since I have about 25 aliases, I use Webmin's <em>Edit Map Manually</em> option in its <em>Mail Aliases</em> page. This works fine, but it won't be applied automatically after save! I had to run the following command as root for the aliases to start working:
 {% highlight sh %}

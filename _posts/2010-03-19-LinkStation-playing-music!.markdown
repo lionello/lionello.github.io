@@ -7,7 +7,7 @@ permalink: /archives/104-LinkStation-playing-music!.html
 s9y_link: http://www.lunesu.com/index.php?/archives/104-LinkStation-playing-music!.html
 date: 2010-03-19 14:02:40.000000000 +08:00
 ---
-Inspired by this page on <a href="http://buffalo.nas-central.org/wiki/Add_a_USB_sound_card" title="Add a USB sound card">NAS-Central</a>, I ordered a <a href="http://item.taobao.com/item_detail.jhtml?item_id=50334a3c57df67f334cf4d7b70b6d67c&x_id=db1" title="USB 5.1声卡">USB sound card on TaoBao</a> (15 RMB including delivery!) and plugged it into my <a href="http://lunesu.com/index.php?/archives/96-Heh.html" title="Open stock LinkStation">LinkStation</a>. A quick <em>dmesg</em> showed that the device was detected, but not recognized.
+Inspired by this page on <a href="http://buffalo.nas-central.org/wiki/Add_a_USB_sound_card" title="Add a USB sound card">NAS-Central</a>, I ordered a <a href="http://item.taobao.com/item_detail.jhtml?item_id=50334a3c57df67f334cf4d7b70b6d67c&x_id=db1" title="USB 5.1声卡">USB sound card on TaoBao</a> (15 RMB including delivery!) and plugged it into my <a href="http://www.lunesu.com/archives/96-Heh.html" title="Open stock LinkStation">LinkStation</a>. A quick <em>dmesg</em> showed that the device was detected, but not recognized.
 
 The NAS-Central page mentions that some kernel modules are needed to get USB audio to work, but of course, the device does not have these modules by default. After googling for a few hours I still could not find any precompiled modules that matched my LinkStation's kernel version, 2.6.22. I decided to jump in and try to compile the modules myself.
 

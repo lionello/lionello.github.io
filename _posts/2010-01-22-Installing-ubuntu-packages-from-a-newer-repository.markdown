@@ -6,7 +6,7 @@ permalink: /archives/98-Installing-ubuntu-packages-from-a-newer-repository.html
 s9y_link: http://www.lunesu.com/index.php?/archives/98-Installing-ubuntu-packages-from-a-newer-repository.html
 date: 2010-01-22 10:54:07.000000000 +08:00
 ---
-As I've explained <a href="http://lunesu.com/index.php?/archives/93-Postfix-+-sender_bcc_maps-WIN.html" title="Postfix + sender_bcc_maps = WIN">earlier</a> I have my incoming and sent mail in a single IMAP folder. To make this folder more readable I use a Thunderbird mail filter to add a "Sent" tag to the outgoing mail. This also causes the sent mail to be colored differently from the received mail.
+As I've explained <a href="http://www.lunesu.com/archives/93-Postfix-+-sender_bcc_maps-WIN.html" title="Postfix + sender_bcc_maps = WIN">earlier</a> I have my incoming and sent mail in a single IMAP folder. To make this folder more readable I use a Thunderbird mail filter to add a "Sent" tag to the outgoing mail. This also causes the sent mail to be colored differently from the received mail.
 
 Unfortunately, the tags don't stick. They <strong>should</strong> be saved into the mail by using the <em>X-Keywords </em>header, but for some reason they aren't.
 

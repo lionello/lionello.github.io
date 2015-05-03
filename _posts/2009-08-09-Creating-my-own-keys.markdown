@@ -30,4 +30,4 @@ cat server.csr
 {% endhighlight %}
 As before, copy paste this server.csr into cacert.org's form, wait, and copy-paste the result from cacert into a new file called <em>server.pem</em>. I've moved the (insecure) <em>server.key</em> and the final <em>server.pem</em> into <em>etc/ssl/private/</em> and <em>etc/ssl/certs/</em> respectively. <strong>Make sure only root has read access for server.key!</strong>
 
-Last step: reconfigure Webmin, Apache and Dovecot to use the new key and certificate. And <a href="http://lunesu.com/index.php?/archives/83-Mail-troubles.html" title="Mail troubles">Postfix</a>.
+Last step: reconfigure Webmin, Apache and Dovecot to use the new key and certificate. And <a href="http://www.lunesu.com/archives/83-Mail-troubles.html" title="Mail troubles">Postfix</a>.
