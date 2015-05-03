@@ -1,0 +1,65 @@
+<TransitionsAndEffects Version="2.8"> 
+<Effects> 
+<EffectDLL guid="TFX"> 
+
+<Effect guid="{00000000-0000-0000-0000-000000000000}" name="Slow down, 10%" iconid="27" speed="0.9" comment="Slow down, 10%">
+</Effect>
+
+<Effect guid="{00000000-0000-0000-0000-000000000000}" name="Speed up, 30%" iconid="28" speed="1.3" comment="Speed up, 30%">
+</Effect>
+
+<Effect name="Rotate, 90%" iconid="21" guid="Rotate 90" comment="Rotate 90%" shadermodel="2">
+<Param name="Animation" value="FX" />
+<Param name="FXFile" value="Parity.fx" />
+<Param name="Technique" value="Rotate" />
+<RotationDegree value="90" />
+</Effect>
+
+<Effect name="Brightness, Decrease 10%" iconid="2" guid="Brightness, Decrease" comment="Brightness, Decrease 10%" shadermodel="2">
+<Param name="Animation" value="FX" />
+<Param name="FXFile" value="Parity.fx" />
+<Param name="Technique" value="Brightness" />
+<Semantics>
+<PercentBrightness Evaluation="Step" type="float">
+<Point time="0.0" value="-0.1"/>
+</PercentBrightness>
+</Semantics>
+</Effect>
+
+<Effect name="Brightness, Increase 10%" iconid="3" guid="Brightness, Increase" comment="Brightness, Increase 10%" shadermodel="2">
+<Param name="Animation" value="FX" />
+<Param name="FXFile" value="Parity.fx" />
+<Param name="Technique" value="Brightness" />
+<Semantics>
+<PercentBrightness Evaluation="Step" type="float">
+<Point time="0.0" value="0.8"/>
+</PercentBrightness>
+</Semantics>
+</Effect>
+
+<Effect name="Pixelate, 10%" iconid="19" guid="Pixelate" comment="Pixelate, 10%" shadermodel="2">
+<Param name="Animation" value="FX" />
+<Param name="FXFile" value="Parity.fx" />
+<Param name="Technique" value="Pixelate" />
+<Semantics>
+<PixelationSize evaluation="Linear" type="float">
+<Point time="0.0" value="1.0"/>
+<Point time="1.0" value="5"/>
+</PixelationSize>
+</Semantics>
+</Effect>
+
+<Effect name="Posterize, 10%" iconid="20" guid="Posterize" comment="Posterize, 10%" shadermodel="2">
+<Param name="Animation" value="FX" />
+<Param name="FXFile" value="Parity.fx" />
+<Param name="Technique" value="Posterize" />
+<Semantics>
+<PosterizeLevels Evaluation="Step" type="int">
+<Point time="0.0" value="25.5"/>
+</PosterizeLevels>
+</Semantics>
+</Effect>
+
+</EffectDLL>
+</Effects>
+</TransitionsAndEffects>
