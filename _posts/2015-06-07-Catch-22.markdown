@@ -1,0 +1,16 @@
+---
+layout: post
+title: Catch 22
+categories: []
+date: 2015-06-07 23:20:43.000000000 +08:00
+---
+
+Catch 22: To manage your municipal information as a Dutch citizen, the Dutch government has created DigiD: a digital ID. You'd be correct to think it'd be super useful for people living abroad, if it weren't for the fact that you have to be physically in the Netherlands to actual register for one.
+
+For Dutch expats, DigiD requires SMS confirmation for each log in, supposedly for extra security (although why this applies solely to expats is beyond me.) Five years ago SMS from foreign numbers to a Chinese mobile would not arrive so back then I had used my Dutch number, now long defunct. That phone number has likely been reassigned, so my DigiD is now sending my login SMS's to a random person. I can't delete that DigiD account, since I can't login.
+
+Nowadays SMS's to/from China seem to get through consistently. Changing the mobile phone number associated with a DigiD can be done online, but only for residents, of course. Expats cannot change their DigiD phone number, and have to go through the registration for a completely new DigiD, for which they (you guessed it) need to be physically in the Netherlands. Again, what makes expats so special as to warrant a special case?
+
+Registration can be done at the Amsterdam airport, after making an appointment. They said I needed to bring: all (!) passports, marriage & divorce papers, a photograph, and proof of residence abroad. Apart from my 1 Dutch passport, I had none of those documents, which the lady would have found out had she actually bothered to ask for any. Which she didn't. She gave me an activation code, with which I can obtain my DigiD online, but... Apparently the password I thought I had used on the DigiD site was not correct. So I couldn't login. There's a "recover password" function, but it doesn't work with inactive DigiD's, and I can't activate mine because I (apparently) forgot the password.
+
+Which brilliant contractor designed this system!?!
