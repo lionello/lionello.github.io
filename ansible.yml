@@ -61,7 +61,7 @@
 
 - name: Manages alternative programs for common commands
   action: alternatives
-      link                   # The path to the symbolic link that should point to the real executable.
+      link                   # The path to the symbolic link that should point to the real executable. This option is required on RHEL-based distributions
       name=                  # The generic name of the link.
       path=                  # The path to the real executable that the link should point to.
 
@@ -80,7 +80,7 @@
       install_recommends     # Corresponds to the `--no-install-recommends' option for `apt'. Default behavior (`yes') replicates apt's default behavior; `no' does not install recommended packages. Suggested packages are never installed.
       name                   # A package name, like `foo', or package specifier with version, like `foo=1.0'. Name wildcards (fnmatch) like `apt*' and version wildcards like `foo=1.0*' are also supported.
       purge                  # Will force purging of configuration files if the module state is set to `absent'.
-      state                  # Indicates the desired package state. `latest' ensures that the latest version is installed.
+      state                  # Indicates the desired package state. `latest' ensures that the latest version is installed. `build-dep' ensures the package build dependencies are installed.
       update_cache           # Run the equivalent of `apt-get update' before the operation. Can be run as part of the package installation or as a separate step.
       upgrade                # If yes or safe, performs an aptitude safe-upgrade. If full, performs an aptitude full-upgrade. If dist, performs an apt-get dist-upgrade. Note: This does not upgrade a specific package, use state=latest for that.
 
@@ -141,7 +141,8 @@
 
 - name: Adds or removes an SSH authorized key
   action: authorized_key
-      key=                   # The SSH public key, as a string
+      exclusive              # Whether to remove all other non-specified keys from the authorized_keys file. Multiple keys can be specified in a single key= string value by separating them by newlines.
+      key=                   # The SSH public key(s), as a string or (since 1.9) url (https://github.com/username.keys)
       key_options            # A string of ssh key options to be prepended to the key in the authorized_keys file
       manage_dir             # Whether this module should manage the directory of the authorized key file.  If set, the module will create the directory, as well as set the owner and permissions of an existing directory. Be sure to set `manage_dir=no' if you are using an alternate directory for authorized_keys, as set with `path', since you could lock yourself out of SSH access. See the example below.
       path                   # Alternate path to the authorized_keys file
@@ -279,11 +280,19 @@
       state                  # Whether to create or remove the client from boundary
       validate_certs         # If `no', SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.
 
+- name: Manage bower packages with bower
+  action: bower
+      name                   # The name of a bower package to install
+      offline                # Install packages from local cache, if the packages were installed before
+      path=                  # The base path where to install the bower packages
+      state                  # The state of the bower package
+      version                # The version to be installed
+
 - name: Deploy software (or files) from bzr branches
   action: bzr
       dest=                  # Absolute path of where the branch should be cloned to.
       executable             # Path to bzr executable to use. If not supplied, the normal mechanism for resolving binary paths will be used.
-      force                  # If `yes', any modified files in the working tree will be discarded.
+      force                  # If `yes', any modified files in the working tree will be discarded.  Before 1.9 the default value was "yes".
       name=                  # SSH or HTTP protocol address of the parent branch.
       version                # What version of the branch to clone.  This can be the bzr revno or revid.
 
@@ -308,7 +317,8 @@
       disable_rollback       # If a stacks fails to form, rollback will remove the stack
       region                 # The AWS region to use. If not specified then the value of the EC2_REGION environment variable, if any, is used.
       stack_name=            # name of the cloudformation stack
-      state=                 # If state is "present", stack will be created.  If state is "present" and if stack exists and template has changed, it will be updated. If state is absent, stack will be removed.
+      stack_policy           # the path of the cloudformation stack policy
+      state=                 # If state is "present", stack will be created.  If state is "present" and if stack exists and template has changed, it will be updated. If state is "absent", stack will be removed.
       tags                   # Dictionary of tags to associate with stack and it's resources during stack creation. Cannot be updated later. Requires at least Boto version 2.6.0.
       template=              # the path of the cloudformation template
       template_parameters    # a list of hashes of all the template variables for the stack
@@ -329,7 +339,7 @@
       no_plugins             # Disables all plugins ( see --no-plugins )
       no_scripts             # Skips the execution of all scripts defined in composer.json ( see --no-scripts )
       optimize_autoloader    # Optimize autoloader during autoloader dump ( see --optimize-autoloader ). Convert PSR-0/4 autoloading to classmap to get a faster autoloader. This is recommended especially for production, but can take a bit of time to run so it is currently not done by default.
-      prefer_dist            # Forces installation from package dist even for de versions ( see --prefer-dist )
+      prefer_dist            # Forces installation from package dist even for dev versions ( see --prefer-dist )
       prefer_source          # Forces installation from package sources when possible ( see --prefer-source )
       working_dir=           # Directory of your project ( see --working-dir )
 
@@ -356,6 +366,7 @@
       from_path              # The local directory from where to install
       locallib               # Specify the install base to install modules
       mirror                 # Specifies the base URL for the CPAN mirror to use
+      mirror_only            # Use the mirror's index file instead of the CPAN Meta DB
       name                   # The name of the Perl library to install. You may use the "full distribution path", e.g.  MIYAGAWA/Plack-0.99_05.tar.gz
       notest                 # Do not run unit tests
 
@@ -374,6 +385,15 @@
       state                  # Whether to ensure the job is present or absent.
       user                   # The specific user whose crontab should be modified.
       weekday                # Day of the week that the job should run ( 0-6 for Sunday-Saturday, *, etc )
+
+- name: Encrypted Linux block devices
+  action: crypttab
+      backing_device         # Path to the underlying block device or file, or the UUID of a block-device prefixed with `UUID='
+      name=                  # Name of the encrypted block device as it appears in the `/etc/crypttab' file, or optionaly prefixed with `/dev/mapper', as it appears in the filesystem. `/dev/mapper' will be stripped from `name'.
+      opts                   # A comma-delimited list of options. See `crypttab(5' ) for details.
+      password               # Encryption password, the path to a file containing the pasword, or 'none' or '-' if the password should be entered at boot.
+      path                   # Path to file to use instead of `/etc/crypttab'. This might be useful in a chroot environment.
+      state=                 # Use `present' to add a line to `/etc/crypttab' or update it's definition if already present. Use `absent' to remove a line with matching `name'. Use `opts_present' to add options to those already present; options with different values will be updated. Use `opts_absent' to remove options from the existing set.
 
 - name: Posts events to DataDog  service
   action: datadog_event
@@ -454,6 +474,16 @@
       skip                   # Will skip over out-of-order missing migrations, you can only use this parameter with `migrate'
       virtualenv             # An optional path to a `virtualenv' installation to use while running the manage application.
 
+- name: Manages packages with the I(dnf) package manager
+  action: dnf
+      conf_file              # The remote dnf configuration file to use for the transaction.
+      disable_gpg_check      # Whether to disable the GPG checking of signatures of packages being installed. Has an effect only if state is `present' or `latest'.
+      disablerepo            # `Repoid' of repositories to disable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a ",".
+      enablerepo             # `Repoid' of repositories to enable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a ",".
+      list                   # Various (non-idempotent) commands for usage with `/usr/bin/ansible' and `not' playbooks. See examples.
+      name=                  # Package name, or package specifier with version, like `name-1.0'. When using state=latest, this can be '*' which means run: dnf -y update. You can also pass a url or a local path to a rpm file.
+      state                  # Whether to install (`present', `latest'), or remove (`absent') a package.
+
 - name: Interface with dnsimple.com (a DNS hosting service).
   action: dnsimple
       account_api_token      # Account API token. See `account_email' for info.
@@ -482,32 +512,54 @@
 
 - name: manage docker containers
   action: docker
-      command                # Set command to run in a container on startup
-      count                  # Set number of containers to run
-      detach                 # Enable detached mode on start up, leaves container running in background
-      dns                    # Set custom DNS servers for the container
+      command                # Command used to match and launch containers.
+      count                  # Number of matching containers that should be in the desired state.
+      detach                 # Enable detached mode to leave the container running in background.
+      dns                    # List of custom DNS servers for the container.
       docker_api_version     # Remote API version to use. This defaults to the current default as specified by docker-py.
+      docker_url             # URL of the host running the docker daemon. This will default to the env var DOCKER_HOST if unspecified.
+      domainname             # Container domain name.
+      email                  # Remote API email.
+      env                    # Pass a dict of environment variables to the container.
+      expose                 # List of additional container ports to expose for port mappings or links. If the port is already exposed using EXPOSE in a Dockerfile, you don't need to expose it again.
+      hostname               # Container hostname.
+      image=                 # Container image used to match and launch containers.
+      insecure_registry      # Use insecure private registry by HTTP instead of HTTPS. Needed for docker-py >= 0.5.0.
+      links                  # List of other containers to link within this container with an optional alias. Use docker CLI-style syntax: `redis:myredis'.
+      lxc_conf               # LXC configuration parameters, such as `lxc.aa_profile:unconfined'.
+      memory_limit           # RAM allocated to the container as a number of bytes or as a human-readable string like "512MB". Leave as "0" to specify no limit.
+      name                   # Name used to match and uniquely name launched containers. Explicit names are used to uniquely identify a single container or to link among containers. Mutually exclusive with a "count" other than "1".
+      net                    # Network mode for the launched container: bridge, none, container:<name|id> or host. Requires docker >= 0.11.
+      password               # Remote API password.
+      pid                    # Set the PID namespace mode for the container (currently only supports 'host'). Requires docker-py >= 1.0.0 and docker >= 1.5.0
+      ports                  # List containing private to public port mapping specification. Use docker CLI-style syntax: `8000', `9000:8000', or `0.0.0.0:9000:8000' where  8000 is a container port, 9000 is a host port, and 0.0.0.0 is a host interface.
+      privileged             # Whether the container should run in privileged mode or not.
+      publish_all_ports      # Publish all exposed ports to the host interfaces.
+      pull                   # Control when container images are updated from the `docker_url' registry. If "missing," images will be pulled only when missing from the host; if '"always," the registry will be checked for a newer version of the image' each time the task executes.
+      registry               # Remote registry URL to pull images from.
+      restart_policy         # Container restart policy.
+      restart_policy_retry   # Maximum number of times to restart a container. Leave as "0" for unlimited retries.
+      state                  # Assert the container's desired state. "present" only asserts that the matching containers exist. "started" asserts that the matching containers both exist and are running, but takes no action if any configuration has changed. "reloaded" asserts that all matching containers are running and restarts any that have any images or configuration out of date. "restarted" unconditionally restarts (or starts) the matching containers. "stopped" and '"killed" stop and kill all matching containers. "absent" stops and then' removes any matching containers.
+      stdin_open             # Keep stdin open after a container is launched.
+      tls_ca_cert            # Path to a PEM-encoded certificate authority to secure the Docker connection. This has no effect if use_tls is encrypt.
+      tls_client_cert        # Path to the PEM-encoded certificate used to authenticate docker client. If specified tls_client_key must be valid
+      tls_client_key         # Path to the PEM-encoded key used to authenticate docker client. If specified tls_client_cert must be valid
+      tls_hostname           # A hostname to check matches what's supplied in the docker server's certificate.  If unspecified, the hostname is taken from the docker_url.
+      tty                    # Allocate a pseudo-tty within the container.
+      use_tls                # Whether to use tls to connect to the docker server.  "no" means not to use tls (and ignore any other tls related parameters). "encrypt" means to use tls to encrypt the connection to the server.  "verify" means to also verify that the server's certificate is valid for the server (this both verifies the certificate against the CA and that the certificate was issued for that host. If this is unspecified, tls will only be used if one of the other tls options require it.
+      username               # Remote API username.
+      volumes                # List of volumes to mount within the container using docker CLI-style syntax: `/host:/container[:mode]' where "mode" may be "rw" or "ro".
+      volumes_from           # List of names of containers to mount volumes from.
+
+- name: manage docker images
+  action: docker_image
       docker_url             # URL of docker host to issue commands to
-      env                    # Set environment variables (e.g. env="PASSWORD=sEcRe7,WORKERS=4")
-      expose                 # Set container ports to expose for port mappings or links. (If the port is already exposed using EXPOSE in a Dockerfile, you don't need to expose it again.)
-      hostname               # Set container hostname
-      image=                 # Set container image to use
-      links                  # Link container(s) to other container(s) (e.g. links=redis,postgresql:db)
-      lxc_conf               # LXC config parameters,  e.g. lxc.aa_profile:unconfined
-      memory_limit           # Set RAM allocated to container
-      name                   # Set the name of the container (cannot use with count)
-      net                    # Set Network mode for the container (bridge, none, container:<name|id>, host). Requires docker >= 0.11.
-      password               # Set remote API password
-      ports                  # Set private to public port mapping specification using docker CLI-style syntax [([<host_interface>:[host_port]])|(<host_port>):]<container_port>[/udp]
-      privileged             # Set whether the container should run in privileged mode
-      publish_all_ports      # Publish all exposed ports to the host interfaces
-      registry               # The remote registry URL to use for pulling images.
-      state                  # Set the state of the container
-      stdin_open             # Keep stdin open
-      tty                    # Allocate a pseudo-tty
-      username               # Set remote API username
-      volumes                # Set volume(s) to mount on the container
-      volumes_from           # Set shared volume(s) from another container
+      name=                  # Image name to work with
+      nocache                # Do not use cache with building
+      path                   # Path to directory with Dockerfile
+      state                  # Set the state of the image
+      tag                    # Image tag to work with
+      timeout                # Set image operation timeout
 
 - name: Installs Python libraries
   action: easy_install
@@ -517,7 +569,7 @@
       virtualenv_command     # The command to create the virtual environment with. For example `pyvenv', `virtualenv', `virtualenv2'.
       virtualenv_site_packages   # Whether the virtual environment will inherit packages from the global site-packages directory.  Note that if this setting is changed on an already existing virtual environment it will not have any effect, the environment must be deleted and newly created.
 
-- name: create, terminate, start or stop an instance in ec2, return instanceid
+- name: create, terminate, start or stop an instance in ec2
   action: ec2
       assign_public_ip       # when provisioning within vpc, assign a public IP address. Boto library must be 2.13.0+
       aws_access_key         # AWS access key. If not set then the value of the AWS_ACCESS_KEY environment variable is used.
@@ -529,8 +581,7 @@
       exact_count            # An integer value which indicates how many instances that match the 'count_tag' parameter should be running. Instances are either created or terminated based on this value.
       group                  # security group (or list of groups) to use with the instance
       group_id               # security group id (or list of ids) to use with the instance
-      id                     # identifier for this instance or set of instances, so that the module will be idempotent with respect to EC2 instances. This identifier is valid for at least 24 hours after the termination of the instance, and should not be reused for another call later on. For details, see the description of client token at http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html.
-      image=                 # `emi' (or `ami') to use for the instance
+      image=                 # `ami' ID to use for the instance
       instance_ids           # list of instance ids, currently used for states: absent, running, stopped
       instance_profile_name   # Name of the IAM instance profile to use. Boto library must be 2.5.0+
       instance_tags          # a hash/dictionary of tags to add to the new instance; '{"key":"value"}' and '{"key":"value","key":"value"}'
@@ -548,19 +599,20 @@
       spot_price             # Maximum spot price to bid, If not set a regular on-demand instance is requested. A spot request is made with this maximum bid. When it is filled, the instance is started.
       spot_wait_timeout      # how long to wait for the spot instance request to be fulfilled
       state                  # create or terminate instances
+      tenancy                # An instance with a tenancy of "dedicated" runs on single-tenant hardware and can only be launched into a VPC. Valid values are "default" or "dedicated". Note that to use dedicated tenancy you MUST specify a vpc_subnet_id as well. Dedicated tenancy is not available for EC2 "micro" instances.
       user_data              # opaque blob of data which is made available to the ec2 instance
       validate_certs         # When set to "no", SSL certificates will not be validated for boto versions >= 2.6.0.
       volumes                # a list of volume dicts, each containing device name and optionally ephemeral id or snapshot id. Size and type (and number of iops for io device type) must be specified for a new volume or a root volume, and may be passed for a snapshot volume. For any volume, a volume size less than 1 will be interpreted as a request not to create the volume.
       vpc_subnet_id          # the subnet ID in which to launch the instance (VPC)
-      wait                   # wait for the instance to be in state 'running' before returning
+      wait                   # wait for the instance to be 'running' before returning.  Does not wait for SSH, see 'wait_for' example for details.
       wait_timeout           # how long before wait gives up, in seconds
       zone                   # AWS availability zone in which to launch the instance
 
-- name: create or destroy an image in ec2, return imageid
+- name: create or destroy an image in ec2
   action: ec2_ami
       aws_access_key         # AWS access key. If not set then the value of the AWS_ACCESS_KEY environment variable is used.
       aws_secret_key         # AWS secret key. If not set then the value of the AWS_SECRET_KEY environment variable is used.
-      delete_snapshot        # Whether or not to deleted an AMI while deregistering it.
+      delete_snapshot        # Whether or not to delete an AMI while deregistering it.
       description            # An optional human-readable string describing the contents and purpose of the AMI.
       ec2_url                # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints).  Must be specified if region is not used. If not set then the value of the EC2_URL environment variable, if any, is used
       image_id               # Image ID to be deregistered.
@@ -575,7 +627,7 @@
       wait                   # wait for the AMI to be in state 'available' before returning.
       wait_timeout           # how long before wait gives up, in seconds
 
-- name: Retrieve AWS AMI for a given operating system.
+- name: Retrieve AWS AMI information for a given operating system.
   action: ec2_ami_search
       arch                   # C P U   a r c h i t e c t u r e
       distro=                # L i n u x   d i s t r i b u t i o n   ( e . g . ,   C ( u b u n t u ) )
@@ -610,6 +662,7 @@
       tags                   # A list of tags to add to the Auto Scale Group. Optional key is 'propagate_at_launch', which defaults to true.
       validate_certs         # When set to "no", SSL certificates will not be validated for boto versions >= 2.6.0.
       vpc_zone_identifier    # List of VPC subnets to use
+      wait_for_instances     # Wait for the ASG instances to be in a ready state before exiting.  If instances are behind an ELB, it will wait until the instances are considered by the ELB.
       wait_timeout           # how long before wait instances to become viable when replaced.  Used in concjunction with instance_ids option.
 
 - name: associate an EC2 elastic IP with an instance.
@@ -680,7 +733,7 @@
       name=                  # Name of the security group.
       profile                # uses a boto profile. Only works with boto >= 2.24.0
       purge_rules            # Purge existing rules on security group that are not found in rules
-      purge_rules_egress     # Purge existing rules_egree on security group that are not found in rules_egress
+      purge_rules_egress     # Purge existing rules_egress on security group that are not found in rules_egress
       region                 # the EC2 region to use
       rules                  # List of firewall inbound rules to enforce in this group (see example).
       rules_egress           # List of firewall outbound rules to enforce in this group (see example).
@@ -740,7 +793,9 @@
       profile                # uses a boto profile. Only works with boto >= 2.24.0
       region                 # The AWS region to use. If not specified then the value of the EC2_REGION environment variable, if any, is used.
       security_token         # security token to authenticate against AWS
+      snapshot_id            # snapshot id to remove
       snapshot_tags          # a hash/dictionary of tags to add to the snapshot
+      state                  # whether to add or create a snapshot
       validate_certs         # When set to "no", SSL certificates will not be validated for boto versions >= 2.6.0.
       volume_id              # volume from which to take the snapshot
       wait                   # wait for the snapshot to be ready
@@ -766,7 +821,7 @@
       ec2_url                # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints).  Must be specified if region is not used. If not set then the value of the EC2_URL environment variable, if any, is used
       encrypted              # Enable encryption at rest for this volume.
       id                     # volume id if you wish to attach an existing volume (requires instance) or remove an existing volume
-      instance               # instance ID if you wish to attach the volume.
+      instance               # instance ID if you wish to attach the volume. Since 1.9 you can set to None to detach.
       iops                   # the provisioned IOPs you want to associate with this volume (integer).
       name                   # volume Name tag if you wish to attach an existing volume (requires instance)
       profile                # uses a boto profile. Only works with boto >= 2.24.0
@@ -776,6 +831,7 @@
       state                  # whether to ensure the volume is present or absent, or to list existing volumes (The `list' option was added in version 1.8).
       validate_certs         # When set to "no", SSL certificates will not be validated for boto versions >= 2.6.0.
       volume_size            # size of volume (in GB) to create.
+      volume_type            # Type of EBS volume; standard (magnetic), gp2 (SSD), io1 (Provisioned IOPS). "Standard" is the old EBS default and continues to remain the Ansible default for backwards compatibility.
       zone                   # zone in which to create the volume, if unset uses the zone the instance is in (if set)
 
 - name: configure AWS virtual private clouds
@@ -834,7 +890,7 @@
   action: fetch
       dest=                  # A directory to save the file into. For example, if the `dest' directory is `/backup' a `src' file named `/etc/profile' on host `host.example.com', would be saved into `/backup/host.example.com/etc/profile'
       fail_on_missing        # Makes it fails when the source file is missing.
-      flat                   # A l l o w s   y o u   t o   o v e r r i d e   t h e   d e f a u l t   b e h a v i o r   o f   p r e p e n d i n g   h o s t n a m e / p a t h / t o / f i l e   t o   t h e   d e s t i n a t i o n .     I f   d e s t   e n d s   w i t h   ' / ' ,   i t   w i l l   u s e   t h e   b a s e n a m e   o f   t h e   s o u r c e   f i l e ,   s i m i l a r   t o   t h e   c o p y   m o d u l e .     O b v i o u s l y   t h i s   i s   o n l y   h a n d y   i f   t h e   f i l e n a m e s   a r e   u n i q u e .
+      flat                   # Allows you to override the default behavior of prepending hostname/path/to/file to the destination.  If dest ends with '/', it will use the basename of the source file, similar to the copy module. Obviously this is only handy if the filenames are unique.
       src=                   # The file on the remote system to fetch. This `must' be a file, not a directory. Recursive fetching may be supported in a later release.
       validate_checksum      # Verify that the source and destination checksums match after the files are fetched.
 
@@ -868,6 +924,7 @@
 
 - name: Manage arbitrary ports/services with firewalld
   action: firewalld
+      immediate              # Should this configuration be applied immediately, if set as permanent
       permanent=             # Should this configuration be in the running firewalld configuration or persist across reboots
       port                   # Name of a port to add/remove to/from firewalld must be in the form PORT/PROTOCOL
       rich_rule              # Rich rule to add/remove to/from firewalld
@@ -907,9 +964,12 @@
 
 - name: create or terminate GCE instances
   action: gce
+      disk_auto_delete       # if set boot disk will be removed after instance destruction
       disks                  # a list of persistent disks to attach to the instance; a string value gives the name of the disk; alternatively, a dictionary value can define 'name' and 'mode' ('READ_ONLY' or 'READ_WRITE'). The first entry will be the boot disk (which must be READ_WRITE).
+      external_ip            # type of external ip, ephemeral by default
       image                  # image string to use for the instance
       instance_names         # a comma-separated list of instance names to create or destroy
+      ip_forward             # set to true if the instance can forward ip packets (useful for gateways)
       machine_type           # machine type to use for the instance, use 'n1-standard-1' by default
       metadata               # a hash/dictionary of custom data for the instance; '{"key":"value",...}'
       name                   # identifier when working with a single instance
@@ -921,6 +981,17 @@
       state                  # desired state of the resource
       tags                   # a comma-separated list of tags to associate with the instance
       zone=                  # the GCE zone to use
+
+- name: utilize GCE image resources
+  action: gce_img
+      description            # an optional description
+      name=                  # the name of the image to create or delete
+      pem_file               # path to the pem file associated with the service account email
+      project_id             # your GCE project ID
+      service_account_email   # service account email
+      source                 # the source disk or the Google Cloud Storage URI to create the image from
+      state                  # desired state of the image
+      zone                   # the zone of the disk specified by source
 
 - name: create/destroy GCE load-balancer resources
   action: gce_lb
@@ -955,10 +1026,12 @@
       src_range              # the source IPv4 address range in CIDR notation
       src_tags               # the source instance tags for creating a firewall rule
       state                  # desired state of the persistent disk
+      target_tags            # the target instance tags for creating a firewall rule
 
 - name: utilize GCE persistent disk resources
   action: gce_pd
       detach_only            # do not destroy the disk, merely detach it from an instance
+      disk_type              # type of disk provisioned
       image                  # the source image to use for the disk
       instance_name          # instance name if you wish to attach or detach the disk
       mode                   # GCE mount mode of disk, READ_ONLY (default) or READ_WRITE
@@ -1011,20 +1084,22 @@
       depth                  # Create a shallow clone with a history truncated to the specified number or revisions. The minimum possible value is `1', otherwise ignored.
       dest=                  # Absolute path of where the repository should be checked out to. This parameter is required, unless `clone' is set to `no' This change was made in version 1.8.3. Prior to this version, the `dest' parameter was always required.
       executable             # Path to git executable to use. If not supplied, the normal mechanism for resolving binary paths will be used.
-      force                  # If `yes', any modified files in the working repository will be discarded.  Prior to 0.7, this was always 'yes' and could not be disabled.
+      force                  # If `yes', any modified files in the working repository will be discarded.  Prior to 0.7, this was always 'yes' and could not be disabled.  Prior to 1.9, the default was `yes`
       key_file               # Specify an optional private key file to use for the checkout.
       recursive              # if `no', repository will be cloned without the --recursive option, skipping sub-modules.
       reference              # Reference repository (see "git clone --reference ...")
+      refspec                # Add an additional refspec to be fetched. If version is set to a `SHA-1' not reachable from any branch or tag, this option may be necessary to specify the ref containing the `SHA-1'. Uses the same syntax as the 'git fetch' command. An example value could be "refs/meta/config".
       remote                 # Name of the remote.
       repo=                  # git, SSH, or HTTP protocol address of the git repository.
       ssh_opts               # Creates a wrapper script and exports the path as GIT_SSH which git then automatically uses to override ssh arguments. An example value could be "-o StrictHostKeyChecking=no"
       track_submodules       # if `yes', submodules will track the latest commit on their master branch (or other branch specified in .gitmodules).  If `no', submodules will be kept at the revision specified by the main project. This is equivalent to specifying the --remote flag to git submodule update.
-      update                 # If `no', just returns information about the repository without updating.
+      update                 # If `no', do not retrieve new revisions from the origin repository
       version                # What version of the repository to check out.  This can be the full 40-character `SHA-1' hash, the literal string `HEAD', a branch name, or a tag name.
 
 - name: Manages github service hooks.
   action: github_hooks
       action=                # This tells the githooks module what you want it to do.
+      content_type           # Content type to use for requests made to the webhook
       hookurl                # When creating a new hook, this is the url that you want github to post to. It is only required when creating a new hook.
       oauthkey=              # The oauth key provided by github. It can be found/generated on github under "Edit Your Profile" >> "Applications" >> "Personal Access Tokens"
       repo=                  # This is the API url for the repository you want to manage hooks for. It should be in the form of: https://api.github.com/repos/user:/repo:. Note this is different than the normal repo url.
@@ -1051,6 +1126,23 @@
       state                  # Indicate desired state of the resource
       timeout                # The time to wait for the image process to complete in seconds
 
+- name: Manage GlusterFS volumes
+  action: gluster_volume
+      brick                  # Brick path on servers
+      cluster                # List of hosts to use for probing and brick setup
+      directory              # Directory for limit-usage
+      force                  # If brick is being created in the root partition, module will fail. Set force to true to override this behaviour
+      host                   # Override local hostname (for peer probing purposes)
+      name=                  # The volume name
+      options                # A dictionary/hash with options/settings for the volume
+      quota                  # Quota value for limit-usage (be sure to use 10.0MB instead of 10MB, see quota list)
+      rebalance              # Controls whether the cluster is rebalanced after changes
+      replicas               # Replica count for volume
+      start_on_create        # Controls whether the volume is started after creation or not, defaults to yes
+      state=                 # Use present/absent ensure if a volume exists or not, use started/stopped to control it's availability.
+      stripes                # Stripe count for volume
+      transport              # Transport type for volume
+
 - name: Add or remove groups
   action: group
       gid                    # Optional `GID' to set for the group.
@@ -1071,11 +1163,20 @@
       url                    # Service URL for the web client
       validate_certs         # If `no', SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.
 
+- name: An Ansible module to handle states enable/disable server and set weight to backend host in haproxy using socket commands.
+  action: haproxy
+      backend                # Name of the haproxy backend pool. Required, else auto-detection applied.
+      host=                  # Host (backend) to operate in Haproxy.
+      shutdown_sessions      # When disabling server, immediately terminate all the sessions attached to the specified server. This can be used to terminate long-running sessions after a server is put into maintenance mode, for instance.
+      socket                 # Haproxy socket file name with path.
+      state=                 # describe the desired state of the given host in lb pool.
+      weight                 # The value passed in argument. If the value ends with the '%' sign, then the new weight will be relative to the initially cnfigured weight. Relative weights are only permitted between 0 and 100% and absolute weights are permitted between 0 and 256.
+
 - name: Manages Mercurial (hg) repositories.
   action: hg
       dest=                  # Absolute path of where the repository should be cloned to.
       executable             # Path to hg executable to use. If not supplied, the normal mechanism for resolving binary paths will be used.
-      force                  # Discards uncommitted changes. Runs `hg update -C'.
+      force                  # Discards uncommitted changes. Runs `hg update -C'.  Prior to 1.9, the default was `yes`.
       purge                  # Deletes untracked files. Runs `hg purge'.
       repo=                  # The repository address.
       revision               # Equivalent `-r' option in hg command which could be the changeset, revision number, branch name or even tag.
@@ -1211,11 +1312,19 @@
       token                  # The token to be uses in case the password is not specified
       user                   # The name of the user that has to added/removed from OpenStack
 
+- name: Add or remove a host from the C(known_hosts) file
+  action: known_hosts
+      key                    # The SSH public host key, as a string (required if state=present, optional when state=absent, in which case all keys for the host are removed)
+      name=                  # The host to add or remove (must match a host specified in key)
+      path                   # The known_hosts file to edit
+      state                  # `present' to add the host, `absent' to remove it.
+
 - name: Manage Gentoo overlays
   action: layman
       list_url               # An URL of the alternative overlays list that defines the overlay to install. This list will be fetched and saved under `${overlay_defs}'/${name}.xml), where `overlay_defs' is readed from the Layman's configuration.
       name=                  # The overlay id to install, synchronize, or uninstall. Use 'ALL' to sync all of the installed overlays (can be used only when `state=updated').
       state                  # Whether to install (`present'), sync (`updated'), or uninstall (`absent') the overlay.
+      validate_certs         # If `no', SSL certificates will not be validated. This should only be set to `no' when no other option exists.  Prior to 1.9.3 the code defaulted to `no'.
 
 - name: create an annotation in librato
   action: librato_annotation
@@ -1237,8 +1346,8 @@
       dest=                  # The file to modify.
       follow                 # This flag indicates that filesystem links, if they exist, should be followed.
       group                  # name of the group that should own the file/directory, as would be fed to `chown'
-      insertafter            # Used with `state=present'. If specified, the line will be inserted after the specified regular expression. A special value is available; `EOF' for inserting the line at the end of the file. May not be used with `backrefs'.
-      insertbefore           # Used with `state=present'. If specified, the line will be inserted before the specified regular expression. A value is available; `BOF' for inserting the line at the beginning of the file. May not be used with `backrefs'.
+      insertafter            # Used with `state=present'. If specified, the line will be inserted after the last match of specified regular expression. A special value is available; `EOF' for inserting the line at the end of the file. If specified regular expresion has no matches, EOF will be used instead. May not be used with `backrefs'.
+      insertbefore           # Used with `state=present'. If specified, the line will be inserted before the last match of specified regular expression. A value is available; `BOF' for inserting the line at the beginning of the file. If specified regular expresion has no matches, the line will be inserted at the end of the file.  May not be used with `backrefs'.
       line                   # Required for `state=present'. The line to insert/replace into the file. If `backrefs' is set, may contain backreferences that will get expanded with the `regexp' capture groups if the regexp matches. The backreferences should be double escaped (see examples).
       mode                   # mode the file or directory should be, such as 0644 as would be fed to `chmod'. As of version 1.8, the mode may be specified as a symbolic mode (for example, `u+rwx' or `u=rw,g=r,o=r').
       others                 # All arguments accepted by the [file] module also work here.
@@ -1277,6 +1386,8 @@
 
 - name: Module for tracking logs via logentries.com
   action: logentries
+      logtype                # type of the log
+      name                   # name of the log
       path=                  # path to a log file
       state                  # following state of the log
 
@@ -1297,6 +1408,30 @@
       state                  # Control if the logical volume exists.
       vg=                    # The volume group this logical volume is part of.
 
+- name: Manage LXC Containers
+  action: lxc_container
+      archive                # Create an archive of a container. This will create a tarball of the running container.
+      archive_compression    # Type of compression to use when creating an archive of a running container.
+      archive_path           # Path the save the archived container. If the path does not exist the archive method will attempt to create it.
+      backing_store          # Backend storage type for the container.
+      config                 # Path to the LXC configuration file.
+      container_command      # Run a command within a container.
+      container_config       # list of 'key=value' options to use when configuring a container.
+      container_log          # Enable a container log for host actions to the container.
+      container_log_level    # Set the log level for a container where *container_log* was set.
+      directory              # Place rootfs directory under DIR.
+      fs_size                # File system Size.
+      fs_type                # Create fstype TYPE.
+      lv_name                # Name of the logical volume, defaults to the container name.
+      lxc_path               # Place container under PATH
+      name=                  # Name of a container.
+      state                  # Start a container right after it's created.
+      template               # Name of the template to use within an LXC create.
+      template_options       # Template options when building the container.
+      thinpool               # Use LVM thin pool called TP.
+      vg_name                # If Backend store is lvm, specify the name of the volume group.
+      zfs_root               # Create zfs under given zfsroot.
+
 - name: Package manager for MacPorts
   action: macports
       name=                  # name of package to install/remove
@@ -1313,9 +1448,11 @@
       from                   # The email-address the mail is sent from. May contain address and phrase.
       headers                # A vertical-bar-separated list of headers which should be added to the message. Each individual header is specified as `header=value' (see example below).
       host                   # The mail server
+      password               # If SMTP requires password
       port                   # The mail server port
       subject=               # The subject of the email being sent.
       to                     # The email-address(es) the mail is being sent to. This is a comma-separated list, which may contain address and phrase portions.
+      username               # If SMTP requires username
 
 - name: Add or remove kernel modules
   action: modprobe
@@ -1330,12 +1467,12 @@
       login_password         # The password used to authenticate with
       login_port             # The port to connect to
       login_user             # The username used to authenticate with
+      name=                  # The name of the user to add or remove
       password               # The password to use for the user
       replica_set            # Replica set to connect to (automatically connects to primary for writes)
       roles                  # The database user roles valid values are one or more of the following: read, 'readWrite', 'dbAdmin', 'userAdmin', 'clusterAdmin', 'readAnyDatabase', 'readWriteAnyDatabase', 'userAdminAnyDatabase', 'dbAdminAnyDatabase' This param requires mongodb 2.4+ and pymongo 2.5+
       ssl                    # Whether to use an SSL connection when connecting to the database
       state                  # The database user state
-      user=                  # The name of the user to add or remove
 
 - name: Manage the state of a program monitored via Monit
   action: monit
@@ -1382,6 +1519,7 @@
   action: mysql_replication
       login_host             # mysql host to connect
       login_password         # password to connect mysql host, if defined login_user also needed.
+      login_port             # Port of the MySQL server. Requires login_host be defined as other then localhost if login_port is used
       login_unix_socket      # unix socket to connect mysql server
       login_user             # username to connect mysql host, if defined login_password also needed.
       master_connect_retry   # same as mysql variable
@@ -1490,6 +1628,7 @@
       name=                  # Name that has to be given to the instance
       nics                   # A list of network id's to which the VM's interface should be attached
       region_name            # Name of the region
+      scheduler_hints        # Arbitrary key/value pairs to the scheduler for custom use
       security_groups        # The name of the security group to which the VM should be added
       state                  # Indicate desired state of the resource
       user_data              # Opaque blob of data which is made available to the instance
@@ -1608,6 +1747,14 @@
       user=                  # PagerDuty user ID.
       validate_certs         # If `no', SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.
 
+- name: Apply patch files using the GNU patch tool.
+  action: patch
+      basedir                # Path of a base directory in which the patch file will be applied. May be ommitted when `dest' option is specified, otherwise required.
+      dest                   # Path of the file on the remote machine to be patched. The names of the files to be patched are usually taken from the patch file, but if there's just one file to be patched it can specified with this option.
+      remote_src             # If False, it will search for src at originating/master machine, if True it will go to the remote/target machine for the src. Default is False.
+      src=                   # Path of the patch file as accepted by the GNU patch tool. If `remote_src' is False, the patch source file is looked up from the module's "files" directory.
+      strip                  # Number that indicates the smallest prefix containing leading slashes that will be stripped from each file name found in the patch file. For more information see the strip parameter of the GNU patch tool.
+
 - name: Pause playbook execution
   action: pause
       minutes                # Number of minutes to pause for.
@@ -1638,10 +1785,24 @@
       virtualenv_command     # The command or a pathname to the command to create the virtual environment with. For example `pyvenv', `virtualenv', `virtualenv2', `~/bin/virtualenv', `/usr/local/bin/virtualenv'.
       virtualenv_site_packages   # Whether the virtual environment will inherit packages from the global site-packages directory.  Note that if this setting is changed on an already existing virtual environment it will not have any effect, the environment must be deleted and newly created.
 
-- name: Package manager for SmartOS
+- name: Manages packages with the Solaris 11 Image Packaging System
+  action: pkg5
+      name=                  # An FRMI of the package(s) to be installed/removed/updated. Multiple packages may be specified, separated by `,'.
+      state                  # Whether to install (`present', `latest'), or remove (`absent') a package.
+
+- name: Manages Solaris 11 Image Packaging System publishers
+  action: pkg5_publisher
+      enabled                # Is the repository enabled or disabled?
+      mirror                 # A path or URL to the repository mirror. Multiple values may be provided.
+      name=                  # The publisher's name.
+      origin                 # A path or URL to the repository. Multiple values may be provided.
+      state                  # Whether to ensure that a publisher is present or absent.
+      sticky                 # Packages installed from a sticky repository can only receive updates from that repository.
+
+- name: Package manager for SmartOS, NetBSD, et al.
   action: pkgin
-      name=                  # name of package to install/remove
-      state                  # state of the package
+      name=                  # Name of package to install/remove; multiple names may be given, separated by commas
+      state                  # Intended state of the package
 
 - name: Package manager for FreeBSD >= 9.0
   action: pkgng
@@ -1662,6 +1823,7 @@
       changed_use            # Include installed packages where USE flags have changed, except when flags that the user has not enabled are added or removed (--changed-use)
       deep                   # Consider the entire dependency tree of packages (--deep)
       depclean               # Remove packages not needed by explicitly merged packages (--depclean) If no package is specified, clean up the world's dependencies Otherwise, --depclean serves as a dependency aware version of --unmerge
+      getbinpkg              # Prefer packages specified at PORTAGE_BINHOST in make.conf
       newuse                 # Include installed packages where USE flags have changed (--newuse)
       nodeps                 # Only merge packages but not their dependencies (--nodeps)
       noreplace              # Do not re-emerge installed packages (--noreplace)
@@ -1672,6 +1834,7 @@
       state                  # State of the package atom
       sync                   # Sync package repositories first If yes, perform "emerge --sync" If web, perform "emerge-webrsync"
       update                 # Update packages to the best version available (--update)
+      usepkgonly             # Merge only binaries (no compiling). This sets getbinpkg=yes.
       verbose                # Run emerge in verbose mode (--verbose)
 
 - name: Installing packages from FreeBSD`s ports system
@@ -1687,12 +1850,37 @@
       lc_ctype               # Character classification (LC_CTYPE) to use in the database (e.g. lower, upper, ...) Must match LC_CTYPE of template database unless `template0' is used as template.
       login_host             # Host running the database
       login_password         # The password used to authenticate with
+      login_unix_socket      # Path to a Unix domain socket for local connections
       login_user             # The username used to authenticate with
       name=                  # name of the database to add or remove
       owner                  # Name of the role to set as owner of the database
       port                   # Database port to connect to.
       state                  # The database state
       template               # Template used to create the database
+
+- name: Add or remove PostgreSQL extensions from a database.
+  action: postgresql_ext
+      db=                    # name of the database to add or remove the extension to/from
+      login_host             # Host running the database
+      login_password         # The password used to authenticate with
+      login_user             # The username used to authenticate with
+      name=                  # name of the extension to add or remove
+      port                   # Database port to connect to.
+      state                  # The database extension state
+
+- name: Adds, removes or changes procedural languages with a PostgreSQL database.
+  action: postgresql_lang
+      cascade                # when dropping a language, also delete object that depend on this language. only used when `state=absent'.
+      db                     # name of database where the language will be added, removed or changed
+      fail_on_drop           # if `yes', fail when removing a language. Otherwise just log and continue in some cases, it is not possible to remove a language (used by the db-system). When         dependencies block the removal, consider using `cascade'.
+      force_trust            # marks the language as trusted, even if it's marked as untrusted in pg_pltemplate. use with care!
+      lang=                  # name of the procedural language to add, remove or change
+      login_host             # Host running PostgreSQL where you want to execute the actions.
+      login_password         # Password used to authenticate with PostgreSQL (must match `login_user')
+      login_user             # User used to authenticate with PostgreSQL
+      port                   # Database port to connect to.
+      state                  # The state of the language for the selected database
+      trust                  # make this language trusted for the selected db
 
 - name: Grant or revoke privileges on PostgreSQL database objects.
   action: postgresql_privs
@@ -1708,6 +1896,7 @@
       schema                 # Schema that contains the database objects specified via `objs'. May only be provided if `type' is `table', `sequence' or `function'. Defaults to  `public' in these cases.
       state                  # If `present', the specified privileges are granted, if `absent' they are revoked.
       type                   # Type of database object to set privileges on.
+      unix_socket            # Path to a Unix domain socket for local connections. Alias: `login_unix_socket'
 
 - name: Adds or removes a users (roles) from a PostgreSQL database.
   action: postgresql_user
@@ -1717,6 +1906,7 @@
       fail_on_user           # if `yes', fail when user can't be removed. Otherwise just log and continue
       login_host             # Host running PostgreSQL.
       login_password         # Password used to authenticate with PostgreSQL
+      login_unix_socket      # Path to a Unix domain socket for local connections
       login_user             # User (role) used to authenticate with PostgreSQL
       name=                  # name of the user (role) to add or remove
       password               # set the user's password, before 1.4 this was required. When passing an encrypted password, the encrypted parameter must also be true, and it must be generated with the format `'str["md5"] + md5[ password + username ]'', resulting in a total of 35 characters.  An easy way to do this is: `echo "md5`echo -n "verysecretpasswordJOE" | md5`"'.
@@ -1875,6 +2065,10 @@
       api_key                # Rackspace API key (overrides `credentials')
       auth_endpoint          # The URI of the authentication service
       auto_increment         # Whether or not to increment a single number with the name of the created servers. Only applicable when used with the `group' attribute or meta key.
+      boot_from_volume       # Whether or not to boot the instance from a Cloud Block Storage volume. If `yes' and `image' is specified a new volume will be created at boot time. `boot_volume_size' is required with `image' to create a new volume at boot time.
+      boot_volume            # Cloud Block Storage ID or Name to use as the boot volume of the instance
+      boot_volume_size       # Size of the volume to create in Gigabytes. This is only required with `image' and `boot_from_volume'.
+      boot_volume_terminate   # Whether the `boot_volume' or newly created volume from `image' will be terminated when the server is terminated
       config_drive           # Attach read-only configuration drive to server as label config-2
       count                  # number of instances to launch
       count_offset           # number count to start at
@@ -1888,7 +2082,7 @@
       flavor                 # flavor to use for the instance
       group                  # host group to assign to server, is also used for idempotent operations to ensure a specific number of instances
       identity_type          # Authentication machanism to use, such as rackspace or keystone
-      image                  # image to use for the instance. Can be an `id', `human_id' or `name'
+      image                  # image to use for the instance. Can be an `id', `human_id' or `name'. With `boot_from_volume', a Cloud Block Storage volume will be created with this image
       instance_ids           # list of instance ids, currently only used when state='absent' to remove instances
       key_name               # key pair to use on the instance
       meta                   # A hash of metadata to associate with the instance
@@ -1912,6 +2106,7 @@
       description            # Description to give the volume being created
       env                    # Environment as configured in ~/.pyrax.cfg, see https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#pyrax-configuration
       identity_type          # Authentication machanism to use, such as rackspace or keystone
+      image                  # image to use for bootable volumes. Can be an `id', `human_id' or `name'. This option requires `pyrax>=1.9.3'
       meta                   # A hash of metadata to associate with the volume
       name=                  # Name to give the volume being created
       region                 # Region to create an instance in
@@ -2226,11 +2421,12 @@
       aws_secret_key         # AWS secret key. If not set then the value of the AWS_SECRET_KEY environment variable is used.
       backup_retention       # Number of days backups are retained.  Set to 0 to disable backups.  Default is 1 day.  Valid range: 0-35. Used only when command=create or command=modify.
       backup_window          # Backup window in format of hh24:mi-hh24:mi.  If not specified then a random backup window is assigned. Used only when command=create or command=modify.
+      character_set_name     # Associate the DB instance with a specified character set. Used with command=create.
       command=               # Specifies the action to take.
       db_engine              # The type of database.  Used only when command=create.
       db_name                # Name of a database to create within the instance.  If not specified then no database is created. Used only when command=create.
       engine_version         # Version number of the database engine to use. Used only when command=create. If not specified then the current Amazon RDS default engine version is used.
-      instance_name=         # Database instance identifier.
+      instance_name          # Database instance identifier. Required except when using command=facts or command=delete on just a snapshot
       instance_type          # The instance type of the database.  Must be specified when command=create. Optional when command=replicate, command=modify or command=restore. If not specified then the replica inherits the same instance type as the source instance.
       iops                   # Specifies the number of IOPS for the instance.  Used only when command=create or command=modify. Must be an integer greater than 1000.
       license_model          # The license model for this DB instance. Used only when command=create or command=restore.
@@ -2241,12 +2437,14 @@
       parameter_group        # Name of the DB parameter group to associate with this instance.  If omitted then the RDS default DBParameterGroup will be used. Used only when command=create or command=modify.
       password               # Password for the master database username. Used only when command=create or command=modify.
       port                   # Port number that the DB instance uses for connections.  Defaults to 3306 for mysql. Must be changed to 1521 for Oracle, 1443 for SQL Server, 5432 for PostgreSQL. Used only when command=create or command=replicate.
+      publicly_accessible    # explicitly set whether the resource should be publicly accessible or not. Used with command=create, command=replicate. Requires boto >= 2.26.0
       region=                # The AWS region to use. If not specified then the value of the EC2_REGION environment variable, if any, is used.
       security_groups        # Comma separated list of one or more security groups.  Used only when command=create or command=modify.
       size                   # Size in gigabytes of the initial storage for the DB instance. Used only when command=create or command=modify.
-      snapshot               # Name of snapshot to take. When command=delete, if no snapshot name is provided then no snapshot is taken. Used only when command=delete or command=snapshot.
+      snapshot               # Name of snapshot to take. When command=delete, if no snapshot name is provided then no snapshot is taken. If used with command=delete with no instance_name, the snapshot is deleted. Used with command=facts, command=delete or command=snapshot.
       source_instance        # Name of the database to replicate. Used only when command=replicate.
       subnet                 # VPC subnet group.  If specified then a VPC instance is created. Used only when command=create.
+      tags                   # tags dict to apply to a resource. Used with command=create, command=replicate, command=restore. Requires boto >= 2.26.0
       upgrade                # Indicates that minor version upgrades should be applied automatically. Used only when command=create or command=replicate.
       username               # Master database username. Used only when command=create.
       vpc_security_groups    # Comma separated list of one or more vpc security group ids. Also requires `subnet` to be specified. Used only when command=create or command=modify.
@@ -2361,15 +2559,18 @@
 
 - name: add or delete entries in Amazons Route53 DNS service
   action: route53
+      alias                  # Indicates if this is an alias record.
+      alias_hosted_zone_id   # The hosted zone identifier.
       aws_access_key         # AWS access key.
       aws_secret_key         # AWS secret key.
       command=               # Specifies the action to take.
       overwrite              # Whether an existing record should be overwritten on create if values do not match
+      private_zone           # If set to true, the private zone matching the requested name within the domain will be used if there are both public and private zones. The default is to use the public zone.
       record=                # The full DNS record to create or delete
       retry_interval         # In the case that route53 is still servicing a prior request, this module will wait and try again after this many seconds. If you have many domain names, the default of 500 seconds may be too long.
       ttl                    # The TTL to give the new record
       type=                  # The type of DNS record to create
-      value                  # The new value when creating a DNS record.  Multiple comma-spaced values are allowed.  When deleting a record all values for the record must be specified or Route53 will not delete it.
+      value                  # The new value when creating a DNS record.  Multiple comma-spaced values are allowed for non-alias records.  When deleting a record all values for the record must be specified or Route53 will not delete it.
       zone=                  # The DNS zone to modify
 
 - name: Adds or removes a gpg key from the rpm db
@@ -2390,7 +2591,7 @@
       object                 # Keyname of the object inside the bucket. Can be used to create "virtual directories", see examples.
       overwrite              # Force overwrite either locally on the filesystem or remotely with the object/key. Used with PUT and GET operations.
       region                 # AWS region to create the bucket in. If not set then the value of the EC2_REGION and AWS_REGION environment variables are checked, followed by the aws_region and ec2_region settings in the Boto config file.  If none of those are set the region defaults to the S3 Location: US Standard.  Prior to ansible 1.8 this parameter could be specified but had no effect.
-      s3_url                 # S3 URL endpoint. If not specified then the S3_URL environment variable is used, if that variable is defined. Ansible tries to guess if fakes3 (https://github.com/jubos/fake-s3) or Eucalyptus Walrus (https://github.com/eucalyptus/eucalyptus/wiki/Walrus) is used and configure connection accordingly. Current heuristic is: everything with scheme fakes3:// is fakes3, everything else not ending with amazonaws.com is Walrus.
+      s3_url                 # S3 URL endpoint for usage with Eucalypus, fakes3, etc.  Otherwise assumes AWS
       src                    # The source file path when performing a PUT operation.
 
 - name: Runs a local script on a remote node after transferring it
@@ -2442,19 +2643,31 @@
 - name: Send Slack notifications
   action: slack
       channel                # Channel to send the message to. If absent, the message goes to the channel selected for the `token'.
-      domain=                # Slack (sub)domain for your environment without protocol. (i.e. `future500.slack.com')
+      domain                 # Slack (sub)domain for your environment without protocol. (i.e. `future500.slack.com') In 1.8 and beyond, this is deprecated and may be ignored.  See token documentation for information.
       icon_emoji             # Emoji for the message sender. See Slack documentation for options. (if `icon_emoji' is set, `icon_url' will not be used)
       icon_url               # Url for the message sender's icon (default `http://www.ansible.com/favicon.ico')
       link_names             # Automatically create links for channels and usernames in `msg'.
       msg=                   # Message to send.
       parse                  # Setting for the message parser at Slack
-      token=                 # Slack integration token
+      token=                 # Slack integration token.  This authenticates you to the slack service. Prior to 1.8, a token looked like `3Ffe373sfhRE6y42Fg3rvf4GlK'.  In 1.8 and above, ansible adapts to the new slack API where tokens look like `G922VJP24/D921DW937/3Ffe373sfhRE6y42Fg3rvf4GlK'.  If tokens are in the new format then slack will ignore any value of domain.  If the token is in the old format the domain is required.  Ansible has no control of when slack will get rid of the old API.  When slack does that the old format will stop working.
       username               # This is the sender of the message.
       validate_certs         # If `no', SSL certificates will not be validated. This should only be used on personally controlled sites using self-signed certificates.
 
 - name: Slurps a file from remote nodes
   action: slurp
       src=                   # The file on the remote system to fetch. This `must' be a file, not a directory.
+
+- name: Retrive facts for a device using SNMP.
+  action: snmp_facts
+      authkey                # Authentication key, required if version is v3
+      community              # The SNMP community string, required if version is v2/v2c
+      host=                  # Set to target snmp server (normally {{inventory_hostname}})
+      integrity              # Hashing algoritm, required if version is v3
+      level                  # Authentication level, required if version is v3
+      privacy                # Encryption algoritm, required if level is authPriv
+      privkey                # Encryption key, required if version is authPriv
+      username               # Username for SNMPv3, required if version is v3
+      version=               # SNMP Version to use, v2/v2c or v3
 
 - name: Send Amazon Simple Notification Service (SNS) messages
   action: sns
@@ -2482,7 +2695,7 @@
       dest=                  # Absolute path where the repository should be deployed.
       executable             # Path to svn executable to use. If not supplied, the normal mechanism for resolving binary paths will be used.
       export                 # If `yes', do export instead of checkout/update.
-      force                  # If `yes', modified files will be discarded. If `no', module will fail if it encounters modified files.
+      force                  # If `yes', modified files will be discarded. If `no', module will fail if it encounters modified files. Prior to 1.9 the default was `yes`.
       password               # --password parameter passed to svn.
       repo=                  # The subversion URL to the repository.
       revision               # Specific revision to checkout.
@@ -2497,6 +2710,15 @@
       state=                 # The desired state of program/group.
       supervisorctl_path     # path to supervisorctl executable
       username               # username to use for authentication
+
+- name: Manage daemontools services.
+  action: svc
+      downed                 # Should a 'down' file exist or not, if it exists it disables auto startup. defaults to no. Downed does not imply stopped.
+      enabled                # Wheater the service is enabled or not, if disabled it also implies stopped. Make note that a service can be enabled and downed (no auto restart).
+      name=                  # Name of the service to manage.
+      service_dir            # directory svscan watches for services
+      service_src            # directory where services are defined, the source of symlinks to service_dir.
+      state                  # `Started'/`stopped' are idempotent actions that will not run commands unless necessary.  `restarted' will always bounce the svc (svc -t) and `killed' will always bounce the svc (svc -k). `reloaded' will send a sigusr1 (svc -u). `once' will run a normally downed svc once (svc -o), not really an idempotent operation.
 
 - name: Manage Solaris SVR4 packages
   action: svr4pkg
@@ -2596,9 +2818,9 @@
       to_ip                  # Destination IP address.
       to_port                # Destination port.
 
-- name: Copies an archive to a remote location and unpack it
+- name: Unpacks an archive after (optionally) copying it from the local machine.
   action: unarchive
-      copy                   # if true, the file is copied from the 'master' to the target machine, otherwise, the plugin will look for src archive at the target machine.
+      copy                   # If true, the file is copied from local 'master' to the target machine, otherwise, the plugin will look for src archive at the target machine.
       creates                # a filename, when it already exists, this step will *not* be run.
       dest=                  # Remote absolute path where the archive should be unpacked
       follow                 # This flag indicates that filesystem links, if they exist, should be followed.
@@ -2609,7 +2831,13 @@
       serole                 # role part of SELinux file context, `_default' feature works as for `seuser'.
       setype                 # type part of SELinux file context, `_default' feature works as for `seuser'.
       seuser                 # user part of SELinux file context. Will default to system policy, if applicable. If set to `_default', it will use the `user' portion of the policy if available
-      src=                   # Local path to archive file to copy to the remote server; can be absolute or relative.
+      src=                   # If copy=yes (default), local path to archive file to copy to the target server; can be absolute or relative. If copy=no, path on the target server to existing archive file to unpack.
+
+- name: Pause and start Uptime Robot monitoring
+  action: uptimerobot
+      apikey=                # Uptime Robot API key.
+      monitorid=             # ID of the monitor to check.
+      state=                 # Define whether or not the monitor should be running or paused.
 
 - name: Interacts with webservices
   action: uri
@@ -2628,10 +2856,11 @@
       timeout                # The socket level timeout in seconds
       url=                   # HTTP or HTTPS URL in the form (http|https)://host.domain[:port]/path
       user                   # username for the module to use for Digest, Basic or WSSE authentication.
+      validate_certs         # If `no', SSL certificates will not be validated.  This should only set to `no' used on personally controlled sites using self-signed certificates.  Prior to 1.9.2 the code defaulted to `no'.
 
 - name: Urpmi manager
   action: urpmi
-      force                  # Corresponds to the `--force' option for `urpmi'.
+      force                  # Assume "yes" is the answer to any question urpmi has to ask. Corresponds to the `--force' option for `urpmi'.
       no-suggests            # Corresponds to the `--no-suggests' option for `urpmi'.
       pkg=                   # name of package to install, upgrade or remove.
       state                  # Indicates the desired package state
@@ -2642,6 +2871,7 @@
       append                 # If `yes', will only add groups, not set them to just the list in `groups'.
       comment                # Optionally sets the description (aka `GECOS') of user account.
       createhome             # Unless set to `no', a home directory will be made for the user when the account is created or if the home directory does not exist.
+      expires                # An expiry time for the user in epoch, it will be ignored on platforms that do not support this. Currently supported on Linux and FreeBSD.
       force                  # When used with `state=absent', behavior is as with `userdel --force'.
       generate_ssh_key       # Whether to generate a SSH key for the user in question. This will *not* overwrite an existing SSH key.
       group                  # Optionally sets the user's primary group (takes a group name).
@@ -2651,15 +2881,15 @@
       move_home              # If set to `yes' when used with `home=', attempt to move the user's home directory to the specified directory if it isn't there already.
       name=                  # Name of the user to create, remove or modify.
       non_unique             # Optionally when used with the -u option, this option allows to change the user ID to a non-unique value.
-      password               # Optionally set the user's password to this crypted value.  See the user example in the github examples directory for what this looks like in a playbook. The `FAQ <http://docs.ansible.com/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module>`_ contains details on various ways to generate these password values.
+      password               # Optionally set the user's password to this crypted value.  See the user example in the github examples directory for what this looks like in a playbook. The `FAQ <http://docs.ansible.com/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module>`_ contains details on various ways to generate these password values. Note on Darwin system, this value has to be cleartext. Beware of security issues.
       remove                 # When used with `state=absent', behavior is as with `userdel --remove'.
       shell                  # Optionally set the user's shell.
       ssh_key_bits           # Optionally specify number of bits in SSH key to create.
       ssh_key_comment        # Optionally define the comment for the SSH key.
-      ssh_key_file           # Optionally specify the SSH key filename.
+      ssh_key_file           # Optionally specify the SSH key filename. If this is a relative filename then it will be relative to the user's home directory.
       ssh_key_passphrase     # Set a passphrase for the SSH key.  If no passphrase is provided, the SSH key will default to having no passphrase.
       ssh_key_type           # Optionally specify the type of SSH key to generate. Available SSH key types will depend on implementation present on target host.
-      state                  # Whether the account should exist.  When `absent', removes the user account.
+      state                  # Whether the account should exist or not, taking action if the state is different from what is stated.
       system                 # When creating an account, setting this to `yes' makes the user a system account.  This setting cannot be changed on existing users.
       uid                    # Optionally sets the `UID' of the user.
       update_password        # `always' will update passwords if they differ.  `on_create' will only set the password for newly created users.
@@ -2677,10 +2907,12 @@
       cluster                # The name of the cluster to create the VM in. By default this is derived from the host you tell the module to build the guest on.
       esxi                   # Dictionary which includes datacenter and hostname on which the VM should be created. For standalone ESXi hosts, ha-datacenter should be used as the datacenter name
       force                  # Boolean. Allows you to run commands which may alter the running state of a guest. Also used to reconfigure and destroy.
+      from_template          # Specifies if the VM should be deployed from a template (cannot be ran with state)
       guest=                 # The virtual server name you wish to manage.
       password=              # Password of the user to connect to vcenter as.
       resource_pool          # The name of the resource_pool to create the VM in.
       state                  # Indicate desired state of the vm.
+      template_src           # Name of the source template to deploy from
       username=              # Username to connect to vcenter as.
       vcenter_hostname=      # The hostname of the vcenter server the module will connect to, to create the guest.
       vm_disk                # A key, value list of disks and their sizes and which datastore to keep it in.
@@ -2692,14 +2924,30 @@
 
 - name: Waits for a condition before continuing.
   action: wait_for
+      connect_timeout        # maximum number of seconds to wait for a connection to happen before closing and retrying
       delay                  # number of seconds to wait before starting to poll
       exclude_hosts          # list of hosts or IPs to ignore when looking for active TCP connections for `drained' state
-      host                   # hostname or IP address to wait for
+      host                   # A resolvable hostname or IP address to wait for
       path                   # path to a file on the filesytem that must exist before continuing
       port                   # port number to poll
       search_regex           # Can be used to match a string in either a file or a socket connection. Defaults to a multiline regex.
       state                  # either `present', `started', or `stopped', `absent', or `drained' When checking a port `started' will ensure the port is open, `stopped' will check that it is closed, `drained' will check for active connections When checking for a file or a search string `present' or `started' will ensure that the file or string is present before continuing, `absent' will check that file is absent or removed
       timeout                # maximum number of seconds to wait for
+
+- name: Installs packages using chocolatey
+  action: win_chocolatey
+      force                  # Forces install of the package (even if it already exists). Using Force will cause ansible to always report that a change was made
+      logPath                # Where to log command output to
+      name=                  # Name of the package to be installed
+      showlog                # Outputs the chocolatey log inside a chocolatey_log property.
+      source                 # Which source to install from
+      state                  # State of the package on the system
+      version                # Specific version of the package to be installed Ignored when state == 'absent'
+
+- name: Copies files to remote locations on windows hosts.
+  action: win_copy
+      dest=                  # Remote absolute path where the file should be copied to. If src is a directory, this must be a directory too. Use \ for path separators.
+      src                    # Local path to a file to copy to the remote server; can be absolute or relative. If path is a directory, it is copied recursively. In this case, if path ends with "/", only inside contents of that directory are copied to destination. Otherwise, if it does not end with "/", the directory itself with all contents is copied. This behavior is similar to Rsync.
 
 - name: Installs and uninstalls Windows Features
   action: win_feature
@@ -2708,6 +2956,19 @@
       name=                  # Names of roles or features to install as a single feature or a comma-separated list of features
       restart                # Restarts the computer automatically when installation is complete, if restarting is required by the roles or features installed.
       state                  # State of the features or roles on the system
+
+- name: Creates, touches or removes files or directories.
+  action: win_file
+      follow                 # This flag indicates that filesystem links, if they exist, should be followed.
+      group                  # name of the group that should own the file/directory, as would be fed to `chown'
+      mode                   # mode the file or directory should be, such as 0644 as would be fed to `chmod'. As of version 1.8, the mode may be specified as a symbolic mode (for example, `u+rwx' or `u=rw,g=r,o=r').
+      owner                  # name of the user that should own the file/directory, as would be fed to `chown'
+      path=                  # path to the file being managed.  Aliases: `dest', `name'
+      selevel                # level part of the SELinux file context. This is the MLS/MCS attribute, sometimes known as the `range'. `_default' feature works as for `seuser'.
+      serole                 # role part of SELinux file context, `_default' feature works as for `seuser'.
+      setype                 # type part of SELinux file context, `_default' feature works as for `seuser'.
+      seuser                 # user part of SELinux file context. Will default to system policy, if applicable. If set to `_default', it will use the `user' portion of the policy if available
+      state                  # If `directory', all immediate subdirectories will be created if they do not exist. If `file', the file will NOT be created if it does not exist, see the [copy] or [template] module if you want that behavior.  If `absent', directories will be recursively deleted, and files will be removed. If `touch', an empty file will be created if the c(path) does not exist, while an existing file or directory will receive updated file access and modification times (similar to the way `touch` works from the command line).
 
 - name: Fetches a file from a given URL
   action: win_get_url
@@ -2741,11 +3002,30 @@
       get_md5                # Whether to return the md5 sum of the file
       path=                  # The full path of the file/object to get the facts of; both forward and back slashes are accepted.
 
+- name: Templates a file out to a remote server.
+  action: win_template
+      dest=                  # Location to render the template to on the remote machine.
+      src=                   # Path of a Jinja2 formatted template on the local server. This can be a relative or absolute path.
+
+- name: Lists / Installs windows updates
+  action: win_updates
+      category               # Which category to install updates from
+
 - name: Manages local Windows user accounts
   action: win_user
-      name=                  # Username of the user to manage
-      password=              # Password for the user (plain text)
-      state                  # Whether to create or delete a user
+      account_disabled       # `yes' will disable the user account.  `no' will clear the disabled flag.
+      account_locked         # `no' will unlock the user account if locked.
+      description            # Description of the user
+      fullname               # Full name of the user
+      groups                 # Adds or removes the user from this comma-separated lis of groups, depending on the value of `groups_action'. When `groups_action' is `replace' and `groups' is set to the empty string ('groups='), the user is removed from all groups.
+      groups_action          # If `replace', the user is added as a member of each group in `groups' and removed from any other groups.  If `add', the user is added to each group in `groups' where not already a member.  If `remove', the user is removed from each group in `groups'.
+      name=                  # Name of the user to create, remove or modify.
+      password               # Optionally set the user's password to this (plain text) value.
+      password_expired       # `yes' will require the user to change their password at next login. `no' will clear the expired password flag.
+      password_never_expires   # `yes' will set the password to never expire.  `no' will allow the password to expire.
+      state                  # When `present', creates or updates the user account.  When `absent', removes the user account if it exists.  When `query' (new in 1.9), retrieves the user account details without making any changes.
+      update_password        # `always' will update passwords if they differ.  `on_create' will only set the password for newly created users.
+      user_cannot_change_password   # `yes' will prevent the user from changing their password.  `no' will allow the user to change their password.
 
 - name: set/retrieve extended attributes
   action: xattr
@@ -2764,6 +3044,15 @@
       list                   # Various (non-idempotent) commands for usage with `/usr/bin/ansible' and `not' playbooks. See examples.
       name=                  # Package name, or package specifier with version, like `name-1.0'. When using state=latest, this can be '*' which means run: yum -y update. You can also pass a url or a local path to a rpm file.
       state                  # Whether to install (`present', `latest'), or remove (`absent') a package.
+      update_cache           # Force updating the cache. Has an effect only if state is `present' or `latest'.
+
+- name: Add or remove a host group to Zabbix.
+  action: zabbix_group
+      host_group=            # Name of the host group to be added or removed.
+      login_password=        # Zabbix user password. If not set environment variable `ZABBIX_LOGIN_PASSWORD' is used.
+      login_user=            # Zabbix user name. If not set environment variable `ZABBIX_LOGIN_USER' is used.
+      server_url=            # Url of Zabbix server, with protocol (http or https) e.g. https://monitoring.example.com/zabbix. `url' is an alias for `server_url'. If not set environment variable `ZABBIX_SERVER_URL' is used.
+      state                  # Whether the host group should be added or removed.
 
 - name: Create Zabbix maintenance windows
   action: zabbix_maintenance
@@ -2831,17 +3120,7 @@
       description            # A description of the repository
       disable_gpg_check      # Whether to disable GPG signature checking of all packages. Has an effect only if state is `present'.
       name                   # A name for the repository. Not required when adding repofiles.
+      refresh                # Enable autorefresh of the repository.
       repo                   # URI of the repository or .repo file. Required when state=present.
       state                  # A source string state.
-
-
-- name: manage docker images
-  action: docker_image
-      docker_url             # URL of docker host to issue commands to
-      name=                  # Image name to work with
-      nocache                # Do not use cache with building
-      path                   # Path to directory with Dockerfile
-      state                  # Set the state of the image
-      tag                    # Image tag to work with
-      timeout                # Set image operation timeout
 
