@@ -2,7 +2,7 @@
 layout: post
 title: Lies, Damn Lies, and Statistics
 categories: []
-date: 2015-06-25 16:20:43.000000000 +03:00
+date: 2016-06-25 16:20:43.000000000 +03:00
 ---
 Inspired by our current 'post-fact democracy', I had the thought that maybe the internet isn't the democratic safeguard that people believed it to be in the 90s and 00s.
 
@@ -16,9 +16,9 @@ When the simulation starts, the (correct) information spreads to each neighbor, 
 
 The "My bias" value controls how much each individual values his/her opinion over their neighbors'. A value of '1' means an individual values his/her own opinion as much as any other's.
 
-Use a large bias to simulate "social media", where my own opinion is being amplified. For example, a bias of 10 can be understood to mean that in addition to the 8 neighbors (neighboring pixels) and my own opinion, an individual can find another 9 opinions similar to his/her own, likely overriding the opinion of the neighborhood. With a large bias, the ratio between informed and misinformed approaches 50/50, eventhough the incorrect information is scarcer!
+The "ratio" value controls the odds of being presented with correct information. Obviously, if the odds of finding correct information is lower than 50%, there's no chance the truth can prevail. However, it's interesting to see that even at a ratio of 0.51, misinformation completely disappears if we change the bias value to 0: extreme open mindedness, where my neighbors can override my wrong opinion.
 
-The "ratio" value controls the odds of being presented with correct information. Obviously, if the odds of finding correct information is lower than 50%, there's no chance the truth can prevail. However, t's interesting to see that even at a ratio of 0.51, misinformation completely disappears if we change the bias value to 0: extreme open mindedness, where my neighbors can override my wrong opinion.
+Use a large bias to simulate "social media", where my own opinion is being amplified. For example, a bias of 10 can be understood to mean that in addition to the 8 neighbors (neighboring pixels) and my own opinion, an individual can find another 9 opinions similar to his/her own, likely overriding the opinion of the neighborhood. With a large bias, the ratio between informed and misinformed approaches 50/50, eventhough the incorrect information is scarcer!
 
 <script type="text/javascript">
 var width = 600,
