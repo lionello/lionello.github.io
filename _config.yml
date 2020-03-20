@@ -5,8 +5,8 @@ description: > # this means to ignore newlines until "baseurl:"
   languages, food, coffee, science. This blog mostly serves as my private
   knowledgebase, but I figured it might be useful to others."
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://www.lunesu.com" # the base hostname & protocol for your site
-twitter_username: LioLunesu
+url: "https://www.lunesu.com" # the base hostname & protocol for your site
+#twitter_username: LioLunesu
 github_username:  lionello
 
 # Build settings
