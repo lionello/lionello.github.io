@@ -8,7 +8,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://www.lunesu.com" # the base hostname & protocol for your site
 #twitter_username: LioLunesu
 github_username: lionello
-mastodon_username: @lionello
+mastodon_username: "@lionello"
 
 # Build settings
 markdown: kramdown
