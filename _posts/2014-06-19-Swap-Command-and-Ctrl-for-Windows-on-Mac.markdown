@@ -6,7 +6,7 @@ permalink: /archives/139-Swap-Command-and-Ctrl-for-Windows-on-Mac.html
 s9y_link: http://www.lunesu.com/index.php?/archives/139-Swap-Command-and-Ctrl-for-Windows-on-Mac.html
 date: 2014-06-19 11:06:36.000000000 +08:00
 ---
-Quick <a href="http://www.lunesu.com/swapctrlcmd.reg">registry hack</a> that turns the Mac Command keys into Ctrl keys and turns the left most Ctrl key into the Windows key:
+Quick <a href="/files/swapctrlcmd.reg">registry hack</a> that turns the Mac Command keys into Ctrl keys and turns the left most Ctrl key into the Windows key:
 {% highlight sh %}
 Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
