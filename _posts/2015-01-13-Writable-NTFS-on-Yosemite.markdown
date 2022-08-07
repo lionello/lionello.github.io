@@ -17,7 +17,7 @@ Reboot (optional but recommended by osxfuse)
 
 Install ntfs-3g via homebrew:
 {% highlight sh %}
-brew update &&amp; brew install ntfs-3g
+brew update && brew install ntfs-3g
 {% endhighlight %}
 
 Link mount_ntfs:

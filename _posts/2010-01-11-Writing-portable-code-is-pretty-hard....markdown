@@ -36,7 +36,7 @@ int H2I(TCHAR m) {
 }
 
 BOOL ValidHex(TCHAR t) {
-	return (t &gt;= '0' &&amp; t &lt;= '9') || (t &gt;= 'a' &&amp; t &lt;= 'f') || (t &gt;= 'A' &&amp; t &lt;= 'F');
+	return (t &gt;= '0' && t &lt;= '9') || (t &gt;= 'a' && t &lt;= 'f') || (t &gt;= 'A' && t &lt;= 'F');
 }
 
 #ifdef _WIN32

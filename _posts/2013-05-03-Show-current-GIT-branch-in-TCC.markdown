@@ -33,7 +33,7 @@ int __stdcall _main() {
     if (h != INVALID_HANDLE_VALUE) {
       char buf[64];
       DWORD read = 0;
-      if (ReadFile(h, buf, sizeof(buf), &read, NULL) &&amp; read > 16) {
+      if (ReadFile(h, buf, sizeof(buf), &read, NULL) && read > 16) {
         DWORD off = 0;
         DWORD len = 7;            // show 7 hex digits
         if ((int&)buf[0] == ':fer') {

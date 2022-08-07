@@ -32,7 +32,7 @@ int even(FILE * f)
 int main(int argc, char** argv)
 {
   int i, r = 0;
-  if (argc == 1 || (argc == 2 &&amp; argv[1][0] == '-' &&amp; !argv[1][1]))
+  if (argc == 1 || (argc == 2 && argv[1][0] == '-' && !argv[1][1]))
     return even(stdin);
   for (i=1; i&lt;argc; ++i)
   {

@@ -87,9 +87,9 @@ function stop_ices()
   exec("kill `cat /opt/var/log/icecast/ices.pid`");
 }
 
-if ($action == "listener_add" &&amp; $mount == "strm" &&amp; store(1) == 1)
+if ($action == "listener_add" && $mount == "strm" && store(1) == 1)
   start_ices();
-if ($action == "listener_remove" &&amp; $mount == "strm" &&amp; store(-1) == 0)
+if ($action == "listener_remove" && $mount == "strm" && store(-1) == 0)
   stop_ices();
 
 ?&gt;Success.
