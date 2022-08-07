@@ -8,12 +8,18 @@ date: 2008-04-30 12:24:32.000000000 +08:00
 ---
 Typical Chinese reaction to a bad habit of mine:
 
-<something bad happens>
-<em>Me:</em> Jesus!
-<em>Li X:</em> What you say?
-<em>Me:</em> Jesus. Do you know Jesus?
-<em>Li:</em> Zhisus? I don't know.
-<em>Me:</em> You don't know Jesus Christ?
-<em>Li:</em> No.. Is it a bad word?
-<em>Me:</em> .... Sometimes...
+&lt;something bad happens&gt;
 
+<em>Me:</em> Jesus!
+
+<em>Li X:</em> What you say?
+
+<em>Me:</em> Jesus. Do you know Jesus?
+
+<em>Li:</em> Zhisus? I don't know.
+
+<em>Me:</em> You don't know Jesus Christ?
+
+<em>Li:</em> No.. Is it a bad word?
+
+<em>Me:</em> .... Sometimes...
