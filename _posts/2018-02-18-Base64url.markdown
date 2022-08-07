@@ -9,7 +9,9 @@ It basically invokes the platform's `base64` and `sed` to turn regular Base64 in
 
 By the way, this is using the following markup to embed a Gist in Github Pages. You'll need to install the `jekyll-gist` gem to see this locally:
 ```
+{% raw  %}
 {% gist 6bb597fc600932c6c737aab3b402147c %}
+{% endraw %}
 ```
 
 {% gist 6bb597fc600932c6c737aab3b402147c %}
