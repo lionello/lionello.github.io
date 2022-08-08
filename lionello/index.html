@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <style>
       body {
-        font-family: sans-serif;
+        font-family: "Skia", sans-serif;
+        color: #555;
+        padding: 0;
+        margin: 0;
       }
       a {
         text-decoration: inherit;
@@ -17,37 +20,72 @@
         list-style: none;
         padding: 0;
       }
+      .headshot {
+        border-radius: 50%;
+        object-fit: cover;
+        width: 36vw;
+        aspect-ratio: 1;
+      }
+      img#qrcode {
+        padding: 20px;
+        width: 48vw;
+        aspect-ratio: 1;
+      }
+      @media print
+      {
+          .no-print, .no-print *
+          {
+              display: none !important;
+          }
+      }
+      .center {
+        margin: 0 auto;
+        text-align: center;
+      }
+      h2 {
+        font-weight: inherit;
+      }
     </style>
+    <script>
+      function upsidedown(flip) {
+        var body = document.getElementById("card");
+        body.style.transform = flip ? "rotate(180deg)" : null;
+      }
+      function onLoad() {
+        window.addEventListener("deviceorientation", function(event) {
+          upsidedown(event.beta < 0);
+        });
+      }
+      window.addEventListener("load", onLoad);
+    </script>
   </head>
   <body>
-    <img alt="lio-headshot" src="lio headshot-2 small.jpeg" />
-    <img
-      alt="https://noun.ly/lionello"
-      style="float: left; margin: 55px"
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQMAAAAGz+OhAAAABlBMVEUAAAD///+l2Z/dAAABsElEQVRIx7WWQa6DMAxEjVhkmRvARRBc6y8igdSLUXGRcAMvs0DMH7tddN2kkVDLQyJi7PFERKRTmUSAJyTJe33NInBq6W+R/o4lLcDWnm39yX1HLesukmaCagZZsr8/XL9jASfweKKkeua6LLeQKa4Prdoxr2+ZhhjIykfNv2Tg0iIdv+OWsvLuas+8vlxlZb/wme1bwWTdR+DI/AOE7aVLY4ZiviEPV2ffk+ml1kzXA4p9iOZV1jezh6pYQI44qLvMEsgpXGsmfzJIuEYND7iPTL8KxgbJUZaTe7En+33U1Jx5fWXqEB7mJV5XHQuH+dJa/Um+j9S+NVPuqy+tbI4v0FTHhD4y75ees4SNGK/mzHolBv567lg+pCrmq8jI+bp4Npj2rZmNqCJDfM0sZJ8HbVksU2d6gQ+VV2Y9qph5ktmj3i/W8Fd7tvXMStdqdt3o/RrmuWD562eG9X57vymzfGPGW/7M0c4RmqqY5S+kB+xeuMf7LNWUWb75THns1ExGbcCC1dNypr9H89ZPGHvEzoDMy3e/fM9cl4kZvC2KrcMPmNf3NQMWm4lZUmv2D3iQsR48M/ztAAAAAElFTkSuQmCC"
-    />
-    <div>
-      <h1>Lionello Lunesu</h1>
-      <ul>
-        <li><a href="tel:1-604-968-9599">☎ +1 604-968-9599</a></li>
-        <li><a href="mailto:lionello@lunesu.com">✉ lionello@lunesu.com</a></li>
-        <li><a href="files/card.vcf">👤 vCard</a></li>
-      </ul>
-      <ul class="social-media-list">
-        <li>
-          <a href="https://linkedin.com/in/lionello">
-            <span class="icon icon--linkedin">
-              <svg viewBox="0 0 16 16" width="16" height="16">
-                <path
-                  fill="#828282"
-     d="M 11.31878,15.999999 H 5.0579006 C 4.2895398,15.999999 3.6666,15.37707 3.6666,14.608695 V 1.391304 C 3.6666,0.62292936 4.2895398,0 5.0579006,0 H 11.31878 c 0.768361,0 1.391301,0.62292936 1.391301,1.391304 v 13.217391 c 0,0.768375 -0.62294,1.391305 -1.391301,1.391304 z M 12.014431,1.391304 c 0,-0.384028 -0.31163,-0.695652 -0.695651,-0.695652 H 5.0579006 c -0.3840204,0 -0.6956503,0.311624 -0.6956503,0.695652 v 1.3913054 h 7.6521807 z m 0,2.0869574 H 4.3622503 v 9.0434776 h 7.6521807 z m 0,9.7391286 H 4.3622503 v 1.391305 c 0,0.384028 0.3116299,0.695653 0.6956503,0.695653 H 11.31878 c 0.384021,0 0.695651,-0.311625 0.695651,-0.695653 z m -3.8260841,1.739131 c -0.3840338,0 -0.6956503,-0.311624 -0.6956503,-0.695653 0,-0.384027 0.3116165,-0.695651 0.6956503,-0.695651 0.3840204,0 0.6956369,0.311624 0.6956369,0.695651 0,0.384029 -0.3116165,0.695653 -0.6956369,0.695653 z M 5.7535642,4.5217389 h 0.6956503 c 0.1923302,0 0.3478318,0.155812 0.3478318,0.3478267 v 0.6956521 c 0,0.1920132 -0.1555016,0.3478266 -0.3478318,0.3478266 H 5.7535642 c -0.1923435,0 -0.3478318,-0.1558134 -0.3478318,-0.3478266 V 4.8695656 c 0,-0.1920147 0.1554883,-0.3478267 0.3478318,-0.3478267 z m 0,2.4347828 h 0.6956503 c 0.1923302,0 0.3478318,0.155812 0.3478318,0.3478266 v 0.695652 c 0,0.1923335 -0.1555016,0.3478268 -0.3478318,0.3478268 H 5.7535642 c -0.1923435,0 -0.3478318,-0.1554933 -0.3478318,-0.3478268 v -0.695652 c 0,-0.1920146 0.1554883,-0.3478266 0.3478318,-0.3478266 z m 0,2.4347828 h 0.6956503 c 0.1923302,0 0.3478318,0.155492 0.3478318,0.3478265 v 0.695652 c 0,0.192333 -0.1555016,0.347826 -0.3478318,0.347826 H 5.7535642 c -0.1923435,0 -0.3478318,-0.155493 -0.3478318,-0.347826 V 9.739131 c 0,-0.1923345 0.1554883,-0.3478265 0.3478318,-0.3478265 z M 7.8405151,4.5217389 h 0.6956636 c 0.1923302,0 0.3478051,0.155812 0.3478051,0.3478267 v 0.6956521 c 0,0.1920132 -0.1554749,0.3478266 -0.3478051,0.3478266 H 7.8405151 c -0.1923302,0 -0.3478185,-0.1558134 -0.3478185,-0.3478266 V 4.8695656 c 0,-0.1920147 0.1554883,-0.3478267 0.3478185,-0.3478267 z m 0,2.4347828 h 0.6956636 c 0.1923302,0 0.3478051,0.155812 0.3478051,0.3478266 v 0.695652 c 0,0.1923335 -0.1554749,0.3478268 -0.3478051,0.3478268 H 7.8405151 c -0.1923302,0 -0.3478185,-0.1554933 -0.3478185,-0.3478268 v -0.695652 c 0,-0.1920146 0.1554883,-0.3478266 0.3478185,-0.3478266 z m 0,2.4347828 h 0.6956636 c 0.1923302,0 0.3478051,0.155492 0.3478051,0.3478265 v 0.695652 c 0,0.192333 -0.1554749,0.347826 -0.3478051,0.347826 H 7.8405151 c -0.1923302,0 -0.3478185,-0.155493 -0.3478185,-0.347826 V 9.739131 c 0,-0.1923345 0.1554883,-0.3478265 0.3478185,-0.3478265 z M 9.9274659,4.5217389 h 0.6956501 c 0.192344,0 0.347833,0.155812 0.347833,0.3478267 v 0.6956521 c 0,0.1920132 -0.155489,0.3478266 -0.347833,0.3478266 H 9.9274659 c -0.1923302,0 -0.3478318,-0.1558134 -0.3478318,-0.3478266 V 4.8695656 c 0,-0.1920147 0.1555016,-0.3478267 0.3478318,-0.3478267 z m 0,2.4347828 h 0.6956501 c 0.192344,0 0.347833,0.155812 0.347833,0.3478266 v 0.695652 c 0,0.1923335 -0.155489,0.3478268 -0.347833,0.3478268 H 9.9274659 c -0.1923302,0 -0.3478318,-0.1554933 -0.3478318,-0.3478268 v -0.695652 c 0,-0.1920146 0.1555016,-0.3478266 0.3478318,-0.3478266 z M 7.1448648,1.391304 h 2.0869509 c 0.1923435,0 0.3478184,0.1558121 0.3478184,0.3478268 0,0.1920133 -0.1554749,0.3478253 -0.3478184,0.3478253 H 7.1448648 c -0.1923302,0 -0.3478185,-0.155812 -0.3478185,-0.3478253 0,-0.1920147 0.1554883,-0.3478268 0.3478185,-0.3478268 z"
-                />
-              </svg>
-            </span>
-            <span class="username">+1</span>
-          </a>
-        </li>
-
+    <div id="card" class="upsidedown">
+      <div class="no-print" style="margin-top: 120pt;">
+      </div>
+      <div class="center">
+        <p class="center headshot">
+          <img
+            alt="lio headshot"
+            class="headshot"
+            src="lio headshot-2 small.jpeg"
+          />
+        </p>
+        <h1>Lionello Lunesu</h1>
+        <h2>CEO & Co-founder</h2>
+        <h2>Defang Software Labs</h2>
+        <p><a href="tel:1-604-968-9599">+1 604-968-9599</a></p>
+        <p><a href="mailto:lionello@lunesu.com">lionello@lunesu.com</a></p>
+        <p class="no-print"><a href="card.vcf">Download vCard</a></p>
+        <p>
+          <img
+            id="qrcode"
+            alt="https://noun.ly/lionello"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQMAAAAGz+OhAAAABlBMVEUAAAD///+l2Z/dAAABsElEQVRIx7WWQa6DMAxEjVhkmRvARRBc6y8igdSLUXGRcAMvs0DMH7tddN2kkVDLQyJi7PFERKRTmUSAJyTJe33NInBq6W+R/o4lLcDWnm39yX1HLesukmaCagZZsr8/XL9jASfweKKkeua6LLeQKa4Prdoxr2+ZhhjIykfNv2Tg0iIdv+OWsvLuas+8vlxlZb/wme1bwWTdR+DI/AOE7aVLY4ZiviEPV2ffk+ml1kzXA4p9iOZV1jezh6pYQI44qLvMEsgpXGsmfzJIuEYND7iPTL8KxgbJUZaTe7En+33U1Jx5fWXqEB7mJV5XHQuH+dJa/Um+j9S+NVPuqy+tbI4v0FTHhD4y75ees4SNGK/mzHolBv567lg+pCrmq8jI+bp4Npj2rZmNqCJDfM0sZJ8HbVksU2d6gQ+VV2Y9qph5ktmj3i/W8Fd7tvXMStdqdt3o/RrmuWD562eG9X57vymzfGPGW/7M0c4RmqqY5S+kB+xeuMf7LNWUWb75THns1ExGbcCC1dNypr9H89ZPGHvEzoDMy3e/fM9cl4kZvC2KrcMPmNf3NQMWm4lZUmv2D3iQsR48M/ztAAAAAElFTkSuQmCC"
+          />
+        </p>
+      </div>
+      <ul class="social-media-list center">
         <li>
           <a href="https://linkedin.com/in/lionello">
             <span class="icon icon--linkedin">
@@ -58,8 +96,7 @@
                 ></path>
               </svg>
             </span>
-
-            <span class="username">lionello</span>
+            <span class="username">linkedin.com/in/lionello</span>
           </a>
         </li>
 
@@ -73,8 +110,7 @@
                 ></path>
               </svg>
             </span>
-
-            <span class="username">lionello</span>
+            <span class="username">github.com/lionello</span>
           </a>
         </li>
 
@@ -93,7 +129,7 @@
                 ></path>
               </svg>
             </span>
-            <span class="username">@lionello</span>
+            <span class="username">mastodon.social/@lionello</span>
           </a>
         </li>
       </ul>
