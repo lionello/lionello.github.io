@@ -7,7 +7,6 @@
         font-family: "Skia", sans-serif;
         color: #555;
         padding: 0;
-        margin: 0;
       }
       a {
         text-decoration: inherit;
@@ -45,21 +44,47 @@
       h2 {
         font-weight: inherit;
       }
+      input#autoFlip {
+        display: none;
+      }
     </style>
     <script>
+      var flipped = false;
       function upsidedown(flip) {
-        var body = document.getElementById("card");
-        body.style.transform = flip ? "rotate(180deg)" : null;
+        if (flip !== flipped) {
+          var body = document.getElementById("card");
+          body.style.transform = flip ? "rotate(180deg)" : null;
+          flipped = flip;
+        }
+      }
+      function handleDeviceOrientation(event) {
+        upsidedown(event.beta < 0);
+      }
+      function onAutoFlipChange(event) {
+        if (event.target.checked) {
+          if (DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) {
+            DeviceOrientationEvent.requestPermission().then(state => {
+              if (state === "granted") {
+                window.addEventListener("deviceorientation", handleDeviceOrientation, true);
+              }
+            });
+          } else {
+            upsidedown(true);
+          }
+        } else {
+          window.removeEventListener("deviceorientation", handleDeviceOrientation);
+          upsidedown(false);
+        }
       }
       function onLoad() {
-        window.addEventListener("deviceorientation", function(event) {
-          upsidedown(event.beta < 0);
-        });
+        var autoFlip = document.getElementById("autoFlip");
+        autoFlip.addEventListener("change", onAutoFlipChange);
       }
       window.addEventListener("load", onLoad);
     </script>
   </head>
   <body>
+    <label><input type="checkbox" id="autoFlip"/>↻</label>
     <div id="card" class="upsidedown">
       <div class="no-print" style="margin-top: 120pt;">
       </div>
