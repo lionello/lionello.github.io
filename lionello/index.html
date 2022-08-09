@@ -66,16 +66,16 @@
         }
       }
       function handleDeviceOrientation(event) {
-        upsidedown(event.beta < 0);
+        upsidedown(event.beta < -0.1);
       }
       function checkPermission() {
         if (
           window.DeviceOrientationEvent &&
           DeviceOrientationEvent.requestPermission
         ) {
-          return DeviceOrientationEvent.requestPermission().then((state) => {
-            return state === "granted";
-          });
+          return DeviceOrientationEvent.requestPermission().then(
+            (state) => state === "granted"
+          );
         }
         return Promise.resolve(false);
       }
@@ -83,11 +83,7 @@
         if (event.target.checked) {
           checkPermission().then((granted) => {
             if (granted) {
-              window.addEventListener(
-                "deviceorientation",
-                handleDeviceOrientation,
-                true
-              );
+              window.addEventListener("deviceorientation", handleDeviceOrientation, true);
             } else {
               upsidedown(true);
             }
@@ -103,11 +99,11 @@
       function onLoad() {
         var autoFlip = document.getElementById("autoFlip");
         autoFlip.addEventListener("change", onAutoFlipChange);
-        checkPermission().then((granted) => {
-          if (granted) {
-            autoFlip.checked = true;
-          }
-        });
+        window.addEventListener(
+          "deviceorientation",
+          handleDeviceOrientation,
+          true
+        );
         /*if (localStorage.getItem("uuid") === null && window.crypto) {
           var uuid = crypto.randomUUID()
           localStorage.setItem("uuid", uuid);
