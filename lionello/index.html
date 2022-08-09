@@ -68,24 +68,30 @@
       function handleDeviceOrientation(event) {
         upsidedown(event.beta < 0);
       }
+      function checkPermission() {
+        if (
+          window.DeviceOrientationEvent &&
+          DeviceOrientationEvent.requestPermission
+        ) {
+          return DeviceOrientationEvent.requestPermission().then((state) => {
+            return state === "granted";
+          });
+        }
+        return Promise.resolve(false);
+      }
       function onAutoFlipChange(event) {
         if (event.target.checked) {
-          if (
-            typeof(DeviceOrientationEvent) !== "undefined" &&
-            DeviceOrientationEvent.requestPermission
-          ) {
-            DeviceOrientationEvent.requestPermission().then((state) => {
-              if (state === "granted") {
-                window.addEventListener(
-                  "deviceorientation",
-                  handleDeviceOrientation,
-                  true
-                );
-              }
-            });
-          } else {
-            upsidedown(true);
-          }
+          checkPermission().then((granted) => {
+            if (granted) {
+              window.addEventListener(
+                "deviceorientation",
+                handleDeviceOrientation,
+                true
+              );
+            } else {
+              upsidedown(true);
+            }
+          });
         } else {
           window.removeEventListener(
             "deviceorientation",
@@ -97,7 +103,12 @@
       function onLoad() {
         var autoFlip = document.getElementById("autoFlip");
         autoFlip.addEventListener("change", onAutoFlipChange);
-        /*if (localStorage.getItem("uuid") === null && typeof(crypto) === "object") {
+        checkPermission().then((granted) => {
+          if (granted) {
+            autoFlip.checked = true;
+          }
+        });
+        /*if (localStorage.getItem("uuid") === null && window.crypto) {
           var uuid = crypto.randomUUID()
           localStorage.setItem("uuid", uuid);
         }*/
@@ -118,8 +129,10 @@
         </p>
         <h1>Lionello Lunesu</h1>
         <h2>
-          <a href="https://defang.io/">CEO & Co-founder<br/>
-          Defang Software Labs</a>
+          <a href="https://defang.io/"
+            >CEO & Co-founder<br />
+            Defang Software Labs</a
+          >
         </h2>
         <p><a href="tel:1-604-968-9599">+1 604-968-9599</a></p>
         <p><a href="mailto:lionello@lunesu.com">lionello@lunesu.com</a></p>
