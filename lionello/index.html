@@ -5,9 +5,17 @@
     <style>
       body {
         font-family: "Skia", sans-serif;
-        font-size: 200%;
         color: #555;
         padding: 0;
+      }
+      @media screen and (orientation: portrait) {
+        body {
+          font-size: 200%;
+        }
+      }
+      .center {
+        margin: 0 auto;
+        text-align: center;
       }
       a {
         text-decoration: inherit;
@@ -23,23 +31,19 @@
       .headshot {
         border-radius: 50%;
         object-fit: cover;
-        width: 36vw;
-        aspect-ratio: 1;
+        width: 36vmin;
+        height: 36vmin;
       }
       img#qrcode {
-        padding: 20px;
-        width: 48vw;
-        aspect-ratio: 1;
+        padding: 10pt;
+        width: 48vmin;
+        height: 48vmin;
       }
       @media print {
         .no-print,
         .no-print * {
           display: none !important;
         }
-      }
-      .center {
-        margin: 0 auto;
-        text-align: center;
       }
       h2 {
         font-weight: inherit;
@@ -67,7 +71,7 @@
       function onAutoFlipChange(event) {
         if (event.target.checked) {
           if (
-            DeviceOrientationEvent &&
+            typeof(DeviceOrientationEvent) === "object" &&
             DeviceOrientationEvent.requestPermission
           ) {
             DeviceOrientationEvent.requestPermission().then((state) => {
@@ -98,9 +102,8 @@
     </script>
   </head>
   <body>
-    <label><input type="checkbox" id="autoFlip" />↻</label>
+    <label class="no-print"><input type="checkbox" id="autoFlip" />↻</label>
     <div id="card" class="upsidedown">
-      <div class="no-print" style="margin-top: 120pt"></div>
       <div class="center">
         <p class="center headshot">
           <img
