@@ -71,7 +71,7 @@
       function onAutoFlipChange(event) {
         if (event.target.checked) {
           if (
-            typeof(DeviceOrientationEvent) === "object" &&
+            typeof(DeviceOrientationEvent) !== "undefined" &&
             DeviceOrientationEvent.requestPermission
           ) {
             DeviceOrientationEvent.requestPermission().then((state) => {
@@ -97,6 +97,10 @@
       function onLoad() {
         var autoFlip = document.getElementById("autoFlip");
         autoFlip.addEventListener("change", onAutoFlipChange);
+        /*if (localStorage.getItem("uuid") === null && typeof(crypto) === "object") {
+          var uuid = crypto.randomUUID()
+          localStorage.setItem("uuid", uuid);
+        }*/
       }
       window.addEventListener("load", onLoad);
     </script>
