@@ -34,10 +34,11 @@
         width: 36vmin;
         height: 36vmin;
       }
-      img#qrcode {
+      #qrcode img {
         padding: 10pt;
         width: 48vmin;
         height: 48vmin;
+        margin: 0 auto;
       }
       @media print {
         .no-print,
@@ -56,17 +57,24 @@
         height: 1em;
       }
     </style>
+    <script
+      src="qrcode.min.js"
+      type="text/javascript"
+      integrity="sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU"
+    ></script>
     <script>
-      var flipped = false;
+      let flipped = false;
       function upsidedown(flip) {
         if (flip !== flipped) {
-          var body = document.getElementById("card");
+          const body = document.getElementById("card");
           body.style.transform = flip ? "rotate(180deg)" : null;
           flipped = flip;
         }
       }
       function handleDeviceOrientation(event) {
-        upsidedown(event.beta < -0.1);
+        upsidedown(
+          event.beta < -0.5 && event.gamma > -0.5 && event.gamma < 0.5
+        );
       }
       function checkPermission() {
         if (
@@ -83,7 +91,11 @@
         if (event.target.checked) {
           checkPermission().then((granted) => {
             if (granted) {
-              window.addEventListener("deviceorientation", handleDeviceOrientation, true);
+              window.addEventListener(
+                "deviceorientation",
+                handleDeviceOrientation,
+                true
+              );
             } else {
               upsidedown(true);
             }
@@ -96,8 +108,12 @@
           upsidedown(false);
         }
       }
+      function qrLink() {
+        const timestamp = (new Date() / 30000) | 0;
+        return "noun.ly/lio#" + timestamp;
+      }
       function onLoad() {
-        var autoFlip = document.getElementById("autoFlip");
+        const autoFlip = document.getElementById("autoFlip");
         autoFlip.addEventListener("change", onAutoFlipChange);
         window.addEventListener(
           "deviceorientation",
@@ -108,6 +124,12 @@
           var uuid = crypto.randomUUID()
           localStorage.setItem("uuid", uuid);
         }*/
+        const qrcode = document.getElementById("qrcode");
+        qrcode.innerHTML = "";
+        const qr = new QRCode(qrcode, {
+          text: qrLink(),
+        });
+        setInterval(() => updateQr(qrLink()), 1000);
       }
       window.addEventListener("load", onLoad);
     </script>
@@ -133,13 +155,12 @@
         <p><a href="tel:1-604-968-9599">+1 604-968-9599</a></p>
         <p><a href="mailto:lionello@lunesu.com">lionello@lunesu.com</a></p>
         <p class="no-print"><a href="card.vcf">Download vCard</a></p>
-        <p>
+        <div id="qrcode">
           <img
-            id="qrcode"
             alt="https://noun.ly/lionello"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQMAAAAGz+OhAAAABlBMVEUAAAD///+l2Z/dAAABsElEQVRIx7WWQa6DMAxEjVhkmRvARRBc6y8igdSLUXGRcAMvs0DMH7tddN2kkVDLQyJi7PFERKRTmUSAJyTJe33NInBq6W+R/o4lLcDWnm39yX1HLesukmaCagZZsr8/XL9jASfweKKkeua6LLeQKa4Prdoxr2+ZhhjIykfNv2Tg0iIdv+OWsvLuas+8vlxlZb/wme1bwWTdR+DI/AOE7aVLY4ZiviEPV2ffk+ml1kzXA4p9iOZV1jezh6pYQI44qLvMEsgpXGsmfzJIuEYND7iPTL8KxgbJUZaTe7En+33U1Jx5fWXqEB7mJV5XHQuH+dJa/Um+j9S+NVPuqy+tbI4v0FTHhD4y75ees4SNGK/mzHolBv567lg+pCrmq8jI+bp4Npj2rZmNqCJDfM0sZJ8HbVksU2d6gQ+VV2Y9qph5ktmj3i/W8Fd7tvXMStdqdt3o/RrmuWD562eG9X57vymzfGPGW/7M0c4RmqqY5S+kB+xeuMf7LNWUWb75THns1ExGbcCC1dNypr9H89ZPGHvEzoDMy3e/fM9cl4kZvC2KrcMPmNf3NQMWm4lZUmv2D3iQsR48M/ztAAAAAElFTkSuQmCC"
           />
-        </p>
+        </div>
       </div>
       <ul class="social-media-list center">
         <li>
