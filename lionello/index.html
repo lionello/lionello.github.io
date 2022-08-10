@@ -72,9 +72,7 @@
         }
       }
       function handleDeviceOrientation(event) {
-        upsidedown(
-          event.beta < -0.5 && event.gamma > -0.5 && event.gamma < 0.5
-        );
+        upsidedown(event.beta < -20 && event.gamma > -20 && event.gamma < 20);
       }
       function checkPermission() {
         if (
@@ -108,8 +106,9 @@
           upsidedown(false);
         }
       }
+      const interval = 30000;
       function qrLink() {
-        const timestamp = (new Date() / 30000) | 0;
+        const timestamp = (new Date() / interval) | 0;
         return "noun.ly/lio#" + timestamp;
       }
       function onLoad() {
@@ -129,7 +128,7 @@
         const qr = new QRCode(qrcode, {
           text: qrLink(),
         });
-        setInterval(() => updateQr(qrLink()), 1000);
+        setInterval(() => updateQr(qrLink()), interval);
       }
       window.addEventListener("load", onLoad);
     </script>
