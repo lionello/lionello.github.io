@@ -10,6 +10,8 @@ date: 2024-11-18 17:34:00.000000000 -08:00
 
 Christmas is nearing, and this year I’m once again spending time in the Vancouver Hacker Space [vanhack.ca](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized[^1] acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
 
+> [“We've got room for a-whole-nother two-thirds of a person.” - Bender (Futurama S1E3)](https://theinfosphere.org/Transcript:I,_Roommate#time-07-51)
+
 The project was inspired by [Knick Knack](https://en.wikipedia.org/wiki/Knick_Knack), one of Pixar’s earliest 3D shorts. My plan was to fill the globe with a 2D cut-out of Knick Knack the Snowman and his igloo, along with fake snow. Then, I'd add an Arduino and an accelerometer to detect a “shake” and in turn trigger the snow.
 
 The most challenging part of this project is figuring out how to make the fake snow particles flow around the sphere.  Making the snow fly around nicely involves the strategic placement of a fan. On this particular day, I figured I’d use the laser cutter to cut holes out of a wooden disc that would become the floor of the globe and snuggly fit the back of a fan that I had found lying around.
@@ -23,7 +25,6 @@ I didn’t bring my laptop, so I used [Inkscape](https://inkscape.org/) on one o
 Having finished the drawing and exported it to a file, I now had to find a way to transfer the file to the computer with the laser cutter software. The hackerspace has Wi-Fi but I did not feel like digging into networking or dealing with account and file permissions on these public Windows machines. I looked around the space for USB thumb drives, but didn’t find any. I did bring my phone, and perhaps could find a lightning cable, but I also wasn’t particularly eager to connect my phone to this public PC. If I could just upload my file somewhere, then I could easily download it on my phone and, later, on the laser cutter’s PC.
 
 > [“Give a boy a hammer and everything he meets has to be pounded.” - Abraham Kaplan](https://en.wikipedia.org/wiki/Law_of_the_instrument) (not Mark Twain)
->
 
 I've spent the last year building [Defang](https://defang.io). `defang` is a tool which deploys Docker compose-based projects to the cloud using `defang compose up`. To lower the barrier to adoption, we added a gen-AI command (`defang generate`) to help you get started with a project outline. We also provide a [Defang Playground](https://docs.defang.io/docs/concepts/defang-playground) to temporarily deploy your project before you’re ready to [bring-your-own-cloud](https://docs.defang.io/docs/concepts/defang-byoc). Fully aware I was now “a boy with a hammer” staring at a file-shaped nail, I realized I could build an app without needing to install any other dependencies like Docker/Python/NodeJS on this PC, since Defang would build the app in the cloud for me. Being in a [hackerspace](https://hackerspaces.org), it’s quite fitting to be using tools and materials in ways they were not initially intended to be used.
 
@@ -149,26 +150,7 @@ By no means do I claim that this was a sensible way to get a file off a computer
 
 If you give Defang a try, let me know what you think! The CLI currently supports AWS, but there’s limited support for DigitalOcean and we’re working to have GCP hooked up in a few weeks.
 
-[^1]: I had asked ChatGPT 4o whether “human-sized” was a good descriptor for the size of the globe and it turned into horror fairly quickly:
-
-![image.png](/images/1418fc22c430809baab5f1165ed297db/image%202.png)
-
-```python
-import math
-
-# Constants
-radius_m = 1 / 2  # radius of the sphere in meters (1m diameter)
-volume_sphere = (4/3) * math.pi * radius_m**3  # volume of the sphere in cubic meters
-
-# Average human volume in cubic meters (assume average adult)
-average_human_volume = 0.07  # typical range is ~0.065 to 0.075 m^3
-
-# Calculate how many humans fit
-humans_fit = volume_sphere / average_human_volume
-humans_fit
-```
-
-> [“We've got room for a-whole-nother two-thirds of a person.” - Bender (Futurama S1E3)](https://theinfosphere.org/Transcript:I,_Roommate#time-07-51)
->
+[^1]: I had asked ChatGPT 4o whether “human-sized” was a good descriptor for the size of the globe and it turned into horror fairly quickly: ![image.png](/images/1418fc22c430809baab5f1165ed297db/image%202.png)
 
 [^2]: The first deployment will always be slower, because none of the container layers are cached. `defang` will also wait for a few healthchecks to pass before it prints the final URL.
+
