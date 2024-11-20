@@ -4,11 +4,11 @@ title: Nailed it with Defang
 author: Lionello Lunesu
 date: 2024-11-18 17:34:00.000000000 -08:00
 ---
+You can find the code for this post [here](https://gist.github.com/lionello/d1f9d5c198f12590fb70997a93f06edd) and install the CLI with `winget install defang` or `eval "$(curl -fsSL s.defang.io/install)"`.
+
 {:refdef: style="text-align: center;"}
 ![The Greek god Hephaestus striking a USB thumb drive with his hammer in the Cloud](/images/1418fc22c430809baab5f1165ed297db/image.png){: width="350" }
 {: refdef}
-
-You can find the code for this post [here](https://gist.github.com/lionello/d1f9d5c198f12590fb70997a93f06edd) and install the CLI with `winget install defang` or `eval "$(curl -fsSL s.defang.io/install)"`.
 
 Christmas is nearing, and this year I’m once again spending time in the [Vancouver Hack Space](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized[^1] acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
 
