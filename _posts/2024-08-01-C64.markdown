@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Commodore 64 in 2024
+title: How to connect a Commodore 64 in 2024
 author: Lionello Lunesu
 date: 2024-08-01 21:21:00.000000000 -07:00
 ---
@@ -18,6 +18,6 @@ Now I had to find a way to connect the Commodore 64 to my TV. The C64 has two vi
 
 Then I remembered that I had a coax cable lying around and that my TV, a Samsung Frame, has a coax input. I connected the Commodore 64 to the TV, and now to figure out how to have the TV scan for channels. Like the old days!
 
-It worked! The picture looked black and white, which I guess was due to the fact that my C64 was a PAL version, and the TV was NTSC. I found some info online that Samsung TVs in Europe support both PAL and NTSC, but the ones in North America only support NTSC. Looks like I'll be soldering that DIN connector after all.
+It worked! This blows my mind: a machine from ~1984 on a 4K TV from the ~2020s. The picture looked black and white, which I guess was due to the fact that my C64 was a PAL version, and the TV was NTSC. I found some info online that Samsung TVs in Europe support both PAL and NTSC, but the ones in North America only support NTSC. Looks like I'll be soldering that DIN connector after all.
 
 ![Commodore 64 on Samsung Frame](/images/IMG_3023%20c64.jpg)
