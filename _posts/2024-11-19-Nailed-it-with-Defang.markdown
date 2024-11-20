@@ -8,7 +8,7 @@ date: 2024-11-18 17:34:00.000000000 -08:00
 ![The Greek god Hephaestus striking a USB thumb drive with his hammer in the Cloud](/images/1418fc22c430809baab5f1165ed297db/image.png){: width="350" }
 {: refdef}
 
-Christmas is nearing, and this year I’m once again spending time in the Vancouver Hacker Space [vanhack.ca](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized* acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
+Christmas is nearing, and this year I’m once again spending time in the Vancouver Hacker Space [vanhack.ca](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized[^1] acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
 
 The project was inspired by [Knick Knack](https://en.wikipedia.org/wiki/Knick_Knack), one of Pixar’s earliest 3D shorts. My plan was to fill the globe with a 2D cut-out of Knick Knack the Snowman and his igloo, along with fake snow. Then, I'd add an Arduino and an accelerometer to detect a “shake” and in turn trigger the snow.
 
@@ -137,7 +137,7 @@ This was the first time I was prompted to log in. Defang relies on a GitHub acco
 For help with warnings, check our FAQ at [https://docs.defang.io/docs/faq](https://docs.defang.io/docs/faq)
 ```
 
-After 2 minutes** Defang reserved a URL for my service and printed it to my shell. When I opened the link, I saw the HTML upload form I expected. I pressed “Choose File”, selected the SVG file I had exported form Inkscape, and uploaded it:
+After 2 minutes[^2] Defang reserved a URL for my service and printed it to my shell. When I opened the link, I saw the HTML upload form I expected. I pressed “Choose File”, selected the SVG file I had exported form Inkscape, and uploaded it:
 
 {:refdef: style="text-align: center;"}
 ![image.png](/images/1418fc22c430809baab5f1165ed297db/image%201.png){: width="250" }
@@ -149,7 +149,7 @@ By no means do I claim that this was a sensible way to get a file off a computer
 
 If you give Defang a try, let me know what you think! The CLI currently supports AWS, but there’s limited support for DigitalOcean and we’re working to have GCP hooked up in a few weeks.
 
-* I had asked ChatGPT 4o whether “human-sized” was a good descriptor for the size of the globe and it turned into horror fairly quickly:
+[^1]: I had asked ChatGPT 4o whether “human-sized” was a good descriptor for the size of the globe and it turned into horror fairly quickly:
 
 ![image.png](/images/1418fc22c430809baab5f1165ed297db/image%202.png)
 
@@ -171,4 +171,4 @@ humans_fit
 > [“We've got room for a-whole-nother two-thirds of a person.” - Bender (Futurama S1E3)](https://theinfosphere.org/Transcript:I,_Roommate#time-07-51)
 >
 
-** the first deployment will always be slower, because none of the container layers are cached. `defang` will also wait for a few healthchecks to pass before it prints the final URL.
+[^2]: The first deployment will always be slower, because none of the container layers are cached. `defang` will also wait for a few healthchecks to pass before it prints the final URL.
