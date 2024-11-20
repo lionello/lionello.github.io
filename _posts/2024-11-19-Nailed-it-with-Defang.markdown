@@ -8,7 +8,7 @@ date: 2024-11-18 17:34:00.000000000 -08:00
 ![The Greek god Hephaestus striking a USB thumb drive with his hammer in the Cloud](/images/1418fc22c430809baab5f1165ed297db/image.png){: width="350" }
 {: refdef}
 
-Christmas is nearing, and this year I’m once again spending time in the Vancouver Hacker Space [vanhack.ca](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized[^1] acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
+Christmas is nearing, and this year I’m once again spending time in the [Vancouver Hack Space](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized[^1] acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
 
 > [“We've got room for a-whole-nother two-thirds of a person.” - Bender (Futurama S1E3)](https://theinfosphere.org/Transcript:I,_Roommate#time-07-51)
 
