@@ -1,0 +1,23 @@
+---
+layout: post
+title: Commodore 64 in 2024
+author: Lionello Lunesu
+date: 2024-08-01 21:21:00.000000000 -07:00
+---
+When I went to Europe this summer, I was eager to try my Commodore 64, because I had just bought the [Ultimate II+](https://ultimate64.com). This cardridge emulates the 1541 disk drive, and has a lot of other features, like Wi-Fi, custom kernals, and an (optional) tape emulator.
+
+When I got to my parent's place, I tried to turn on the Commodore 64, but it wouldn't turn on. I thought it was the power supply, because the LED would not even light up. The power supply has a fuse, so I assumed that it would've degraded over time, but it looked fine.
+
+My parents didn't have a multimeter, so I ended up using a speaker to test the power. Connecting the speaker to the power supply, I heard a loud 50Hz hum on one pin and a loud tick on the other, which were the AC and DC outputs. This meant that the power supply was working fine.
+
+At that point I figured it must have been the power switch. This makes sense, since it's the only mechanical part in the system. I opened up the Commodore 64, and tested the power switch with the speaker, and indeed, the switch was broken. I found a [replacement switch on eBay](https://www.ebay.com/itm/176354480604).
+
+I brought back my Commodore 64 to Vancouver and bought a cheap 110V->220V transformer, so I could use the Commodore 64 in Canada. I soldered the power switch, at the (Vancouver Hack Space)[https://vanhack.ca] and it turned on fine! At least, the LED turned on, which is a good sign.
+
+Now I had to find a way to connect the Commodore 64 to my TV. The C64 has two video outputs: RF and its own video port. The video port uses a DIN connector and has pins for composite video, and a separate pin for chroma, which corresponds to S-Video. I found the proper (DIN connector at Lee's Electronics)[https://leeselectronic.com/en/product/2736-din-plug-5-pin-25-250-0.html], but they're closed in weekends, so I had to wait until Monday to buy it.
+
+Then I remembered that I had a coax cable lying around and that my TV, a Samsung Frame, has a coax input. I connected the Commodore 64 to the TV, and now to figure out how to have the TV scan for channels. Like the old days!
+
+It worked! The picture looked black and white, which I guess was due to the fact that my C64 was a PAL version, and the TV was NTSC. I found some info online that Samsung TVs in Europe support both PAL and NTSC, but the ones in North America only support NTSC. Looks like I'll be soldering that DIN connector after all.
+
+![Commodore 64 on Samsung Frame](/images/IMG_3023%20c64.jpg)

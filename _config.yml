@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   knowledgebase, but I figured it might be useful to others."
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://www.lunesu.com" # the base hostname & protocol for your site
-#twitter_username: LioLunesu
+twitter_username: LioLunesu
 github_username: lionello
 mastodon_username: "@lionello"
 linkedin_username: lionello
@@ -16,3 +16,19 @@ markdown: kramdown
 excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
 include: [".well-known"]
 
+github: [metadata]
+kramdown:
+  input: GFM
+  hard_wrap: false
+plugins:
+  - jekyll-coffeescript
+  - jekyll-gist
+  # - jekyll-mentions
+  - jekyll-paginate
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-coffeescript
+  - jekyll-gist
+  # - jekyll-mentions
+  - jekyll-paginate
+  - jekyll-redirect-from
