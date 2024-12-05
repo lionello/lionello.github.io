@@ -50,17 +50,17 @@ Successfully installed
 
 That worked like a charm!
 
-I then used `defang generate` to generate all the code I need for a website to upload/download my file:
+I then used `defang generate` to generate all the code I need for a website to upload/download my file using the prompt "app that on / shows an HTML with file upload form and and list of previously uploaded files you can click on to download":
 
 ```
 C:\Users\Administrator> defang generate
  * Using Defang Playground; consider using BYOC ([https://s.defang.io/byoc](https://s.defang.io/byoc))
-**? Choose a sample service:** *Generate with AI*
-**? Choose the language you'd like to use:** *Nodejs*
-**? Please describe the service you'd like to build:** *app that on / shows an HTML with file upload form and and list of previously uploaded files you can click on to download*
-**? What folder would you like to create the project in?** *project1*
+? Choose a sample service: Generate with AI
+? Choose the language you'd like to use: Nodejs
+? Please describe the service you'd like to build: app that on / shows an HTML with file upload form and and list of previously uploaded files you can click on to download
+? What folder would you like to create the project in? project1
 Our latest terms of service can be found at [https://defang.io/terms-service.html](https://defang.io/terms-service.html)
-**? Do you agree to the Defang terms of service?** *Yes*
+? Do you agree to the Defang terms of service? Yes
  * Working on it. This may take 1 or 2 minutes...
  * Writing files to disk...
    - Dockerfile
