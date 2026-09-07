@@ -1,7 +1,6 @@
 ---
 layout: post
 title: base64url
-author: Lionello Lunesu
 date: 2018-02-18 11:51:00.000000000 +08:00
 ---
 This is a small shell script that I wrote to help with encoding/decoding Base64-URL encoded data.

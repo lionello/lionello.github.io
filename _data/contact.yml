@@ -1,0 +1,19 @@
+#  The contact options, shown as icons in the sidebar.
+
+- type: github
+  icon: "fab fa-github"
+
+- type: linkedin
+  icon: "fab fa-linkedin"
+  url: "https://www.linkedin.com/in/lionello"
+
+- type: mastodon
+  icon: "fab fa-mastodon"
+  url: "https://mastodon.social/@lionello"
+
+- type: twitter
+  icon: "fa-brands fa-x-twitter"
+
+- type: rss
+  icon: "fas fa-rss"
+  noblank: true

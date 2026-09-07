@@ -1,7 +1,6 @@
 ---
 layout: post
 title: How to connect a Commodore 64 in 2024
-author: Lionello Lunesu
 date: 2024-08-01 21:21:00.000000000 -07:00
 ---
 When I went to Europe this summer, I was eager to try my Commodore 64, because I had just bought the [Ultimate II+](https://ultimate64.com). This cardridge emulates the 1541 disk drive, and has a lot of other features, like Wi-Fi, custom kernals, and an (optional) tape emulator.

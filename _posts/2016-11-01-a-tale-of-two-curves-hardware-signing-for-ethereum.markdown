@@ -3,7 +3,6 @@ layout: post
 title:  "A Tale of Two Curves"
 date:   2016-11-01 17:38:08 +0800
 categories: update
-author: Lionello Lunesu
 ---
 
 #### Hardware Signing for Ethereum
