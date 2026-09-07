@@ -3,7 +3,6 @@ layout: post
 title:  "Hardware Digital Signatures"
 date:   2017-01-26 14:38:08 +0800
 categories: update
-author: Lionello Lunesu
 ---
 Hardware Digital Signatures have clear security advantages over their software counterparts, and crypto hardware is getting ubiquitous.
 

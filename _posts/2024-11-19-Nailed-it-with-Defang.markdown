@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Nailed it with Defang
-author: Lionello Lunesu
 date: 2024-11-18 17:34:00.000000000 -08:00
 ---
 You can find the code for this post [here](https://gist.github.com/lionello/d1f9d5c198f12590fb70997a93f06edd) and install the CLI with `winget install defang` or `eval "$(curl -fsSL s.defang.io/install)"`.
