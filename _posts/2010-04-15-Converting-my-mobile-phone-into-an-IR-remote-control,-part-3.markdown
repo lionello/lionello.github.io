@@ -8,7 +8,7 @@ date: 2010-04-15 18:05:26.000000000 +08:00
 ---
 After confirming the signal and still failing to turn on my TV, I figured my Panasonic Viera TV was using a different protocol from the RC5 that I had initially implemented. I tried to decode the protocol by pointing my remote at the IR sensor attached to the O-scope, but I was unable to get a complete code on the scope:
 
-<!-- s9ymdb:77 --><img class="serendipity_image_center" width="332" height="91"  src="/uploads/oscope3.png"  alt="" />
+<img class="serendipity_image_center" width="332" height="91"  src="/uploads/oscope3.png"  alt="" />
 
 It's immediately apparent however that the Panasonic IR protocol uses space modulation, where the spaces between the pulses are used to differentiate a 1 from a 0. But since I was not able to get a picture of a complete code, I still didn't know what signal I should create to turn my TV on! Fortunately, the <a href="http://lirc.sourceforge.net/remotes/" title="LIRC remote control database">LIRC remote control database</a> had an entry for just <a href="http://lirc.sourceforge.net/remotes/panasonic/N2QAYB000239" title="N2QAYB000239 remote control protocol">my remote</a> and I could confirm that the bits from the picture above are indeed a match for Panasonic's standby button.
 

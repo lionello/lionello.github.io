@@ -10,6 +10,6 @@ Do this by adding "-private" to the shortcut in the taskbar. Right-click on the 
 
 If IE is not currently running, right-clicking the IE logo in the task bar and selecting "Open new tab" opens a new, non-InPrivate, tab.
 
-<!-- s9ymdb:149 --><img class="serendipity_image_left" width="332" height="309"  src="/uploads/ie10inprivate.png" title="ie10inprivate.png" alt="Set IE10 InPrivate as default" />
+<img class="serendipity_image_left" width="332" height="309"  src="/uploads/ie10inprivate.png" title="ie10inprivate.png" alt="Set IE10 InPrivate as default" />
 
-<!-- s9ymdb:150 --><img class="serendipity_image_left" width="377" height="516"  src="/uploads/ie10inprivate2.png"  alt="IE10 properties" />
+<img class="serendipity_image_left" width="377" height="516"  src="/uploads/ie10inprivate2.png"  alt="IE10 properties" />

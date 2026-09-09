@@ -6,7 +6,7 @@ permalink: /archives/42-We-are-sorry-for-this-message..html
 s9y_link: http://www.lunesu.com/index.php?/archives/42-We-are-sorry-for-this-message..html
 date: 2008-07-16 08:19:02.000000000 +08:00
 ---
-<div class="serendipity_imageComment_right" style="width: 110px"><div class="serendipity_imageComment_img"><!-- s9ymdb:42 --><img class="serendipity_image_right" width="110" height="83"  src="/uploads/procontainer27.serendipityThumb.jpg" alt="" /></div><div class="serendipity_imageComment_txt">"Container cu grup sanitar"</div></div>I've seen some pretty weird spam, and now and then even spam can be surprising  and noteworthy:
+<div class="serendipity_imageComment_right" style="width: 110px"><div class="serendipity_imageComment_img"><img class="serendipity_image_right" width="110" height="83"  src="/uploads/procontainer27.serendipityThumb.jpg" alt="" /></div><div class="serendipity_imageComment_txt">"Container cu grup sanitar"</div></div>I've seen some pretty weird spam, and now and then even spam can be surprising  and noteworthy:
 {% highlight sh %}
 Buna ziua,
 

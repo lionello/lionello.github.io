@@ -6,7 +6,7 @@ permalink: /archives/87-Windows-7,-but-not-yet....html
 s9y_link: http://www.lunesu.com/index.php?/archives/87-Windows-7,-but-not-yet....html
 date: 2009-10-22 21:39:38.000000000 +08:00
 ---
-<!-- s9ymdb:64 --><img class="serendipity_image_left" width="579" height="99" style="border: 0px; padding-left: 5px; padding-right: 5px;" src="/uploads/win7.PNG" alt="I'll have to wait another day, or two..." />
+<img class="serendipity_image_left" width="579" height="99" style="border: 0px; padding-left: 5px; padding-right: 5px;" src="/uploads/win7.PNG" alt="I'll have to wait another day, or two..." />
 
 <strong>UPDATE:</strong> it finished downloading in ~8,5 hours.
 

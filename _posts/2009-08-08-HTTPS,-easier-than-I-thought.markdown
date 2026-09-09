@@ -6,7 +6,7 @@ permalink: /archives/74-HTTPS,-easier-than-I-thought.html
 s9y_link: http://www.lunesu.com/index.php?/archives/74-HTTPS,-easier-than-I-thought.html
 date: 2009-08-08 11:27:36.000000000 +08:00
 ---
-<!-- s9ymdb:61 --><img class="serendipity_image_center" width="241" height="35" style="border: 0px; padding-left: 5px; padding-right: 5px;" src="/uploads/httpspizzapazzi.PNG" alt="https working on pizzapazzi.com" />
+<img class="serendipity_image_center" width="241" height="35" style="border: 0px; padding-left: 5px; padding-right: 5px;" src="/uploads/httpspizzapazzi.PNG" alt="https working on pizzapazzi.com" />
 
 The <a href="http://www.wemin.com/" title="Webmin">Webmin</a> webserver is using a self-signed certificate by default, ie. a certificate that's not authenticated by a (known) Certification Authority. I've been looking up and down for a "certificates for dummies" guide, but all the guides I seem to find are meant for supernatural administrators or something. I was close to giving up and thought I'd just try some brute force approach, by which I mean clicking and copy-pasting until something happens that is close to what I wanted. Maybe it's more like "evolutionary": keep clicking and copy-pasting until it fails, at which point you start over but this time mutating you clicks and pastes. Rinse. Repeat.
 
