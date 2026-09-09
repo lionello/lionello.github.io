@@ -14,4 +14,4 @@ forward-socks4   /               127.0.0.1:9050		.
 {% endhighlight %}
 This will tell Privoxy to route all traffic through the SOCKS server at localhost port 9050. The port 9050 is the port you configured in Putty's dynamic routing tab or after the -D command line option in Plink. By default, Privoxy listens on localhost:8118 so reconfigure your program to use that as a HTTP proxy and you're set. Note that you will have to restart Privoxy after making a change to its configuration file.
 
-* or the old FileZilla 2.x; the new one does not support SOCKS and the old one is nowhere to be found <img src="http://www.lunesu.com/templates/default/img/emoticons/sad.png" alt=":-(" style="display: inline; vertical-align: bottom;" class="emoticon" />
+* or the old FileZilla 2.x; the new one does not support SOCKS and the old one is nowhere to be found 🙁

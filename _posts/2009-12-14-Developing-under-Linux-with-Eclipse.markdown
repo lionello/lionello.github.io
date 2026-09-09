@@ -14,4 +14,4 @@ To prevent messing with tgz files (I never know where to unpack those) I've used
 
 There seems to be another bug in Eclipse 3.5 Galileo: sometimes the Install New Software dialog remains empty, but it's not really empty: the checkboxes and the tree collapse/expand buttons are there and work if you click on them, you just can't see them.
 
-As always with linux, I'll get it working eventually, but it just takes a lot of time fixing these quirks <img src="http://www.lunesu.com/templates/default/img/emoticons/sad.png" alt=":-(" style="display: inline; vertical-align: bottom;" class="emoticon" />
+As always with linux, I'll get it working eventually, but it just takes a lot of time fixing these quirks 🙁

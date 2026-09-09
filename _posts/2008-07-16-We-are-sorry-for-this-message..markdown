@@ -60,4 +60,4 @@ sc procontainer srl
 {% endhighlight %}
 Now, I'm not <em>entirely </em>sure that this isn't some kind of marketing trick. After all, just having a link to their site on this page will get them a better ranking at Google. Although, asking people to call the police in Stefanestii de Jos might not be the smartest way to go. (Unless of course they're in on it, as in, have stocks and stuff.)
 
-Either way, a spam message that surprised me today. I actually don't mind these <img src="http://www.lunesu.com/templates/default/img/emoticons/smile.png" alt=":-)" style="display: inline; vertical-align: bottom;" class="emoticon" />
+Either way, a spam message that surprised me today. I actually don't mind these 🙂

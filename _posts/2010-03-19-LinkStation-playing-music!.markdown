@@ -38,6 +38,6 @@ mknod -m 660 dsp1 c 14 19 ; chgrp audio dsp1
 {% endhighlight %}
 I am now able to stream music using mpg123, madplay, mpd (all installable using ipkg.)
 
-The sound quality of that 15 RMB sound card sucks though <img src="http://www.lunesu.com/templates/default/img/emoticons/sad.png" alt=":-(" style="display: inline; vertical-align: bottom;" class="emoticon" />
+The sound quality of that 15 RMB sound card sucks though 🙁
 
 Here's the final <a href="/uploads/config.bz2" title="config.bz2" target="_blank">.config</a> file I used to build the sound modules.
