@@ -10,4 +10,4 @@ date: 2010-04-15 16:08:08.000000000 +08:00
 
 It works! I've attached the O-scope to an IR sensor (TSOP31238, 38Khz) which also demodulates the signal, and the demodulated signal is correct! This proves that using the 2 LED trick works fine, and it further proves that a 38Khz sensor will also demodulate a 36KHz signal!
 
-<img class="serendipity_image_center" width="524" height="188"  src="/uploads/oscope2.png"  alt="" />
+![Oscilloscope trace](/uploads/oscope2.png)

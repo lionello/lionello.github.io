@@ -5,9 +5,7 @@ date: 2024-11-18 17:34:00.000000000 -08:00
 ---
 You can find the code for this post [here](https://gist.github.com/lionello/d1f9d5c198f12590fb70997a93f06edd) and install the CLI with `winget install defang` or `eval "$(curl -fsSL s.defang.io/install)"`.
 
-{:refdef: style="text-align: center;"}
-![The Greek god Hephaestus striking a USB thumb drive with his hammer in the Cloud](/images/1418fc22c430809baab5f1165ed297db/image.png){: width="350" }
-{: refdef}
+![The Greek god Hephaestus striking a USB thumb drive with his hammer in the Cloud](/images/1418fc22c430809baab5f1165ed297db/image.png){: width="350" .right }
 
 Christmas is nearing, and this year I’m once again spending time in the [Vancouver Hack Space](http://vanhack.ca) to work on a silly Christmas project to turn a human-sized[^1] acrylic sphere into a snow globe. I haven’t finished it in the last few years, and I likely won’t finish it this winter either, but it’s still a fun project to tinker on.
 
@@ -17,9 +15,7 @@ The project was inspired by [Knick Knack](https://en.wikipedia.org/wiki/Knick_Kn
 
 The most challenging part of this project is figuring out how to make the fake snow particles flow around the sphere.  Making the snow fly around nicely involves the strategic placement of a fan. On this particular day, I figured I’d use the laser cutter to cut holes out of a wooden disc that would become the floor of the globe and snuggly fit the back of a fan that I had found lying around.
 
-{:refdef: style="text-align: center;"}
-![Lio struggling to fetch the snow globe](/images/1418fc22c430809baab5f1165ed297db/IMG_1673_lio_globe.jpg){: width="250" }
-{: refdef}
+![Lio struggling to fetch the snow globe](/images/1418fc22c430809baab5f1165ed297db/IMG_1673_lio_globe.jpg){: width="250" .left }
 
 I didn’t bring my laptop, so I used [Inkscape](https://inkscape.org/) on one of the publicly available computers to draw the outline of the disc as well as the circle shaped hole in the middle that would fit the back of the fan (and its power cable).
 

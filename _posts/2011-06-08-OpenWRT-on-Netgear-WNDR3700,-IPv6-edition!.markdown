@@ -8,7 +8,7 @@ date: 2011-06-08 22:46:21.000000000 +08:00
 ---
 Happy IPv6 day everyone!
 
-<img class="serendipity_image_center" width="646" height="195"  src="/uploads/ipv6.PNG"  alt="" />
+![IPv6 working](/uploads/ipv6.PNG)
 
 Here's how I went about it:
 

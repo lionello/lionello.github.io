@@ -16,7 +16,7 @@ I quickly wrote a program (in <a href="http://digitalmars.com/d/" title="D Progr
 
 Unfortunately, when I played this generated .wav file and held my laptop in front of my TV, nothing happened. In order to debug this, I bought a cheap O-scope on <a href="http://taobao.com/" title="Taobao online store">taobao</a>: only 350 RMB! Below you'll see the IR signal with the 14 bits:
 
-<img class="serendipity_image_center" width="581" height="148"  src="/uploads/oscope.png"  alt="RC5 signal" />
+![RC5 signal](/uploads/oscope.png)
 
 The signal appears to be correct, so there must be something else wrong. Are the modulated pulses too wide, not wide enough? Is my TV <strong>not </strong>using the RC5 protocol?
 
