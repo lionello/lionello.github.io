@@ -7,7 +7,7 @@ permalink: /archives/126-Modern-COM-Programming-in-D.html
 s9y_link: http://www.lunesu.com/index.php?/archives/126-Modern-COM-Programming-in-D.html
 date: 2012-01-25 00:53:25.000000000 +08:00
 ---
-I finally got around to asking for permission to share the slides of a tech talk I did more than a year ago: <a href="http://www.lunesu.com/uploads/ModernCOMProgramminginD.pdf" title="Modern COM Programming in D" target="_blank">Modern COM Programming in D</a>
+I finally got around to asking for permission to share the slides of a tech talk I did more than a year ago: <a href="/uploads/ModernCOMProgramminginD.pdf" title="Modern COM Programming in D" target="_blank">Modern COM Programming in D</a>
 
 In the slides I explain how I've made a projection for COM into D, which allows you to use COM objects without the usual hassle of refcount/QueryInterface/HRESULT/BSTR/etc... Sharing the code will be hard (mostly because of the shape it's in) but the slides basically contain all you need. Actually, D has progressed a lot since, so a rewrite might be in order anyway.
 

@@ -15,4 +15,4 @@ More information at <a href="http://tinyurl.com/y9ttldt" title="BLUG website">th
 
 See you there!
 
-<strong>UPDATE:</strong> <a href="http://www.lunesu.com/uploads/DforBLUG1.odp" title="DforBLUG.odp" target="_blank">my slides</a> are now available.
+<strong>UPDATE:</strong> <a href="/uploads/DforBLUG1.odp" title="DforBLUG.odp" target="_blank">my slides</a> are now available.

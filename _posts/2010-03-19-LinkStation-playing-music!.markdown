@@ -40,4 +40,4 @@ I am now able to stream music using mpg123, madplay, mpd (all installable using 
 
 The sound quality of that 15 RMB sound card sucks though <img src="http://www.lunesu.com/templates/default/img/emoticons/sad.png" alt=":-(" style="display: inline; vertical-align: bottom;" class="emoticon" />
 
-Here's the final <a href="http://www.lunesu.com/uploads/config.bz2" title="config.bz2" target="_blank">.config</a> file I used to build the sound modules.
+Here's the final <a href="/uploads/config.bz2" title="config.bz2" target="_blank">.config</a> file I used to build the sound modules.

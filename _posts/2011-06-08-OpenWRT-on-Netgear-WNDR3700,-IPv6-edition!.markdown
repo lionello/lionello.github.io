@@ -8,7 +8,7 @@ date: 2011-06-08 22:46:21.000000000 +08:00
 ---
 Happy IPv6 day everyone!
 
-<!-- s9ymdb:145 --><img class="serendipity_image_center" width="646" height="195"  src="http://www.lunesu.com/uploads/ipv6.PNG"  alt="" />
+<!-- s9ymdb:145 --><img class="serendipity_image_center" width="646" height="195"  src="/uploads/ipv6.PNG"  alt="" />
 
 Here's how I went about it:
 
