@@ -50,20 +50,18 @@ var width = 600,
             data2[v] = data[v];
             data2[w] = data[w];
             if (yes > no+threshold) {
-                // My neighbors vote overwhelmingly Yes; me too
+                /* My neighbors vote overwhelmingly Yes; me too */
                 data2[v] -= speed;
                 data2[w] += speed;
             }
             else if (no > yes+threshold) {
-                // My neighbors vote overwhelmingly No; me too
+                /* My neighbors vote overwhelmingly No; me too */
                 data2[v] += speed;
                 data2[w] -= speed;
             }
             else {
                 if (yes > threshold2 && no > threshold2) {
-                    //               } && yes == no) {
-
-                    // My neighbors are in disagreement; ignore?
+                    /* My neighbors are in disagreement; ignore? */
                     if (Math.random() < ratio) {
                         data2[v] -= speed;
                         data2[w] += speed;
@@ -78,7 +76,7 @@ var width = 600,
             yescount += data2[w];
         }
 
-        // Update the stats
+        /* Update the stats */
         document.getElementById('yescount').innerText = yescount;
         document.getElementById('yescountp').innerText = Math.round(1000*yescount/(yescount+nocount))/10;
         document.getElementById('nocount').innerText = nocount;
@@ -87,12 +85,12 @@ var width = 600,
 
         context.putImageData(imageData2, 0, 0);
 
-        // Swap the buffers
+        /* Swap the buffers */
         var t = imageData;
         imageData = imageData2;
         imageData2 = t;
 
-        // Stop the simulation if the numbers don't change
+        /* Stop the simulation if the numbers don't change */
         var thissim = nocount * 65521 + yescount;
         if (thissim === lastsim) {
             clearInterval(intervalid);
@@ -108,25 +106,25 @@ var width = 600,
 
     function reset() {
         for (var v=0; v<imageData.data.length; v+=4) {
-            imageData.data[v+0] = 0;//Math.random()*ratio*128;
-            imageData.data[v+1] = 0;//Math.random()*(1-ratio)*128;
+            imageData.data[v+0] = 0; /* Math.random()*ratio*128; */
+            imageData.data[v+1] = 0; /* Math.random()*(1-ratio)*128; */
         }
 
-        imageData.data[(height*width/2+2*width/4)*4+1] = 255;//yes
+        imageData.data[(height*width/2+2*width/4)*4+1] = 255; /* yes */
         var x = Math.round(Math.random()*width);
         var y = Math.round(Math.random()*height);
-        imageData.data[(y*width+x)*4] = 255;//no
+        imageData.data[(y*width+x)*4] = 255; /* no */
 
         start();
     }
 
     function init() {
         var canvas = document.getElementById('canvas');
-        //backbuf = document.createElement("canvas");
+        /* backbuf = document.createElement("canvas"); */
         canvas.width = width;
         canvas.height = height;
         context = canvas.getContext("2d");
-        //backcontext = backbuf.getContext("2d");
+        /* backcontext = backbuf.getContext("2d"); */
         imageData = context.createImageData(width, height);
         imageData2 = context.createImageData(width, height);
 
